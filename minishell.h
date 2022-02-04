@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/04 19:49:10 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:36:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <err.h>
-#include <readline/readline.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #endif

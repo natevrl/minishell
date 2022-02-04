@@ -3,38 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
+#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/02 00:21:41 by nabentay         ###   ########.fr        #
+#    Updated: 2022/02/04 19:42:26 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
-BONUS_NAME = philo_bonus
+NAME = minishell
+BONUS_NAME = minishell_bonus
 
 CC = gcc
 INCLUDE = ./
-CFLAGS = -Werror -Wextra -Wall -pthread
+CFLAGS = -Werror -Wextra -Wall -lreadline
 RM = rm -rf
 
-FILES = philo	\
-		philo_utils \
-		action \
-		free \
-		init \
-		time \
-		execute_thread \
-		death \
+FILES = minishell.c \
 
-FILES_B = philo	\
-		philo_utils \
-		action \
-		free \
-		init \
-		time \
-		execute_thread \
-		death \
+FILES_B = minishell.c \
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
