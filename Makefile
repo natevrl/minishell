@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/04 19:48:40 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/04 20:19:58 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ BONUS_NAME = minishell_bonus
 
 CC = gcc
 INCLUDE = ./include/
-CFLAGS = -Werror -Wextra -Wall -lreadline
+CFLAGS = -Werror -Wextra -Wall
+LFLAGS = -lreadline
 RM = rm -rf
 
 FILES = minishell \
@@ -38,10 +39,11 @@ all: $(OBJS_DIR) $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 		@echo "\033[1;31m************ $< COMPILED SUCESSFULLY ************"
-		@$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
+		$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
 
 $(NAME): $(OBJS)
-		@$(CC) $(CFLAGS) -o $@ $^
+		make -C libft
+		@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 		@echo "\033[1;31m************ $@ SUCESS ************"
 
 $(OBJS_DIR):
