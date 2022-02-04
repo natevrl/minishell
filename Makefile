@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/04 19:42:26 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/04 19:43:25 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ INCLUDE = ./
 CFLAGS = -Werror -Wextra -Wall -lreadline
 RM = rm -rf
 
-FILES = minishell.c \
+FILES = minishell \
 
-FILES_B = minishell.c \
+FILES_B = minishell \
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
