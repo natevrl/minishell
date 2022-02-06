@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/04 20:46:30 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/04 22:41:15 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 		$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
 
 $(NAME): $(OBJS)
-		make -C libft
+		make -C libft all
 		@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS) libft/libft.a
 		@echo "\033[1;31m************ $@ SUCESS ************"
 
