@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 18:33:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 21:18:53 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,47 @@ void	list_push(t_list **lst_addr, void *data)
 	ptr = lst_addr;
 	while (*ptr)
 		ptr = &(*ptr)->next;
-	*ptr = (t_list *)malloc(sizeof(t_list));
-	(*ptr)-> = data;
+	*ptr = ft_malloc(sizeof(**ptr));
+	(*ptr)->content = data;
 	(*ptr)->next = NULL;
 }
 
-void	ft_load_builtin(t_builtin **list, t_fun *fun,char *name)
+void	ft_load_builtin(t_list **list, t_fun *fun, char *name)
 {
 	t_builtin *t;
 
 	t = (t_builtin *)malloc(sizeof(t_builtin));
-	t->name = name;
+	t->name = ft_strdup(name);
 	t->built = fun;
 	list_push(list, t);
 }
 
-void	ft_bultin(t_list *cmd)
+void	ft_bultin(t_list **tmp)
 {
-	t_builtin	*list;
+	t_list	*list;
+	t_list	*cmd;
+	list = NULL;
 
-	(void)cmd;
-	list = (t_builtin *)malloc(sizeof(t_builtin));
+	cmd = *tmp;
 	ft_load_builtin(&list, ft_echo, "echo");
 	ft_load_builtin(&list, ft_pwd, "pwd");
-	printf("%s\n", list->name);
-//	list->built(cmd->arg);
-//	while (ft_strncmp("ft_print", list->name, 8) != 0)
-//		list = list->next;
+	while (cmd != NULL)
+	{
+		if (ft_strncmp("echo", cmd->arg[0], 4) == 0)
+		{
+			if (ft_strncmp(((t_builtin *)list->content)->name, "echo", 4) == 0)
+				((t_builtin *)list->content)->built(cmd->arg);
+			else
+				list = list->next;
+		}
+		else if (ft_strncmp("pwd", cmd->arg[0], 4) == 0)
+		{
+			if (ft_strncmp(((t_builtin *)list->content)->name, "pwd", 4) == 0)
+				((t_builtin *)list->content)->built(cmd->arg);
+			else
+				list = list->next;
+		}
+		cmd = cmd->next;
+	}
 //	list->cmd();
 }

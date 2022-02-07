@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 17:05:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 21:22:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	}
 }
 
-void	ft_check_execution(t_list **tmp)
+void	ft_check_execution(t_list **tmp, char **env)
 {
 	t_list	*token;
 
@@ -111,12 +111,12 @@ void	ft_check_execution(t_list **tmp)
 	while (token != NULL)
 	{
 		if (token->token == LITERAL)
-			exec_cmd(token);
+			exec_cmd(token, env);
 		token = token->next;
 	}
 }
 
-void	parse_cmd(char *cmd)
+void	parse_cmd(char *cmd, char **env)
 {
 	t_list	*token;
 	t_list	*cmd_token;
@@ -131,11 +131,5 @@ void	parse_cmd(char *cmd)
 	ft_tokenize_input_condition(&token);
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token);
-	ft_check_execution(&cmd_token);
-	// while (cmd_token != NULL)
-	// {
-	// 	if (cmd_token->arg != NULL)
-	// 		printf("%s\n", (char *)cmd_token->arg[0]);
-	// 	cmd_token = cmd_token->next;
-	// }
+	ft_check_execution(&cmd_token, env);
 }

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 18:25:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 21:22:58 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_env(char **env)
 	return (NULL);
 }
 
-void	exec_cmd(t_list	*cmd)
+void	exec_cmd(t_list	*cmd, char **env)
 {
 	pid_t	pid;
 	int		status;
@@ -98,12 +98,9 @@ void	exec_cmd(t_list	*cmd)
 /*		if (is_builtin(cmd->arg[0])) == -1)
 		{
 			printf("%s\n", arg[0]);*/
-		ft_bultin(cmd);
-		printf("test\n");
-		exit(1);
-		if (execve(exec_cmd, cmd->arg, NULL) == -1)
+		ft_bultin(&cmd);
+		if (execve(exec_cmd, cmd->arg, env) == -1)
 				perror("execve failed");
-		printf("testrdgdrgdrgdr\n");
 /*		}
 		else
 		{
@@ -122,12 +119,11 @@ void	exec_cmd(t_list	*cmd)
 void	prompt(char **env)
 {
 	char	*cmd;
-	(void)env;
 
 	while (cmd)
 	{
 		cmd = readline("$> ");
-		parse_cmd(cmd);
+		parse_cmd(cmd, env);
 	}
 }
 

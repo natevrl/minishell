@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/07 18:26:39 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/07 20:04:47 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ FILES = minishell \
 		builtin/echo \
 		builtin/pwd \
 		builtin/load_builtin \
+		memory/memory0		\
+		memory/memory1		\
 
 FILES_B = minishell \
 
@@ -56,6 +58,7 @@ $(OBJS_DIR):
 		@mkdir $@
 		@mkdir objs/parsing
 		@mkdir objs/builtin
+		@mkdir objs/memory
 
 $(OBJS_B_DIR):
 		@mkdir $@
