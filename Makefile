@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/07 17:25:03 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/07 18:26:39 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ FILES = minishell \
 		parsing/parsing_cmd	\
 		parsing/utils_parsing_cmd	\
 		builtin/echo \
+		builtin/pwd \
+		builtin/load_builtin \
 
 FILES_B = minishell \
 
@@ -42,10 +44,11 @@ all: $(OBJS_DIR) $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 		@echo "\033[1;31m************ $< COMPILED SUCESSFULLY ************"
-		$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
+		@$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
 
 $(NAME): $(OBJS)
-		make -C libft all bonus
+		@make -C libft all
+		@make -C libft bonus
 		@$(CC) $(CFLAGS) -I $(INCLUDE) -o $@ $^ $(LFLAGS) libft/libft.a
 		@echo "\033[1;31m************ $@ SUCESS ************"
 

@@ -6,38 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 17:23:51 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 18:25:29 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// int	ft_print()
-// {
-// 	printf("Test\n");
-// }
-
-// void	ft_load_builtin(t_list **list, t_test *built, char *name)
-// {
-// 	(*list)->name = name;
-// 	(*list)->cmd = built;
-// }
-
-// void	ft_bultin()
-// {
-// 	t_list	*list;
-
-// 	list = (t_list *)malloc(sizeof(t_list));
-// 	ft_load_builtin(&list, ft_print, "ft_printf");
-// //	ft_print();
-// 	printf("%s\n", list->name);
-// 	list->cmd();
-// 	while (ft_strncmp("ft_print", list->name, 8) != 0)
-// 		list = list->next;
-// 	list->cmd();
-// }
-
-static char	*get_cmd(char **path, char *cmd)
+char	*get_cmd(char **path, char *cmd)
 {
 	char	*tmp;
 	char	*res;
@@ -70,35 +45,6 @@ int	is_builtin(char *cmd)
 	if (ft_strncmp(cmd, "unset", 5) == 0)
 		return (6);
 	return (-1);
-}
-
-void	ft_pwd(void)
-{
-	char	*p;
-
-	p = getcwd(NULL, 0);
-	if (p != NULL)
-		printf("%s\n", p);
-	else
-	{
-		write(2, ".", 1);
-		return ;
-	}
-	if (p)
-		free(p);
-}
-
-char	*ft_echo_nathan(char **tab)
-{
-	int i = 1;
-
-//	if (ft_strncmp(tab[1], "echo", 10) != 0)
-//		return (NULL);
-	while (tab[++i])
-	{
-		ft_putstr_fd(tab[i], 1);
-	}
-	return (NULL);
 }
 
 // char **stock_env(char **env)
@@ -152,8 +98,9 @@ void	exec_cmd(t_list	*cmd)
 /*		if (is_builtin(cmd->arg[0])) == -1)
 		{
 			printf("%s\n", arg[0]);*/
-		ft_echo(cmd->arg);
+		ft_bultin(cmd);
 		printf("test\n");
+		exit(1);
 		if (execve(exec_cmd, cmd->arg, NULL) == -1)
 				perror("execve failed");
 		printf("testrdgdrgdrgdr\n");

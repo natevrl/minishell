@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 17:24:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 18:26:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,20 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+typedef void	t_fun(char **arg);
+
+typedef struct s_builtin {
+	char	*name;
+	t_fun	*built;
+	struct s_builtin *next;
+}				t_builtin;
+
+
 void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
+void	ft_pwd(char **arg);
+
+void	ft_load_builtin(t_builtin **list, t_fun *fun,char *name);
+void	ft_bultin(t_list *cmd);
 
 #endif
