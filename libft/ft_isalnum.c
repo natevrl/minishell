@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 22:15:31 by nabentay          #+#    #+#             */
-/*   Updated: 2021/07/24 22:18:55 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:03:51 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include <libft.h>
 
 int	ft_isalnum(int c)
 {

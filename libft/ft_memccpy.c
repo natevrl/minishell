@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:06:09 by nabentay          #+#    #+#             */
-/*   Updated: 2021/07/25 22:24:13 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:08:41 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include <libft.h>
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {

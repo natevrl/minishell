@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:27:32 by nabentay          #+#    #+#             */
-/*   Updated: 2021/07/24 21:37:22 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:09:09 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include <libft.h>
 
 char	*ft_strdup(const char *str)
 {

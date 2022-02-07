@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/06 14:02:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 12:06:32 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ static char	*get_cmd(char **path, char *cmd)
 	return (NULL);
 }
 
-<<<<<<< HEAD
-char	*ft_find_path(char **env)
-{
-	while (strncmp("PATH", *env, 4))
-		env++;
-	return (*env + 5);
-=======
 int		builtin(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 4) == 0)
@@ -80,7 +73,6 @@ int		builtin(char *cmd)
 	if (ft_strncmp(cmd, "unset", 5) == 0)
 		return (5);
 	return (-1);
->>>>>>> 407545b402ff7719fb06dfb595d633dfc5aeef9c
 }
 
 static void	exec_cmd(char **env, char *cmd)
@@ -104,14 +96,14 @@ static void	exec_cmd(char **env, char *cmd)
 	if (pid == -1)
 		perror("fork");
 	// Si le fork a reussit, le processus pere attend l'enfant (process fork)
-	else if (pid > 0) 
+	else if (pid > 0)
 	{
 		// On block le processus parent jusqu'a ce que l'enfant termine puis
 		// on kill le processus enfant
 		waitpid(pid, &status, 0);
 		kill(pid, SIGTERM);
-	} 
-	else 
+	}
+	else
 	{
 		// Le processus enfant execute la commande ou exit si execve echoue
 		if (is_builtin(cmd) == - 1)
@@ -130,8 +122,11 @@ void	prompt(char **env)
 {
 	char *cmd;
 
-	cmd = readline("$> ");
-	parse_cmd(cmd);
+	if (env)
+	{
+		cmd = readline("$> ");
+		parse_cmd(cmd);
+	}
 //	while (read_l)
 //		read_l = readline("$> ");
 //	exec_cmd(env, read_l);

@@ -6,29 +6,32 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/06 15:31:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 12:11:21 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
-void	ft_tokenize_input(t_token **token, char *cmd)
+/*void	ft_tokenize_input_condition(t_token **token)
 {
-	int		i;
+	printf("%d\n", (*token)->token);
 
-	i = -1;
-	while (cmd[++i])
-		ft_lstadd_back_token(token, ft_lstnew_token(cmd[i]));
+}*/
+
+void	ft_tokenize_input(t_list **token)
+{
 	while (*token != NULL)
 	{
-		if (ft_isalnum((*token)->c) || (*token)->c == ' ')
+		if (ft_isalnum(*(char *)(*token)->content) || *(char *)(*token)->content == ' ')
 			(*token)->token = LITERAL;
-		else if ((*token)->next != NULL && (*token)->c == '&' && (*token)->next->c == '&')
-		{
-			(*token)->token = AND;
-			(*token)->next->token = AND;
-		}
+		if (*(char *)(*token)->content == '<')
+			(*token)->token = RD_I;
+		else if (*(char *)(*token)->content == '>')
+			(*token)->token = RD_O;
+		else if (*(char *)(*token)->content== '|')
+			(*token)->token = PIPE;
+		else if (*(char *)(*token)->content == '&')
+			(*token)->token = BG;
 		printf("%d\n", (*token)->token);
 		*token = (*token)->next;
 	}
@@ -36,8 +39,13 @@ void	ft_tokenize_input(t_token **token, char *cmd)
 
 void	parse_cmd(char *cmd)
 {
-	t_token	*token;
-	token = NULL;
+	t_list	*token;
+	int		i;
 
-	ft_tokenize_input(&token, cmd);
+	i = -1;
+	token = NULL;
+	while (cmd[++i])
+		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
+	ft_tokenize_input(&token);
+//	ft_tokenize_input_condition(&token);
 }

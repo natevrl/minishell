@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:12:33 by nabentay          #+#    #+#             */
-/*   Updated: 2021/07/26 01:54:43 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:07:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include <libft.h>
 
 void	*ft_memset(void *b, int c, size_t len)
 {

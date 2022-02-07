@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/04 22:41:15 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/07 12:29:12 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,14 @@ NAME = minishell
 BONUS_NAME = minishell_bonus
 
 CC = gcc
-INCLUDE = ./include/
+INCLUDE = include
 CFLAGS = -Werror -Wextra -Wall
 LFLAGS = -lreadline
 RM = rm -rf
 
 FILES = minishell \
+		parsing/parsing_cmd	\
+		parsing/utils_parsing_cmd	\
 
 FILES_B = minishell \
 
@@ -42,12 +44,13 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 		$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
 
 $(NAME): $(OBJS)
-		make -C libft all
-		@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS) libft/libft.a
+		make -C libft all bonus
+		@$(CC) $(CFLAGS) -I $(INCLUDE) -o $@ $^ $(LFLAGS) libft/libft.a
 		@echo "\033[1;31m************ $@ SUCESS ************"
 
 $(OBJS_DIR):
 		@mkdir $@
+		@mkdir objs/parsing
 
 $(OBJS_B_DIR):
 		@mkdir $@
