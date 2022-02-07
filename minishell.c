@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 21:22:58 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 21:26:45 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,6 @@ char	*get_cmd(char **path, char *cmd)
 	}
 	return (NULL);
 }
-
-int	is_builtin(char *cmd)
-{
-	if (ft_strncmp(cmd, "echo", 4) == 0)
-		return (1);
-	if (ft_strncmp(cmd, "pwd", 3) == 0)
-		return (2);
-	if (ft_strncmp(cmd, "cd", 2) == 0)
-		return (3);
-	if (ft_strncmp(cmd, "env", 3) == 0)
-		return (4);
-	// if (ft_strncmp(cmd, "export", 6) == 0)
-	// 	return (5);
-	if (ft_strncmp(cmd, "unset", 5) == 0)
-		return (6);
-	return (-1);
-}
-
-// char **stock_env(char **env)
-// {
-// 	t_list *stock;
-// 	int i;
-
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		stock->next->content = env[i];
-// 		i++;
-// 	}
-// }
 
 char	*ft_env(char **env)
 {
@@ -95,24 +65,10 @@ void	exec_cmd(t_list	*cmd, char **env)
 	}
 	else
 	{
-/*		if (is_builtin(cmd->arg[0])) == -1)
-		{
-			printf("%s\n", arg[0]);*/
 		ft_bultin(&cmd);
 		if (execve(exec_cmd, cmd->arg, env) == -1)
 				perror("execve failed");
-/*		}
-		else
-		{
-			printf("cest un builtin\n");
-			if (is_builtin(cmd->arg[0]) == 2)
-				ft_pwd();
-			else if (is_builtin(cmd->arg[0]) == 1)
-				ft_echo(argc, argv);
-			else if (is_builtin(arg[0]) == 4)
-				ft_env(env);
-		}
-		exit(EXIT_FAILURE);*/
+		exit(EXIT_FAILURE);
 	}
 }
 
