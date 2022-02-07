@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 12:15:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 17:24:15 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@
 //ajout
 # include <sys/types.h>
 # include <sys/wait.h>
+
+void	exec_cmd(t_list	*cmd);
+void	ft_echo(char **argv);
 
 #endif

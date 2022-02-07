@@ -3,35 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:02 by nabentay          #+#    #+#             */
-/*   Updated: 2022/01/22 21:31:38 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/07 17:24:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-int main(int argc, char **argv)
+void	ft_echo(char **argv)
 {
 	int	flag;
+	int	i;
 
+	i = 1;
 	flag = 0;
 	if (strncmp(argv[1], "-n", 2) == 0)
 	{
 		flag = 1;
-		--argc;
-		++argv;
+		i++;
 	}
-	--argc;
-	++argv;
-	while (argc > 0)
+	while (argv[i])
 	{
-		printf("%s", argv[0]);
-		argc--;
-		argv++;
-		if (argc > 0)
-			putchar(' ');
+		printf("%s", argv[i]);
+		i++;
+		if (argv[i] != NULL)
+			printf(" ");
 	}
 	if (!flag)
 		printf("\n");

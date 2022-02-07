@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/07 14:51:23 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/07 17:25:03 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ RM = rm -rf
 FILES = minishell \
 		parsing/parsing_cmd	\
 		parsing/utils_parsing_cmd	\
+		builtin/echo \
 
 FILES_B = minishell \
 
@@ -51,6 +52,7 @@ $(NAME): $(OBJS)
 $(OBJS_DIR):
 		@mkdir $@
 		@mkdir objs/parsing
+		@mkdir objs/builtin
 
 $(OBJS_B_DIR):
 		@mkdir $@

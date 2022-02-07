@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 16:15:58 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 17:05:56 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	ft_check_execution(t_list **tmp)
 	token = *tmp;
 	while (token != NULL)
 	{
-		if (token->token == AND)
-			ft_execute_and_cmd(token);
+		if (token->token == LITERAL)
+			exec_cmd(token);
 		token = token->next;
 	}
 }
@@ -132,10 +132,10 @@ void	parse_cmd(char *cmd)
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token);
 	ft_check_execution(&cmd_token);
-	while (cmd_token != NULL)
-	{
-		if (cmd_token->arg != NULL)
-			printf("%s\n", (char *)cmd_token->arg[0]);
-		cmd_token = cmd_token->next;
-	}
+	// while (cmd_token != NULL)
+	// {
+	// 	if (cmd_token->arg != NULL)
+	// 		printf("%s\n", (char *)cmd_token->arg[0]);
+	// 	cmd_token = cmd_token->next;
+	// }
 }

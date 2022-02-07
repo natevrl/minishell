@@ -6,36 +6,36 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 14:40:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 17:23:51 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*int	ft_print()
-{
-	printf("Test\n");
-}
+// int	ft_print()
+// {
+// 	printf("Test\n");
+// }
 
-void	ft_load_builtin(t_list **list, t_test *built, char *name)
-{
-	(*list)->name = name;
-	(*list)->cmd = built;
-}
+// void	ft_load_builtin(t_list **list, t_test *built, char *name)
+// {
+// 	(*list)->name = name;
+// 	(*list)->cmd = built;
+// }
 
-void	ft_bultin()
-{
-	t_list	*list;
+// void	ft_bultin()
+// {
+// 	t_list	*list;
 
-	list = (t_list *)malloc(sizeof(t_list));
-	ft_load_builtin(&list, ft_print, "ft_printf");
-//	ft_print();
-	printf("%s\n", list->name);
-	list->cmd();
-	while (ft_strncmp("ft_print", list->name, 8) != 0)
-		list = list->next;
-	list->cmd();
-}
+// 	list = (t_list *)malloc(sizeof(t_list));
+// 	ft_load_builtin(&list, ft_print, "ft_printf");
+// //	ft_print();
+// 	printf("%s\n", list->name);
+// 	list->cmd();
+// 	while (ft_strncmp("ft_print", list->name, 8) != 0)
+// 		list = list->next;
+// 	list->cmd();
+// }
 
 static char	*get_cmd(char **path, char *cmd)
 {
@@ -55,79 +55,133 @@ static char	*get_cmd(char **path, char *cmd)
 	return (NULL);
 }
 
-int		builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 4) == 0)
-		return (0);
-	if (ft_strncmp(cmd, "pwd", 3) == 0)
 		return (1);
-	if (ft_strncmp(cmd, "cd", 2) == 0)
+	if (ft_strncmp(cmd, "pwd", 3) == 0)
 		return (2);
-	if (ft_strncmp(cmd, "env", 3) == 0)
+	if (ft_strncmp(cmd, "cd", 2) == 0)
 		return (3);
-	if (ft_strncmp(cmd, "export", 6) == 0)
+	if (ft_strncmp(cmd, "env", 3) == 0)
 		return (4);
+	// if (ft_strncmp(cmd, "export", 6) == 0)
+	// 	return (5);
 	if (ft_strncmp(cmd, "unset", 5) == 0)
-		return (5);
+		return (6);
 	return (-1);
 }
 
-static void	exec_cmd(char **env, char *cmd)
+void	ft_pwd(void)
 {
-	pid_t	pid = 0;
-	int		status = 0;
-	char *cmd_d[2] = {cmd, NULL};
-	char	*path;
-	char	**cmd_path;
-	char	**arg;
-	char	*cmd2;
-	// On fork
-	path = getenv("PATH");
+	char	*p;
 
-	cmd_path = ft_split(path, ':');
-	arg = ft_split(cmd, ' ');
-	cmd = get_cmd(cmd_path, arg[0]);
+	p = getcwd(NULL, 0);
+	if (p != NULL)
+		printf("%s\n", p);
+	else
+	{
+		write(2, ".", 1);
+		return ;
+	}
+	if (p)
+		free(p);
+}
+
+char	*ft_echo_nathan(char **tab)
+{
+	int i = 1;
+
+//	if (ft_strncmp(tab[1], "echo", 10) != 0)
+//		return (NULL);
+	while (tab[++i])
+	{
+		ft_putstr_fd(tab[i], 1);
+	}
+	return (NULL);
+}
+
+// char **stock_env(char **env)
+// {
+// 	t_list *stock;
+// 	int i;
+
+// 	i = 0;
+// 	while (env[i])
+// 	{
+// 		stock->next->content = env[i];
+// 		i++;
+// 	}
+// }
+
+char	*ft_env(char **env)
+{
+	int	i;
+
+	i = -1;
+	while (env[++i])
+		printf("%s\n", env[i]);
+	return (NULL);
+}
+
+void	exec_cmd(t_list	*cmd)
+{
+	pid_t	pid;
+	int		status;
+	char	*path_cmd;
+	char	**cmd_path;
+	char	*exec_cmd;
+
+	pid = 0;
+	status = 0;
+	path_cmd = getenv("PATH");
+	cmd_path = ft_split(path_cmd, ':');
+	exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
 	if (!cmd)
 		exit(1);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
-	// Si le fork a reussit, le processus pere attend l'enfant (process fork)
 	else if (pid > 0)
 	{
-		// On block le processus parent jusqu'a ce que l'enfant termine puis
-		// on kill le processus enfant
 		waitpid(pid, &status, 0);
 		kill(pid, SIGTERM);
 	}
 	else
 	{
-		// Le processus enfant execute la commande ou exit si execve echoue
-		if (is_builtin(cmd) == - 1)
+/*		if (is_builtin(cmd->arg[0])) == -1)
 		{
-			if (execve(cmd, arg, env) == -1)
+			printf("%s\n", arg[0]);*/
+		ft_echo(cmd->arg);
+		printf("test\n");
+		if (execve(exec_cmd, cmd->arg, NULL) == -1)
 				perror("execve failed");
-		}
+		printf("testrdgdrgdrgdr\n");
+/*		}
 		else
-			exec_builtins(is);
-		exit(EXIT_FAILURE);
+		{
+			printf("cest un builtin\n");
+			if (is_builtin(cmd->arg[0]) == 2)
+				ft_pwd();
+			else if (is_builtin(cmd->arg[0]) == 1)
+				ft_echo(argc, argv);
+			else if (is_builtin(arg[0]) == 4)
+				ft_env(env);
+		}
+		exit(EXIT_FAILURE);*/
 	}
 }
-*/
 
 void	prompt(char **env)
 {
-	char *cmd;
+	char	*cmd;
+	(void)env;
 
-	if (env)
+	while (cmd)
 	{
 		cmd = readline("$> ");
 		parse_cmd(cmd);
 	}
-//	while (read_l)
-//		read_l = readline("$> ");
-//	exec_cmd(env, read_l);
-//		write(1, "$> ", 3);
 }
 
 int	launch_bash(char **env)
