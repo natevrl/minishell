@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 12:16:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 13:12:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@
 
 enum {
 	LITERAL,
+	SP,
+	EXIT,
+	EXIT_CODE,
 	NUM,
+	DOLLAR,
 	RD_I,
+	RD_ID,
 	RD_O,
 	RD_OA,
 	PIPE,
 	BG,
 	AND,
 	OR,
+	EXEC,
 };
 
 void	parse_cmd(char *cmd);
