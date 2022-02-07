@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 13:12:20 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 13:23:35 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ enum {
 	OR,
 	EXEC,
 };
+
+typedef struct s_cmd
+{
+	void			*content;
+	struct s_list	*next;
+}					t_cmd;
 
 void	parse_cmd(char *cmd);
 void	ft_tokenize_input(t_list **token);
