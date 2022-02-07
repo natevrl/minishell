@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 21:26:45 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 22:07:18 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	exec_cmd(t_list	*cmd, char **env)
 	{
 		ft_bultin(&cmd);
 		if (execve(exec_cmd, cmd->arg, env) == -1)
-				perror("execve failed");
+			exit_failure("command not found");
 		exit(EXIT_FAILURE);
 	}
 }
