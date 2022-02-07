@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 14:46:24 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 15:56:56 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,9 @@ typedef struct s_cmd
 
 void	parse_cmd(char *cmd);
 void	ft_tokenize_input(t_list **token);
+
+t_list	*ft_lstnew_token(void	*content, int token);
+int		ft_strlen_token(t_list *token);
+void	ft_set_option(t_list **tmp);
 
 #endif
