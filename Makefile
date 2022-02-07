@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/07 20:04:47 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/07 22:01:23 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,15 +70,17 @@ $(OBJS_B_DIR)%.o: $(BONUS_DIR)%.c
 bonus: $(OBJS_B_DIR) $(BONUS_NAME)
 
 $(BONUS_NAME): $(OBJS_B)
-		@make -C $(LIBFT) all
+		@make -C libft all
 		$(CC) $(CFLAGS) $(OBJS_B) -o $@
 
 clean:
 		@echo "\033[1;31m************ $(OBJS_DIR) DELETE SUCESS ************"
+		@make -C libft clean
 		@$(RM) $(OBJS_DIR) $(OBJS_B_DIR)
 
 fclean: clean
-		@rm -f $(NAME) $(BONUS_NAME)
+		@rm -f $(NAME)
+		@rm -f libft/libft.a
 		@echo "\033[1;31m************ $(NAME) DELETE SUCESS ************"
 
 re: clean all
