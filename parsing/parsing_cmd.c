@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 14:32:33 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 14:55:18 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_strlen_token(t_list *token)
 		i++;
 		token = token->next;
 	}
-	return (i);
+	return (i + 1);
 }
 
 void	ft_exec_command(t_list **cmd_token, t_list **tmp)
@@ -96,23 +96,21 @@ void	ft_exec_command(t_list **cmd_token, t_list **tmp)
 
 	token = *tmp;
 	i = 0;
-	cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token));
+	cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token) + 1);
 	while (token != NULL)
 	{
 		if (token->next != NULL && token->token == token->next->token)
 		{
 			cmd[i] = *(char *)token->content;
-			cmd[i + 1] = *(char *)token->next->content;
 			i++;
 		}
 		else
 		{
-			if (i > 0)
-				cmd[i] = '\0';
+			cmd[i] = *(char *)token->content;
+			cmd[i + 1] = '\0';
 			ft_lstadd_back(cmd_token, ft_lstnew(cmd));
 			i = 0;
-			return ;
-//			cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token));
+			cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token));
 		}
 		token = token->next;
 	}
@@ -125,7 +123,6 @@ void	parse_cmd(char *cmd)
 	int		i;
 
 	i = -1;
-	(void)cmd_token;
 	token = NULL;
 	cmd_token = NULL;
 	while (cmd[++i])
@@ -135,7 +132,7 @@ void	parse_cmd(char *cmd)
 	ft_exec_command(&cmd_token, &token);
 	while (cmd_token != NULL)
 	{
-		printf("%d\n", *(char *)cmd_token->content);
+		printf("%s\n", (char *)cmd_token->content);
 		cmd_token = cmd_token->next;
 	}
 }

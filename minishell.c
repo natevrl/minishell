@@ -6,14 +6,11 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 12:06:32 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/07 14:40:56 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
-#include "include/libft.h"
-
-
+#include <minishell.h>
 
 /*int	ft_print()
 {
