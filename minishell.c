@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 22:07:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/08 13:02:54 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static pid_t pid;
 
 char	*get_cmd(char **path, char *cmd)
 {
@@ -40,16 +42,14 @@ char	*ft_env(char **env)
 	return (NULL);
 }
 
-void	exec_cmd(t_list	*cmd, char **env)
+void	exec_cmd(t_list	*cmd)
 {
-	pid_t	pid;
+//	pid_t	pid;
 	int		status;
 	char	*path_cmd;
 	char	**cmd_path;
 	char	*exec_cmd;
 
-	pid = 0;
-	status = 0;
 	path_cmd = getenv("PATH");
 	cmd_path = ft_split(path_cmd, ':');
 	exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
@@ -59,34 +59,51 @@ void	exec_cmd(t_list	*cmd, char **env)
 	if (pid == -1)
 		perror("fork");
 	else if (pid > 0)
-	{
 		waitpid(pid, &status, 0);
-		kill(pid, SIGTERM);
-	}
 	else
 	{
 		ft_bultin(&cmd);
-		if (execve(exec_cmd, cmd->arg, env) == -1)
+		if (execve(exec_cmd, cmd->arg, NULL) == -1)
 			exit_failure("command not found");
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	prompt(char **env)
+void	prompt()
 {
 	char	*cmd;
 
-	while (cmd)
-	{
-		cmd = readline("$> ");
-		parse_cmd(cmd, env);
-	}
+	cmd = readline("$> ");	
+	if (cmd[0] == '\0')
+		return ;
+	else if (cmd)
+		parse_cmd(cmd);
 }
 
-int	launch_bash(char **env)
+int	launch_bash()
 {
-	prompt(env);
+	int		status;
+	
+//	signal(SIGINT, intHandler);
+	pid = fork();
+	if (pid == -1)
+		perror("fork");
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+		launch_bash();
+	}
+	else
+		prompt();
 	return (0);
+}
+
+void intHandler(int sig) 
+{
+	signal(sig, SIG_IGN);
+	write(1, "\n", 1);
+	kill(pid, SIGINT);
+//	write(1, "\n$> ", 4);
 }
 
 int	main(int ac, char **av, char **env)

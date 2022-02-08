@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 21:21:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/08 12:17:49 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ typedef struct s_builtin {
 }				t_builtin;
 
 
-void	exec_cmd(t_list	*cmd, char **env);
+void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
 void	ft_pwd(char **arg);
+void	intHandler(int sig);
+
 
 void	ft_bultin(t_list **cmd);
-void	ft_load_builtin(t_list **list, t_fun *fun,char *name);
+void	ft_load_builtin(t_list **list, t_fun *fun, char *name);
 
 void	ft_exit(int status);
 void	exit_failure(const char *msg);
