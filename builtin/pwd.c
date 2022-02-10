@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:58 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 21:46:03 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/10 22:05:17 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	ft_pwd(char **arg)
 	}
 	if (p)
 		free(p);
-	exit(EXIT_SUCCESS);
+	exit(g_err);
 }

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/10 21:42:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/10 22:14:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_execve(t_list *cmd)
 	cmd_path = ft_split(path_cmd, ':');
 	exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
 	 if (!cmd)
-		exit(1);
+		ft_exit(1);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
@@ -57,7 +57,7 @@ void	ft_execve(t_list *cmd)
 		ft_bultin(&cmd);
 		if (execve(exec_cmd, cmd->arg, cmd->env) == -1)
 			exit_failure("command not found");
-		exit(EXIT_FAILURE);
+		ft_exit(EXIT_FAILURE);
 	}
 }
 
@@ -85,7 +85,7 @@ void	prompt(char **env)
 	if (!cmd)
 	{
 		write(1, "exit\n", 5);
-		exit (0);
+		exit (g_err);
 	}
 	add_history(cmd);
 	if (*cmd == '\0')
@@ -99,5 +99,5 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	g_err = 0;
 
-	return (launch_bash(env));
+	return (launch_bash(env), g_err);
 }

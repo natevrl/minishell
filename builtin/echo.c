@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:02 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/10 19:21:38 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/10 22:16:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	ft_echo(char **argv)
 	}
 	if (!flag)
 		printf("\n");
-	exit(EXIT_SUCCESS);
+	exit(g_err);
 }

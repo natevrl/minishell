@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/10 11:14:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/10 22:10:11 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	launch_bash(char **env)
 	pid_t	pid2;
 
 	if (!isatty(0))
-		exit (0);
+		exit (g_err);
 	pid2 = fork();
 	if (pid2 == -1)
 		perror("fork");
@@ -32,7 +32,7 @@ int	launch_bash(char **env)
 	}
 	else
 		while (1)
-		prompt(env);
+			prompt(env);
 	return (g_err);
 }
 

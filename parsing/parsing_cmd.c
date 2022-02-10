@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/10 19:09:38 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/10 22:11:33 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,13 @@ void	ft_tokenize_input_condition(t_list **tmp)
 	}
 }
 
-void	ft_tokenize_input(t_list **tmp, char **env)
+void	ft_tokenize_input(t_list **tmp)
 {
 	t_list	*token;
 
 	token = *tmp;
 	while (token != NULL)
 	{
-		token->env = env;
 		if (ft_isalnum(*(char *)token->content) || *(char *)token->content == ' ')
 			token->token = LITERAL;
 		else if (*(char *)token->content == '<')
@@ -121,9 +120,11 @@ void	parse_cmd(char *cmd, char **env)
 	cmd_token = NULL;
 	while (cmd[++i])
 		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
-	ft_tokenize_input(&token, env);
+
+	ft_tokenize_input(&token);
 	ft_tokenize_input_condition(&token);
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token);
+	cmd_token->env = env;
 	ft_check_execution(&cmd_token);
 }
