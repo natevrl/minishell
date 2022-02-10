@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/10 22:14:20 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 00:38:58 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_execve(t_list *cmd)
 	cmd_path = ft_split(path_cmd, ':');
 	exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
 	 if (!cmd)
-		ft_exit(1);
+		ft_exit(127);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
@@ -57,7 +57,7 @@ void	ft_execve(t_list *cmd)
 		ft_bultin(&cmd);
 		if (execve(exec_cmd, cmd->arg, cmd->env) == -1)
 			exit_failure("command not found");
-		ft_exit(EXIT_FAILURE);
+		ft_exit(127);
 	}
 }
 
@@ -85,7 +85,7 @@ void	prompt(char **env)
 	if (!cmd)
 	{
 		write(1, "exit\n", 5);
-		exit (g_err);
+		ft_exit(g_err);
 	}
 	add_history(cmd);
 	if (*cmd == '\0')

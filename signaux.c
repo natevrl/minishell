@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/10 22:10:11 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 00:39:22 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	launch_bash(char **env)
 	pid_t	pid2;
 
 	if (!isatty(0))
-		exit (g_err);
+		exit(g_err);
 	pid2 = fork();
 	if (pid2 == -1)
 		perror("fork");
