@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/08 13:02:54 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:42:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static pid_t pid;
 
 char	*get_cmd(char **path, char *cmd)
 {
 	char	*tmp;
 	char	*res;
 
+	if (cmd[0] == '/' || cmd[0] == '.')
+		return (cmd);
 	while (*path)
 	{
 		tmp = ft_strjoin(*path, "/");
@@ -32,28 +32,20 @@ char	*get_cmd(char **path, char *cmd)
 	return (NULL);
 }
 
-char	*ft_env(char **env)
+void	ft_execve(t_list *cmd)
 {
-	int	i;
-
-	i = -1;
-	while (env[++i])
-		printf("%s\n", env[i]);
-	return (NULL);
-}
-
-void	exec_cmd(t_list	*cmd)
-{
-//	pid_t	pid;
+	pid_t	pid;
 	int		status;
 	char	*path_cmd;
 	char	**cmd_path;
 	char	*exec_cmd;
 
 	path_cmd = getenv("PATH");
+	if (!path_cmd)
+		exit_failure("command not found\n");
 	cmd_path = ft_split(path_cmd, ':');
 	exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
-	if (!cmd)
+	 if (!cmd)
 		exit(1);
 	pid = fork();
 	if (pid == -1)
@@ -63,53 +55,49 @@ void	exec_cmd(t_list	*cmd)
 	else
 	{
 		ft_bultin(&cmd);
-		if (execve(exec_cmd, cmd->arg, NULL) == -1)
+		if (execve(exec_cmd, cmd->arg, cmd->env) == -1)
 			exit_failure("command not found");
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	prompt()
+void	exec_cmd(t_list	*cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd->arg[i])
+	{
+		if (ft_strncmp(cmd->arg[i], "$?", 2) == 0)
+			cmd->arg[i] = ft_itoa(g_err);
+		else if (ft_strncmp(cmd->arg[i], "$", 1) == 0)
+			cmd->arg[i] = ft_get_env(cmd->arg[i], 0);
+		i++;
+	}
+	ft_execve(cmd);
+}
+
+void	prompt(char **env)
 {
 	char	*cmd;
 
-	cmd = readline("$> ");	
-	if (cmd[0] == '\0')
-		return ;
-	else if (cmd)
-		parse_cmd(cmd);
-}
-
-int	launch_bash()
-{
-	int		status;
-	
-//	signal(SIGINT, intHandler);
-	pid = fork();
-	if (pid == -1)
-		perror("fork");
-	else if (pid > 0)
+	cmd = readline("$> ");
+	if (!cmd)
 	{
-		waitpid(pid, &status, 0);
-		launch_bash();
+		write(1, "exit\n", 5);
+		exit (0);
 	}
-	else
-		prompt();
-	return (0);
-}
-
-void intHandler(int sig) 
-{
-	signal(sig, SIG_IGN);
-	write(1, "\n", 1);
-	kill(pid, SIGINT);
-//	write(1, "\n$> ", 4);
+	add_history(cmd);
+	if (*cmd == '\0')
+		return ;
+	parse_cmd(cmd, env);
 }
 
 int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
+	g_err = 0;
 
 	return (launch_bash(env));
 }

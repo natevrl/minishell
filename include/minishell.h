@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/08 12:17:49 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:31:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 //ajout
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 typedef void	t_fun(char **arg);
 
@@ -37,12 +38,19 @@ typedef struct s_builtin {
 	t_fun	*built;
 }				t_builtin;
 
+int		g_err;
 
 void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
 void	ft_pwd(char **arg);
+int		launch_bash(char **env);
+void	prompt(char **env);
+void	print_err_code(t_list	*cmd);
 void	intHandler(int sig);
 
+void	ft_display_env(char *env);
+char	*ft_get_env(char *sign, int pos);
+int		ft_show_env(char *str);
 
 void	ft_bultin(t_list **cmd);
 void	ft_load_builtin(t_list **list, t_fun *fun, char *name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_minishell.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/08 12:14:48 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:05:47 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 enum {
 	LITERAL,
 	SP,
-	EXIT,
-	EXIT_CODE,
 	NUM,
-	DOLLAR,
 	RD_I,
 	RD_ID,
 	RD_O,
@@ -40,8 +37,8 @@ typedef struct s_cmd
 	struct s_list	*next;
 }					t_cmd;
 
-void	parse_cmd(char *cmd);
-void	ft_tokenize_input(t_list **token);
+void	parse_cmd(char *cmd, char **env);
+void	ft_tokenize_input(t_list **tmp, char **env);
 
 t_list	*ft_lstnew_token(void	*content, int token);
 int		ft_strlen_token(t_list *token);

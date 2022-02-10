@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/07 22:01:23 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/10 18:01:07 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ LFLAGS = -lreadline
 RM = rm -rf
 
 FILES = minishell \
+		signaux		\
+		env			\
 		parsing/parsing_cmd	\
 		parsing/utils_parsing_cmd	\
 		builtin/echo \

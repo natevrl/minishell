@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/08 12:15:07 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:09:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,19 @@ void	ft_tokenize_input_condition(t_list **tmp)
 			token->token = RD_OA;
 			token->next->token = RD_OA;
 		}
-		else if (token->next != NULL && token->token == '$' && token->next->token == '?')
-		{
-			token->token = EXIT_CODE;
-			token->next->token = EXIT_CODE;
-		}
 		token = token->next;
 	}
 }
 
-void	ft_tokenize_input(t_list **tmp)
+void	ft_tokenize_input(t_list **tmp, char **env)
 {
 	t_list	*token;
 
 	token = *tmp;
 	while (token != NULL)
 	{
-		if (ft_isalnum(*(char *)token->content) || *(char *)token->content == ' ' || *(char *)token->content == '-')
+		token->env = env;
+		if (ft_isalnum(*(char *)token->content) || *(char *)token->content == ' ')
 			token->token = LITERAL;
 		else if (*(char *)token->content == '<')
 			token->token = RD_I;
@@ -65,12 +61,10 @@ void	ft_tokenize_input(t_list **tmp)
 			token->token = PIPE;
 		else if (*(char *)token->content == '&')
 			token->token = BG;
-		else if (*(char *)token->content == '$')
-			token->token = DOLLAR;
 		else if (*(char *)token->content == ';')
 			token->token = EXEC;
-		else if (*(char *)token->content == '?')
-			token->token = EXIT;
+		else
+			token->token = LITERAL;
 		token = token->next;
 	}
 }
@@ -116,7 +110,7 @@ void	ft_check_execution(t_list **tmp)
 	}
 }
 
-void	parse_cmd(char *cmd)
+void	parse_cmd(char *cmd, char **env)
 {
 	t_list	*token;
 	t_list	*cmd_token;
@@ -127,7 +121,7 @@ void	parse_cmd(char *cmd)
 	cmd_token = NULL;
 	while (cmd[++i])
 		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
-	ft_tokenize_input(&token);
+	ft_tokenize_input(&token, env);
 	ft_tokenize_input_condition(&token);
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token);
