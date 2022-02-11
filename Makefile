@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/11 22:28:02 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/11 22:37:45 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ FILES = minishell \
 		parsing/utils_parsing_cmd	\
 		builtin/echo \
 		builtin/env \
+		builtin/cd \
 		builtin/pwd \
 		builtin/load_builtin \
 		memory/memory0		\

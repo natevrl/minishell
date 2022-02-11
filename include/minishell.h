@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/11 22:27:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:36:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		g_err;
 
 void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
-void	ft_pwd(char **arg);
+void	ft_pwd();
+void	ft_cd(t_list *list);
 int		launch_bash(char **env);
 void	prompt(char **env);
 void	print_err_code(t_list	*cmd);

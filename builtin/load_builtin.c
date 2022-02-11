@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 22:30:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:37:14 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_bultin(t_list **tmp)
 	ft_load_builtin(&list, ft_echo, "echo");
 	ft_load_builtin(&list, ft_pwd, "pwd");
 	ft_load_builtin_list(&list, ft_print_env, "env");
+	ft_load_builtin_list(&list, ft_cd, "cd");
 	while (cmd != NULL)
 	{
 		if (ft_strncmp("echo", cmd->arg[0], 4) == 0)
@@ -73,6 +74,13 @@ void	ft_bultin(t_list **tmp)
 		else if (ft_strncmp("env", cmd->arg[0], 3) == 0)
 		{
 			if (ft_strncmp(((t_builtin_ls *)list->content)->name, "env", 3) == 0)
+				((t_builtin *)list->content)->built(cmd->arg);
+			else
+				list = list->next;
+		}
+		else if (ft_strncmp("cd", cmd->arg[0], 2) == 0)
+		{
+			if (ft_strncmp(((t_builtin_ls *)list->content)->name, "cd", 2) == 0)
 				((t_builtin *)list->content)->built(cmd->arg);
 			else
 				list = list->next;

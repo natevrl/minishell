@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:31:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 22:32:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:36:42 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	change_env_pwd(t_list *envlist, char *pathname)
 	free(newpwd);
 }
 
-void ft_cd(t_list *envlist, char *arg, char **env)
+void ft_cd(t_list *list)
 {
     ft_pwd();
-	change_env_pwd(envlist, "OLDPWD=");
-    if (chdir(arg) != 0)
+	change_env_pwd(list->env, "OLDPWD=");
+    if (chdir(list->env[1]) != 0)
         perror("change directory failed");
-	change_env_pwd(envlist, "PWD=");
+	change_env_pwd(list->env, "PWD=");
     ft_pwd();
 }
