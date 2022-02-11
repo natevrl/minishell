@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/10 22:11:33 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 11:46:12 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	ft_tokenize_input_condition(t_list **tmp)
 			token->token = RD_OA;
 			token->next->token = RD_OA;
 		}
+		else if (token->next != NULL && token->next->next != NULL &&
+			token->token == DOLLARD && token->next->token == INTERO)
+		{
+			token->token = EXIT_CODE;
+			token->next = token->next->next;
+		}
 		token = token->next;
 	}
 }
@@ -62,6 +68,10 @@ void	ft_tokenize_input(t_list **tmp)
 			token->token = BG;
 		else if (*(char *)token->content == ';')
 			token->token = EXEC;
+		else if (*(char *)token->content == '$')
+			token->token = DOLLARD;
+		else if (*(char *)token->content == '?')
+			token->token = INTERO;
 		else
 			token->token = LITERAL;
 		token = token->next;
@@ -79,7 +89,7 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token) + 1);
 	while (token != NULL)
 	{
-		if (token->next != NULL && token->token == token->next->token)
+		if (token->next != NULL && (token->token == token->next->token || (token->token == LITERAL && token->next->token == EXIT_CODE)))
 		{
 			cmd[i] = *(char *)token->content;
 			i++;
@@ -120,7 +130,6 @@ void	parse_cmd(char *cmd, char **env)
 	cmd_token = NULL;
 	while (cmd[++i])
 		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
-
 	ft_tokenize_input(&token);
 	ft_tokenize_input_condition(&token);
 	ft_assemble_token(&cmd_token, &token);
