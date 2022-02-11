@@ -3,61 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:53:49 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/10 21:35:46 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:43:58 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_display_env(char *env)
-{
-	char	*res;
-
-	res = getenv(env);
-	if (res)
-		write(1, res, ft_strlen(res));
-}
-
-char	*ft_get_env(char *sign, int pos)
+char	*ft_get_env_without(char *str)
 {
 	char	*env;
-	int		j;
+	int		i;
 
-	j = 0;
+	i = 0;
 	env = NULL;
-	while (sign[pos])
+	if (str[i] == '$')
 	{
-		if (sign[pos] == '$')
-		{
-			pos++;
-			while (sign[pos] != '\0' && sign[pos] != ' ' && sign[pos] != '$')
-			{
-				pos++;
-				j++;
-			}
-			if (sign[pos] != '$')
-			{
-				env = ft_substr(sign, pos - j, j);
-				return (getenv(env));
-			}
-			else
-			{
-				env = ft_substr(sign, pos - j, j);
-				ft_get_env(sign, pos);
-				return (ft_get_env(sign, pos));
-			}
-		}
-		pos++;
+		i++;
+		while (str[i] != '\0' && str[i] != ' ' && str[i] != '$')
+			i++;
+		env = ft_substr(str, 1, i - 1);
+		return (env);
 	}
 	return (NULL);
 }
 
-int	ft_show_env(char *str)
+char	*ft_get_env(char *str, t_list **list)
 {
-	if (ft_get_env(str, 0) == 0)
-		return (1);
-	return (0);
+	char	*env;
+	int		i;
+
+	i = 0;
+	env = NULL;
+	if (str[i] == '$')
+	{
+		i++;
+		while (str[i] != '\0' && str[i] != ' ' && str[i] != '$')
+		{
+			i++;
+			*list = (*list)->next;
+		}
+		env = ft_substr(str, 1, i - 1);
+		return (env);
+	}
+	return (NULL);
 }

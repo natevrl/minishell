@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 14:23:17 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 19:09:49 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 int	ft_strlen_token(t_list *token)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (token->next != NULL && token->token == token->next->token)
+	while (token->next != NULL)
 	{
+		if (token->token == EXIT_CODE)
+			i += ft_strlen(ft_itoa(g_err));
+		else if (token->token == DOLLARD)
+		{
+			i++;
+			if (getenv(ft_get_env_without((char *)token->content)) != NULL)
+				i += ft_strlen(getenv(ft_get_env_without((char *)token->content)));
+		}
 		i++;
 		token = token->next;
 	}
