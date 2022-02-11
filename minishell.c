@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/11 12:16:06 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 13:21:50 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_execve(t_list *cmd)
 
 void	exec_cmd(t_list	*cmd)
 {
-//			cmd->arg[i] = ft_itoa(g_err);
+//		cmd->arg[i] = ft_itoa(g_err);
 //		if (ft_strncmp(cmd->arg[i], "$", 1) == 0)
 //			cmd->arg[i] = ft_get_env(cmd->arg[i], 0);
 	ft_execve(cmd);
