@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/11 13:21:50 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:14:37 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_cmd(char **path, char *cmd)
 	return (NULL);
 }
 
-void	ft_execve(t_list *cmd)
+void	exec_cmd(t_list	*cmd)
 {
 	pid_t	pid;
 	int		status;
@@ -52,28 +52,23 @@ void	ft_execve(t_list *cmd)
 		perror("fork");
 	else if (pid > 0)
 	{
+		signal(SIGQUIT, intHandler);
 		waitpid(pid, &status, 0);
-
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
 			g_err = 127;
+		else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+			g_err = 131;
 		else
-			g_err = 0;
+			g_err = WEXITSTATUS(status);
 	}
 	else
 	{
 		ft_bultin(&cmd);
-		if (execve(exec_cmd, cmd->arg, cmd->env) == -1)
+		g_err = execve(exec_cmd, cmd->arg, cmd->env);
+		if (g_err == -1)
 			exit_failure("command not found");
-		ft_exit(0);
+		ft_exit(g_err);
 	}
-}
-
-void	exec_cmd(t_list	*cmd)
-{
-//		cmd->arg[i] = ft_itoa(g_err);
-//		if (ft_strncmp(cmd->arg[i], "$", 1) == 0)
-//			cmd->arg[i] = ft_get_env(cmd->arg[i], 0);
-	ft_execve(cmd);
 }
 
 void	prompt(char **env)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
+#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/11 20:47:00 by nabentay         ###   ########.fr        #
+#    Updated: 2022/02/11 22:16:58 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES = minishell \
 		signaux		\
 		env			\
 		parsing/parsing_cmd	\
+		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
 		builtin/echo \
 		builtin/pwd \
