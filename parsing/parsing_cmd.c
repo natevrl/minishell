@@ -42,10 +42,7 @@ void	ft_tokenize_input_condition(t_list **tmp)
 		else if (token->next != NULL && token->token == DOLLARD && token->next->token == INTERO)
 		{
 			token->token = EXIT_CODE;
-			if (token->next->next != NULL)
-				token->next = token->next->next;
-			else
-				token->next = NULL;
+			token->next->token = EXIT_CODE;
 		}
 		token = token->next;
 	}
@@ -74,9 +71,76 @@ void	ft_tokenize_input(t_list **tmp)
 			token->token = DOLLARD;
 		else if (*(char *)token->content == '?')
 			token->token = INTERO;
+		else if (*(char *)token->content == '\'')
+			token->token = QUOTE;
+		else if (*(char *)token->content == '\"')
+			token->token = DQUOTE;
 		else
 			token->token = LITERAL;
 		token = token->next;
+	}
+}
+
+void	ft_assemble_quote(t_list **token, char **cmd, int *i)
+{
+	*token = (*token)->next;
+	while (*token != NULL && (*token)->token != QUOTE)
+	{
+		(*cmd)[*i] = *(char *)(*token)->content;
+		(*i)++;
+		*token = (*token)->next;
+	}
+	if ((*token) == NULL)
+	{
+		printf("Not closed quote\n");
+		exit(1);
+	}
+}
+
+void	ft_assemble_dollard(t_list **token, char **cmd, int *i)
+{
+	char	*env;
+
+	env = ft_get_env((char *)(*token)->content, token);
+	if (ft_strlen(env) == 0)
+		(*cmd)[*i] = *(char *)(*token)->content;
+	(*i)++;
+	if (getenv(env) != NULL)
+	{
+		cmd[*i] = '\0';
+		*i = ft_strlen(*cmd) + ft_strlen(getenv(env));
+		ft_strlcat(*cmd, getenv(env), (*i) + 1);
+	}
+}
+
+void	ft_assemble_exit(t_list **token, char **cmd, int *i)
+{
+	(*cmd)[*i] = '\0';
+	*i = ft_strlen(*cmd) + ft_strlen(ft_itoa(g_err));
+	ft_strlcat(*cmd, ft_itoa(g_err), *i + 1);
+	*token = (*token)->next;
+}
+
+void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
+{
+	*token = (*token)->next;
+	while (*token != NULL && (*token)->token != DQUOTE)
+	{
+		if ((*token)->token == EXIT_CODE)
+			ft_assemble_exit(token, cmd, i);
+		else if ((*token)->token == DOLLARD)
+			ft_assemble_dollard(token, cmd, i);
+		else
+		{
+			(*cmd)[*i] = *(char *)(*token)->content;
+			(*i)++;
+		}
+		*token = (*token)->next;
+	}
+	if (*token == NULL)
+	{
+		printf("Not closed quote\n");
+		exit(1);
 	}
 }
 
@@ -84,11 +148,9 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 {
 	t_list	*token;
 	char	*cmd;
-	char	*env;
 	int		i;
 
 	token = *tmp;
-	cmd = NULL;
 	i = 0;
 	cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token));
 	while (token != NULL)
@@ -98,24 +160,14 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			cmd[i] = *(char *)token->content;
 			i++;
 		}
+		else if (token->token == QUOTE)
+			ft_assemble_quote(&token, &cmd, &i);
+		else if (token->token == DQUOTE)
+			ft_assemble_dquote(&token, &cmd, &i);
 		else if (token->token == EXIT_CODE)
-		{
-			cmd[i] = '\0';
-			i = ft_strlen(cmd) + ft_strlen(ft_itoa(g_err));
-			ft_strlcat(cmd, ft_itoa(g_err), i + 1);
-		}
+			ft_assemble_exit(&token, &cmd, &i);
 		else if (token->token == DOLLARD)
-		{
-			cmd[i] = *(char *)token->content;
-			i++;
-			env = ft_get_env((char *)token->content, &token);
-			if (getenv(env) != NULL)
-			{
-				cmd[i - 1] = '\0';
-				i = ft_strlen(cmd) + ft_strlen(getenv(env));
-				ft_strlcat(cmd, getenv(env), i + 1);
-			}
-		}
+			ft_assemble_dollard(&token, &cmd, &i);
 		token = token->next;
 	}
 	cmd[i] = '\0';

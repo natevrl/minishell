@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:53:49 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 18:43:58 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:56:12 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_get_env(char *str, t_list **list)
 	if (str[i] == '$')
 	{
 		i++;
-		while (str[i] != '\0' && str[i] != ' ' && str[i] != '$')
+		while (str[i] != '\0' && str[i] != ' '  && str[i] != '$' && str[i] != '\"')
 		{
 			i++;
 			*list = (*list)->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_minishell.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 11:41:32 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 19:16:23 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ enum {
 	LITERAL,
 	INTERO,
 	DOLLARD,
+	QUOTE,
+	DQUOTE,
 	EXIT_CODE,
 	SP,
 	NUM,
