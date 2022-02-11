@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 22:37:14 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 23:06:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,14 @@ void	list_push(t_list **lst_addr, void *data)
 	(*ptr)->next = NULL;
 }
 
-void	ft_load_builtin(t_list **list, t_fun *fun, char *name)
+void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name)
 {
 	t_builtin *t;
 
 	t = (t_builtin *)malloc(sizeof(t_builtin));
 	t->name = ft_strdup(name);
 	t->built = fun;
-	list_push(list, t);
-}
-
-void	ft_load_builtin_list(t_list **list, t_ls *ls, char *name)
-{
-	t_builtin_ls *t;
-
-	t = (t_builtin_ls *)malloc(sizeof(t_builtin_ls));
-	t->name = ft_strdup(name);
-	t->built = ls;
+	t->built_l = ls;
 	list_push(list, t);
 }
 
@@ -51,10 +42,10 @@ void	ft_bultin(t_list **tmp)
 	list = NULL;
 
 	cmd = *tmp;
-	ft_load_builtin(&list, ft_echo, "echo");
-	ft_load_builtin(&list, ft_pwd, "pwd");
-	ft_load_builtin_list(&list, ft_print_env, "env");
-	ft_load_builtin_list(&list, ft_cd, "cd");
+	ft_load_builtin(&list, NULL, ft_cd, "cd");
+	ft_load_builtin(&list, NULL, ft_print_env, "env");
+	ft_load_builtin(&list, ft_echo, NULL, "echo");
+	ft_load_builtin(&list, ft_pwd, NULL, "pwd");
 	while (cmd != NULL)
 	{
 		if (ft_strncmp("echo", cmd->arg[0], 4) == 0)
@@ -73,15 +64,15 @@ void	ft_bultin(t_list **tmp)
 		}
 		else if (ft_strncmp("env", cmd->arg[0], 3) == 0)
 		{
-			if (ft_strncmp(((t_builtin_ls *)list->content)->name, "env", 3) == 0)
-				((t_builtin *)list->content)->built(cmd->arg);
+			if (ft_strncmp(((t_builtin *)list->content)->name, "env", 3) == 0)
+				((t_builtin *)list->content)->built_l(cmd);
 			else
 				list = list->next;
 		}
 		else if (ft_strncmp("cd", cmd->arg[0], 2) == 0)
 		{
-			if (ft_strncmp(((t_builtin_ls *)list->content)->name, "cd", 2) == 0)
-				((t_builtin *)list->content)->built(cmd->arg);
+			if (ft_strncmp(((t_builtin *)list->content)->name, "cd", 2) == 0)
+				((t_builtin *)list->content)->built_l(cmd);
 			else
 				list = list->next;
 		}

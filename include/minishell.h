@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/11 22:36:52 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:58:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,8 @@ typedef void	t_ls(t_list *arg);
 typedef struct s_builtin {
 	char	*name;
 	t_fun	*built;
+	t_ls	*built_l;
 }				t_builtin;
-
-typedef struct s_builtin_list {
-	char	*name;
-	t_ls	*built;
-}				t_builtin_ls;
 
 int		g_err;
 
@@ -59,7 +55,7 @@ char	*ft_get_env_without(char *str);
 char	*ft_get_env(char *str, t_list **list);
 
 void	ft_bultin(t_list **cmd);
-void	ft_load_builtin(t_list **list, t_fun *fun, char *name);
+void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name);
 void	ft_print_env(t_list *lst);
 
 void	ft_exit(int status);

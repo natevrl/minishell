@@ -6,19 +6,68 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:31:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 22:36:42 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:45:55 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/**
- * CAS a gerer pour CD :
- * a chaque cd, le OLDPWD et PWD path changent, mettre a jour l'env
- * ~/ pour le HOME
- * cd -- pour le HOME
- * cd - = OLDPWD du l'env
- */
+int no_equal(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '=')
+			return (0);
+	return (1);
+}
+
+char *before_equal(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '=')
+			return (ft_substr(str, 0, i));
+	return (NULL);
+}
+
+char *after_equal(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '=')
+			return (str + i + 1);
+	return (NULL);
+}
+
+int already_in_env(t_list *envlist, char *arg)
+{
+	char *cmp1;
+	char *cmp2;
+
+	while (envlist)
+	{
+		cmp1 = before_equal(envlist->content);
+		cmp2 = before_equal(arg);
+		if (ft_strncmp(cmp1, cmp2, 100) == 0)
+		{
+			if (ft_strncmp(after_equal(envlist->content), after_equal(arg), 100) != 0)
+				envlist->content = arg;
+			free(cmp1);
+			free(cmp2);
+			return (1);
+		}
+		free(cmp1);
+		free(cmp2);
+		envlist = envlist->next;
+	}
+	return (0);
+}
 
 char *own_getenv(char *pathname, t_list *begin)
 {
@@ -42,25 +91,26 @@ char *own_getenv(char *pathname, t_list *begin)
 }
 
 
-void	change_env_pwd(t_list *envlist, char *pathname)
+void	change_env_pwd(char **list, char *pathname)
 {
 	char	*newpwd;
+	int		i;
 	char *lst_name;
 
+	i = 0;
 	newpwd = getcwd(NULL, 0);
 	newpwd = ft_strjoin(pathname, newpwd);
 	printf("====================  %s\n", newpwd);
-
-	while (envlist)
+	while (list[i])
 	{
-		lst_name = before_equal((char *)envlist->content);
+		lst_name = before_equal(list[i]);
 		if (ft_strncmp(lst_name, pathname, 100) == 0)
 		{
-			envlist->content = newpwd;
+			list[i] = newpwd;
 			free(lst_name);
 			return ;
 		}
-		envlist = envlist->next;
+		i++;
 	}
 	free(lst_name);
 	free(newpwd);
@@ -68,10 +118,10 @@ void	change_env_pwd(t_list *envlist, char *pathname)
 
 void ft_cd(t_list *list)
 {
-    ft_pwd();
+	ft_pwd();
 	change_env_pwd(list->env, "OLDPWD=");
-    if (chdir(list->env[1]) != 0)
-        perror("change directory failed");
+	if (chdir(list->env[1]) != 0)
+		perror("change directory failed");
 	change_env_pwd(list->env, "PWD=");
-    ft_pwd();
+	ft_pwd();
 }
