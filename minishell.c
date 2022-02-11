@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/11 11:30:50 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 12:16:06 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_execve(t_list *cmd)
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
-		
+
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
 			g_err = 127;
 		else
@@ -70,17 +70,9 @@ void	ft_execve(t_list *cmd)
 
 void	exec_cmd(t_list	*cmd)
 {
-	int	i;
-
-	i = 0;
-	while (cmd->arg[i])
-	{
-		if (ft_strncmp(cmd->arg[i], "$?", 2) == 0)
-			cmd->arg[i] = ft_itoa(g_err);
-		else if (ft_strncmp(cmd->arg[i], "$", 1) == 0)
-			cmd->arg[i] = ft_get_env(cmd->arg[i], 0);
-		i++;
-	}
+//			cmd->arg[i] = ft_itoa(g_err);
+//		if (ft_strncmp(cmd->arg[i], "$", 1) == 0)
+//			cmd->arg[i] = ft_get_env(cmd->arg[i], 0);
 	ft_execve(cmd);
 }
 

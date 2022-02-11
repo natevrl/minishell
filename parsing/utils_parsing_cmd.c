@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 11:16:32 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/11 13:07:03 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	ft_set_option(t_list **tmp)
 	while (cmd_token != NULL)
 	{
 		if (cmd_token->token == LITERAL)
+		{
 			cmd_token->arg = ft_split((char *)cmd_token->content, ' ');
+			printf("%s\n", cmd_token->arg[0]);
+		}
 		else
 			cmd_token->arg = NULL;
 		cmd_token = cmd_token->next;
