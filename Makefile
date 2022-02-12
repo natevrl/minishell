@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/12 17:38:11 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/12 20:17:10 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ LFLAGS = -lreadline
 RM = rm -rf
 
 FILES = minishell \
-		signaux		\
 		parsing/parsing_cmd	\
 		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
 		builtin/echo \
+		builtin/unset \
 		builtin/env \
 		builtin/cd \
 		builtin/exit \
@@ -34,6 +34,7 @@ FILES = minishell \
 		memory/memory1		\
 		env/env		\
 		env/env_utils		\
+		signal/signaux		\
 
 FILES_B = minishell \
 
@@ -67,6 +68,7 @@ $(OBJS_DIR):
 		@mkdir objs/builtin
 		@mkdir objs/memory
 		@mkdir objs/env
+		@mkdir objs/signal
 
 $(OBJS_B_DIR):
 		@mkdir $@

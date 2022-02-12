@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 11:35:30 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 19:56:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_launch_builtin(t_list *list, t_list *cmd, char *name)
 	if (((t_builtin *)list->content)->built != NULL)
 		((t_builtin *)list->content)->built(cmd->arg);
 	else
-		((t_builtin *)list->content)->built_l(cmd);
+		((t_builtin *)list->content)->built_l(&cmd);
 }
 
 void	ft_bultin(t_list **tmp)
@@ -76,6 +76,7 @@ int	ft_builtin_without_fork(t_list **tmp)
 	cmd = *tmp;
 	ft_load_builtin(&list, NULL, built_exit, "exit");
 	ft_load_builtin(&list, NULL, ft_cd, "cd");
+	ft_load_builtin(&list, NULL, ft_unset, "unset");
 	if (ft_strncmp("exit", cmd->arg[0], 4) == 0)
 	{
 		ft_launch_builtin(list, cmd, "exit");
@@ -84,6 +85,11 @@ int	ft_builtin_without_fork(t_list **tmp)
 	else if (ft_strncmp("cd", cmd->arg[0], 2) == 0)
 	{
 		ft_launch_builtin(list, cmd, "cd");
+		return (1);
+	}
+	else if (ft_strncmp("unset", cmd->arg[0], 5) == 0)
+	{
+		ft_launch_builtin(list, cmd, "unset");
 		return (1);
 	}
 	return (0);

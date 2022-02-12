@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 17:22:47 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 19:53:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include <signal.h>
 
 typedef void	t_fun(char **arg);
-typedef void	t_ls(t_list *arg);
+typedef void	t_ls(t_list **arg);
 
 typedef struct s_myenv {
 	char			*name;
@@ -46,6 +46,7 @@ typedef struct s_builtin {
 	char	*name;
 	t_fun	*built;
 	t_ls	*built_l;
+	t_ls	*built_lm;
 }				t_builtin;
 
 int		g_err;
@@ -53,8 +54,9 @@ int		g_err;
 void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
 void	ft_pwd();
-void	ft_cd(t_list *list);
-void	built_exit(t_list *list);
+void	ft_cd(t_list **list);
+void	ft_unset(t_list **list);
+void	built_exit(t_list **list);
 int		ft_builtin_without_fork(t_list **tmp);
 int		launch_bash(t_list	*cmd);
 void	prompt(t_list *lst);
@@ -70,7 +72,7 @@ size_t	ft_strlen_double(char **str);
 
 void	ft_bultin(t_list **cmd);
 void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name);
-void	ft_print_env(t_list *lst);
+void	ft_print_env(t_list **lst);
 
 void	ft_exit(int status);
 void	exit_failure(const char *msg);
