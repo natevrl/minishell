@@ -6,18 +6,32 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 17:35:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 19:20:28 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_cmd(char **path, char *cmd)
+int	ft_absolute(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '/' || cmd[i] == '.')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*get_cmd(char **path, char *cmd, char *path_cmd)
 {
 	char	*tmp;
 	char	*res;
 
-	if (cmd[0] == '/' || cmd[0] == '.')
+	if (ft_absolute(cmd) || !path_cmd)
 		return (cmd);
 	while (*path)
 	{
@@ -42,8 +56,7 @@ void	exec_cmd(t_list	*cmd)
 
 	path_cmd = getenv("PATH");
 	cmd_path = ft_split(path_cmd, ':');
-	if (path_cmd)
-		exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
+	exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
 	if (ft_builtin_without_fork(&cmd) == 1)
 		return ;
 	if (!cmd)
@@ -65,8 +78,6 @@ void	exec_cmd(t_list	*cmd)
 	else
 	{
 		ft_bultin(&cmd);
-		if (!path_cmd)
-			exit_failure("command not found");
 		g_err = execve(exec_cmd, cmd->arg, ((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
 			exit_failure("command not found");

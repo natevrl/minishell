@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/12 11:02:21 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/12 17:38:11 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ RM = rm -rf
 
 FILES = minishell \
 		signaux		\
-		env			\
 		parsing/parsing_cmd	\
 		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
@@ -33,6 +32,8 @@ FILES = minishell \
 		builtin/load_builtin \
 		memory/memory0		\
 		memory/memory1		\
+		env/env		\
+		env/env_utils		\
 
 FILES_B = minishell \
 
@@ -65,6 +66,7 @@ $(OBJS_DIR):
 		@mkdir objs/parsing
 		@mkdir objs/builtin
 		@mkdir objs/memory
+		@mkdir objs/env
 
 $(OBJS_B_DIR):
 		@mkdir $@
