@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/11 22:14:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 11:14:45 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void	exec_cmd(t_list	*cmd)
 	char	*exec_cmd;
 
 	path_cmd = getenv("PATH");
-	if (!path_cmd)
-		exit_failure("command not found\n");
 	cmd_path = ft_split(path_cmd, ':');
-	exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
-	 if (!cmd)
+	if (path_cmd)
+		exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
+	if (!cmd)
 		ft_exit(127);
 	pid = fork();
 	if (pid == -1)
@@ -58,12 +57,20 @@ void	exec_cmd(t_list	*cmd)
 			g_err = 127;
 		else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
 			g_err = 131;
+		else if (WIFEXITED(status) && WEXITSTATUS(status) == 10)
+			chdir(cmd->arg[1]);
+		else if (WIFEXITED(status) && WEXITSTATUS(status) == 11)
+			chdir(getenv("HOME"));
+		else if (WIFEXITED(status) && WEXITSTATUS(status) == 12)
+			g_err = 1;
 		else
 			g_err = WEXITSTATUS(status);
 	}
 	else
 	{
 		ft_bultin(&cmd);
+		if (!path_cmd)
+			exit_failure("command not found");
 		g_err = execve(exec_cmd, cmd->arg, cmd->env);
 		if (g_err == -1)
 			exit_failure("command not found");

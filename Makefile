@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/11 22:37:45 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/12 11:02:21 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES = minishell \
 		builtin/echo \
 		builtin/env \
 		builtin/cd \
+		builtin/exit \
 		builtin/pwd \
 		builtin/load_builtin \
 		memory/memory0		\

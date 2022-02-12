@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 10:18:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 11:18:07 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,33 @@ void	ft_bultin(t_list **tmp)
 	cmd = *tmp;
 	ft_load_builtin(&list, NULL, ft_cd, "cd");
 	ft_load_builtin(&list, NULL, ft_print_env, "env");
+	ft_load_builtin(&list, NULL, built_exit, "exit");
 	ft_load_builtin(&list, ft_echo, NULL, "echo");
 	ft_load_builtin(&list, ft_pwd, NULL, "pwd");
 	while (cmd != NULL)
 	{
 		if (ft_strncmp("echo", cmd->arg[0], 4) == 0)
 			ft_launch_builtin(list, cmd, "echo");
-		else if (ft_strncmp("pwd", cmd->arg[0], 4) == 0)
+		else if (ft_strncmp("pwd", cmd->arg[0], 3) == 0)
 			ft_launch_builtin(list, cmd, "pwd");
 		else if (ft_strncmp("env", cmd->arg[0], 3) == 0)
 			ft_launch_builtin(list, cmd, "env");
 		else if (ft_strncmp("cd", cmd->arg[0], 2) == 0)
 			ft_launch_builtin(list, cmd, "cd");
+		else if (ft_strncmp("exit", cmd->arg[0], 4) == 0)
+			ft_launch_builtin(list, cmd, "exit");
 		cmd = cmd->next;
 	}
+}
+
+void	ft_builtin_without_fork(t_list **tmp)
+{
+	t_list	*list;
+	t_list	*cmd;
+	list = NULL;
+
+	cmd = *tmp;
+	ft_load_builtin(&list, NULL, built_exit, "exit");
+	if (ft_strncmp("exit", cmd->arg[0], 4) == 0)
+		ft_launch_builtin(list, cmd, "exit");
 }

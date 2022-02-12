@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/11 22:31:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 10:52:15 by ubuntu           ###   ########.fr       */
+/*   Created: 2022/02/12 10:58:04 by ubuntu            #+#    #+#             */
+/*   Updated: 2022/02/12 11:11:01 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void ft_cd(t_list *list)
+void	built_exit(t_list *list)
 {
-	char	*env;
+	int	i;
 
-	if (list->arg[1] == NULL)
+	i = 0;
+	while (list->arg[i])
+		i++;
+	if (i > 2)
 	{
-		if (getenv("HOME") == NULL)
-		{
-			write(1, "HOME not set\n", 13);
-			exit(12);
-		}
-		else
-		{
-			env = getenv("HOME");
-			chdir(env);
-			exit (11);
-		}
+		write(2, "exit: too many arguments\n", 25);
+		exit(5);
 	}
-	else if (chdir(list->arg[1]) == -1)
+	else if (i == 1)
+		exit(2);
+	i = 0;
+	while (list->arg[1][i])
 	{
-		write(1, "No such file or directory\n", 26);
-		exit(12);
+		if (ft_isalpha(list->arg[1][i]))
+		{
+			write(1, "numeric argument required\n", 26);
+			exit(2);
+		}
+		i++;
 	}
-	exit(10);
+	g_err = ft_atoi(list->arg[1]);
+	exit(g_err);
 }
