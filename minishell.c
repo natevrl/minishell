@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 11:14:45 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 11:35:18 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	exec_cmd(t_list	*cmd)
 	cmd_path = ft_split(path_cmd, ':');
 	if (path_cmd)
 		exec_cmd = get_cmd(cmd_path, cmd->arg[0]);
+	if (ft_builtin_without_fork(&cmd) == 1)
+		return ;
 	if (!cmd)
 		ft_exit(127);
 	pid = fork();
@@ -57,12 +59,6 @@ void	exec_cmd(t_list	*cmd)
 			g_err = 127;
 		else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
 			g_err = 131;
-		else if (WIFEXITED(status) && WEXITSTATUS(status) == 10)
-			chdir(cmd->arg[1]);
-		else if (WIFEXITED(status) && WEXITSTATUS(status) == 11)
-			chdir(getenv("HOME"));
-		else if (WIFEXITED(status) && WEXITSTATUS(status) == 12)
-			g_err = 1;
 		else
 			g_err = WEXITSTATUS(status);
 	}

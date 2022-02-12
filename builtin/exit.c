@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:58:04 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 11:11:01 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 11:27:54 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ void	built_exit(t_list *list)
 	i = 0;
 	while (list->arg[i])
 		i++;
-	if (i > 2)
-	{
-		write(2, "exit: too many arguments\n", 25);
-		exit(5);
-	}
-	else if (i == 1)
+	if (i == 1)
 		exit(2);
 	i = 0;
 	while (list->arg[1][i])
@@ -35,6 +30,14 @@ void	built_exit(t_list *list)
 			exit(2);
 		}
 		i++;
+	}
+	i = 0;
+	while (list->arg[i])
+		i++;
+	if (i > 2)
+	{
+		write(2, "exit: too many arguments\n", 25);
+		exit(5);
 	}
 	g_err = ft_atoi(list->arg[1]);
 	exit(g_err);
