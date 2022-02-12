@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 22:18:44 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:15:29 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ void	ft_tokenize_input(t_list **tmp)
 	}
 }
 
-void	ft_check_execution(t_list **tmp)
+void	ft_check_execution(t_list **tmp, char **env)
 {
 	t_list	*token;
 
 	token = *tmp;
+	token->env = env;
 	while (token != NULL)
 	{
 		if (token->token == LITERAL)
@@ -98,6 +99,7 @@ void	parse_cmd(char *cmd, char **env)
 {
 	t_list	*token;
 	t_list	*cmd_token;
+	char	**my_env;
 	int		i;
 
 	i = -1;
@@ -109,6 +111,6 @@ void	parse_cmd(char *cmd, char **env)
 	ft_tokenize_input_condition(&token);
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token);
-	cmd_token->env = env;
-	ft_check_execution(&cmd_token);
+	my_env = ft_check_env(env);
+	ft_check_execution(&cmd_token, my_env);
 }

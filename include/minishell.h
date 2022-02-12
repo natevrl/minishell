@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 11:35:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:26:02 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 typedef void	t_fun(char **arg);
 typedef void	t_ls(t_list *arg);
 
+typedef struct s_myenv {
+	char			*name;
+	char			*value;
+	char			*env;
+	struct s_myenv	*next;
+}				t_myenv;
+
 typedef struct s_builtin {
 	char	*name;
 	t_fun	*built;
@@ -55,6 +62,9 @@ void	intHandler(int sig);
 
 char	*ft_get_env_without(char *str);
 char	*ft_get_env(char *str, t_list **list);
+char	**ft_fill_basic_env(char **env);
+char	**ft_check_env(char **env);
+size_t	ft_strlen_double(char **str);
 
 void	ft_bultin(t_list **cmd);
 void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name);
