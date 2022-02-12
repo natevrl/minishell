@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:36:15 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/10 18:15:49 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 17:32:34 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_list
 {
 	void			*content;
 	char			**arg;
-	char			**env;
+	struct s_list	*env;
 	int				token;
 	struct s_list	*next;
 }					t_list;

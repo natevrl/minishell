@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 11:35:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 17:35:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	exec_cmd(t_list	*cmd)
 		ft_bultin(&cmd);
 		if (!path_cmd)
 			exit_failure("command not found");
-		g_err = execve(exec_cmd, cmd->arg, cmd->env);
+		g_err = execve(exec_cmd, cmd->arg, ((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
 			exit_failure("command not found");
 		ft_exit(g_err);
 	}
 }
 
-void	prompt(char **env)
+void	prompt(t_list *lst)
 {
 	char	*cmd;
 
@@ -87,7 +87,7 @@ void	prompt(char **env)
 	add_history(cmd);
 	if (*cmd == '\0')
 		return ;
-	parse_cmd(cmd, env);
+	parse_cmd(cmd, lst);
 }
 
 int	main(int ac, char **av, char **env)
@@ -95,6 +95,9 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	g_err = 0;
+	t_list	*lst;
 
-	return (launch_bash(env));
+	lst = NULL;
+	ft_check_env(env, &lst);
+	return (launch_bash(lst));
 }

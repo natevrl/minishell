@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 12:26:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/12 17:22:47 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_myenv {
 	char			*name;
 	char			*value;
 	char			*env;
+	char			**envp;
 	struct s_myenv	*next;
 }				t_myenv;
 
@@ -55,15 +56,16 @@ void	ft_pwd();
 void	ft_cd(t_list *list);
 void	built_exit(t_list *list);
 int		ft_builtin_without_fork(t_list **tmp);
-int		launch_bash(char **env);
-void	prompt(char **env);
+int		launch_bash(t_list	*cmd);
+void	prompt(t_list *lst);
 void	print_err_code(t_list	*cmd);
 void	intHandler(int sig);
 
 char	*ft_get_env_without(char *str);
 char	*ft_get_env(char *str, t_list **list);
-char	**ft_fill_basic_env(char **env);
-char	**ft_check_env(char **env);
+void	list_push(t_list **lst_addr, void *data);
+void	ft_fill_basic_env(char **env, t_list **lst);
+void	ft_check_env(char **env, t_list **lst);
 size_t	ft_strlen_double(char **str);
 
 void	ft_bultin(t_list **cmd);
