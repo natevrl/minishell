@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/13 20:36:32 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 21:23:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,15 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			j = 0;
 			pos = i + 1;
 		}
-		else if (token->cmd_translated[i] == '|')
+		else if (token->cmd_translated[i] == '<')
 		{
-			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), PIPE));
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), RD_I));
+			j = 0;
+			pos = i + 1;
+		}
+		else if (token->cmd_translated[i] == '>')
+		{
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), RD_O));
 			j = 0;
 			pos = i + 1;
 		}
@@ -148,6 +154,5 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			j++;
 		i++;
 	}
-	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos,
-		ft_strlen((*tmp)->cmd_translated) - pos), CMD));
+	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, i), CMD));
 }

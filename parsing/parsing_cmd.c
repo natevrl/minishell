@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/13 20:52:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 21:53:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,16 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 		token->env = lst;
 		if (token->token == CMD)
 			exec_cmd(token);
+		else if (token->token == RD_O)
+		{
+			if (token->next != NULL)
+			{
+				redirect_cmd(token);
+				token = token->next;
+			}
+			else
+				printf("Missing output file\n");
+		}
 		token = token->next;
 	}
 }
