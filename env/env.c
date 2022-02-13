@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:53:49 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/13 11:56:34 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 18:17:44 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*ft_get_env(char *str, t_list **list)
 	if (str[i] == '$')
 	{
 		i++;
-		while (str[i] != '\0' && str[i] != ' '  && str[i] != '$' && str[i] != '\"' && str[i] != '=')
+		while (str[i] != '\0' && str[i] != ' '  && str[i] != '$' &&
+			str[i] != '\"' && str[i] != '=' && str[i] != '+')
 		{
 			i++;
 			*list = (*list)->next;

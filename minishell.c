@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/13 14:24:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 21:03:11 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	exec_cmd(t_list	*cmd)
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
 			g_err = 127;
 		else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+		{
+			ft_putstr_fd("Quit (core dumped)\n", 2);
 			g_err = 131;
+		}
 		else
 			g_err = WEXITSTATUS(status);
 	}

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/13 17:53:52 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 20:36:32 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,18 +130,24 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	j = 0;
 	pos = 0;
 	token = *tmp;
-	while (token)
+	while (token->cmd_translated[i])
 	{
-		if (token->token == EXEC)
+		if (token->cmd_translated[i] == ';')
 		{
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), CMD));
+			j = 0;
+			pos = i + 1;
+		}
+		else if (token->cmd_translated[i] == '|')
+		{
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), PIPE));
 			j = 0;
 			pos = i + 1;
 		}
 		else
 			j++;
 		i++;
-		token = token->next;
 	}
-	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j + 100), CMD));
+	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos,
+		ft_strlen((*tmp)->cmd_translated) - pos), CMD));
 }
