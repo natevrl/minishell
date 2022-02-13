@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 17:32:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 17:34:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	ft_tokenize_input(t_list **tmp)
 	token = *tmp;
 	while (token != NULL)
 	{
-		if (ft_isalnum(*(char *)token->content) || *(char *)token->content == ' ')
+		if (ft_isalnum(*(char *)token->content))
 			token->token = LITERAL;
+		else if (*(char *)token->content == ' ')
+			token->token = SP;
 		else if (*(char *)token->content == '<')
 			token->token = RD_I;
 		else if (*(char *)token->content == '>')
@@ -86,10 +88,10 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 	t_list	*token;
 
 	token = *tmp;
-	token->env = lst;
 	while (token != NULL)
 	{
-		if (token->token == LITERAL)
+		token->env = lst;
+		if (token->token == CMD)
 			exec_cmd(token);
 		token = token->next;
 	}
@@ -108,6 +110,7 @@ void	parse_cmd(char *cmd, t_list *lst)
 		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
 	ft_tokenize_input(&token);
 	ft_tokenize_input_condition(&token);
+	ft_translate_token(&token);
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token);
 	ft_check_execution(&cmd_token, lst);

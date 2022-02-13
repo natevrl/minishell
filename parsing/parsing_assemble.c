@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/11 22:15:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 17:53:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	ft_assemble_dollard(t_list **token, char **cmd, int *i)
 
 	env = ft_get_env((char *)(*token)->content, token);
 	if (ft_strlen(env) == 0)
+	{
 		(*cmd)[*i] = *(char *)(*token)->content;
-	(*i)++;
+		(*i)++;
+	}
 	if (getenv(env) != NULL)
 	{
-		cmd[*i] = '\0';
+		(*cmd)[*i] = '\0';
 		*i = ft_strlen(*cmd) + ft_strlen(getenv(env));
 		ft_strlcat(*cmd, getenv(env), (*i) + 1);
 	}
@@ -75,7 +77,19 @@ void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 	}
 }
 
-void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
+void	ft_fill_translated(t_list **tmp, char *cmd)
+{
+	t_list	*token;
+
+	token = *tmp;
+	while (token != NULL)
+	{
+		token->cmd_translated = cmd;
+		token = token->next;
+	}
+}
+
+void	ft_translate_token(t_list **tmp)
 {
 	t_list	*token;
 	char	*cmd;
@@ -102,5 +116,32 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 		token = token->next;
 	}
 	cmd[i] = '\0';
-	ft_lstadd_back(cmd_token, ft_lstnew_token(cmd, LITERAL));
+	ft_fill_translated(tmp, cmd);
+}
+
+void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
+{
+	t_list	*token;
+	int		i;
+	int		j;
+	int		pos;
+
+	i = 0;
+	j = 0;
+	pos = 0;
+	token = *tmp;
+	while (token)
+	{
+		if (token->token == EXEC)
+		{
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), CMD));
+			j = 0;
+			pos = i + 1;
+		}
+		else
+			j++;
+		i++;
+		token = token->next;
+	}
+	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j + 100), CMD));
 }

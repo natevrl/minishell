@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/12 19:20:28 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/13 14:24:36 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	exec_cmd(t_list	*cmd)
 
 	path_cmd = getenv("PATH");
 	cmd_path = ft_split(path_cmd, ':');
+	if (cmd->arg[0] == NULL)
+		return ;
 	exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
 	if (ft_builtin_without_fork(&cmd) == 1)
 		return ;
