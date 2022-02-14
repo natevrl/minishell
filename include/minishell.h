@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/13 22:00:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 14:12:57 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ size_t	ft_strlen_double(char **str);
 void	ft_bultin(t_list **cmd);
 void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name);
 void	ft_print_env(t_list **lst);
+void	ft_update_env(char **env, char *name);
 
 void	ft_exit(int status);
 void	exit_failure(const char *msg);

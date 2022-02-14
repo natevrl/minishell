@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/14 11:28:34 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 14:12:44 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,24 @@ char	*ft_after_equal(char *env)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+void	ft_update_env(char **env, char *name)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], name, ft_strlen(name)) == 0)
+		{
+			while (env[i] && env[i + 1])
+			{
+				*env[i] = *env[i + 1];
+				i++;
+			}
+			env[i] = NULL;
+		}
+		i++;
+	}
 }
