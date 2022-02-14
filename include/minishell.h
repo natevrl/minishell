@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/14 18:21:57 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 19:44:43 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	print_err_code(t_list	*cmd);
 void	intHandler(int sig);
 
 char	*get_cmd(char **path, char *cmd, char *path_cmd);
-void	redirect_out_cmd(t_list	*cmd);
-void	redirect_in_cmd(t_list	*cmd);
+void	redirect_out_cmd(t_list	*cmd, int fd);
+void	redirect_in_cmd(t_list	*cmd, int fd);
 char	*ft_get_env_without(char *str);
 char	*ft_get_env(char *str, t_list **list);
 void	list_push(t_list **lst_addr, void *data);

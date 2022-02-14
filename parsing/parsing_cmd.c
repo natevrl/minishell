@@ -94,13 +94,37 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 		if (token->token == CMD)
 			exec_cmd(token);
 		else if (token->token == RD_O)
-			redirect_out_cmd(token);
+		{
+			if (token->next != NULL)
+			{
+				while (token->next->token == RD_O)
+				{
+					token->fd = open(token->next->arg[0], O_CREAT | O_RDWR | O_TRUNC, 0664);
+					token = token->next;
+				}
+				token->fd = open(token->next->arg[0], O_CREAT | O_RDWR | O_TRUNC, 0664);
+				redirect_out_cmd((*tmp), token->fd);
+				token = token->next;
+			}
+			else
+				ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
+		}
 		else if (token->token == RD_I)
 		{
 			if (token->next != NULL)
-				redirect_in_cmd(token);
+			{
+				while (token->next->token == RD_I)
+				{
+					token->fd = open(token->next->arg[0], O_RDONLY);
+					redirect_in_cmd((*tmp), token->fd);
+					token = token->next;
+				}
+				token->fd = open(token->next->arg[0], O_RDONLY);
+				redirect_in_cmd((*tmp), token->fd);
+				token = token->next;
+			}
 			else
-				printf("Missing output file\n");
+				ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
 		}
 		token = token->next;
 	}
