@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/13 21:57:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 15:20:48 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_tokenize_input(t_list **tmp)
 void	ft_check_execution(t_list **tmp, t_list *lst)
 {
 	t_list	*token;
+	int		fd;
+	int		fd2;
 
 	token = *tmp;
 	while (token != NULL)
@@ -95,9 +97,19 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 			exec_cmd(token);
 		else if (token->token == RD_O)
 		{
+			fd = creat(token->next->arg[0], 0644);
+			redirect_out_cmd(token, fd, STDOUT_FILENO);
+			token = token->next;
+			while (token->next != NULL && token->next->token == RD_O)
+			{
+				fd2 = creat(token->next->arg[0], 0644);
+				redirect_out_cmd(token, fd, fd2);
+				token = token->next;
+			}
 			if (token->next != NULL)
 			{
-				redirect_out_cmd(token);
+				fd = creat(token->next->arg[0], 0644);
+				redirect_out_cmd(token, fd, STDOUT_FILENO);
 				token = token->next;
 			}
 			else

@@ -6,20 +6,19 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/14 13:39:04 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 14:43:29 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	redirect_out_cmd(t_list	*cmd)
+void	redirect_out_cmd(t_list	*cmd, int fd, int fd2)
 {
 	pid_t	pid;
 	int		status;
 	char	*path_cmd;
 	char	**cmd_path;
 	char	*exec_cmd;
-	int		fd;
 
 	path_cmd = getenv("PATH");
 	cmd_path = ft_split(path_cmd, ':');
@@ -49,8 +48,7 @@ void	redirect_out_cmd(t_list	*cmd)
 	}
 	else
 	{
-		fd = creat(cmd->next->arg[0], 0644);
-		dup2(fd, STDOUT_FILENO);
+		dup2(fd, fd2);
 		close(fd);
 		ft_bultin(&cmd);
 		g_err = execve(exec_cmd, cmd->arg, ((t_myenv *)cmd->env->content)->envp);
