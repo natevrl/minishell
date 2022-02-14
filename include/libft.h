@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:36:15 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/14 12:28:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 17:19:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*env;
 	int				token;
 	char			*cmd_translated;
+	int				fd;
 	struct s_list	*next;
 }					t_list;
 
