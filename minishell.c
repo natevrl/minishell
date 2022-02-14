@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/13 21:51:33 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 11:53:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,5 @@ int	main(int ac, char **av, char **env)
 	ft_check_env(env, &lst);
 	return (launch_bash(lst));
 }
+
+

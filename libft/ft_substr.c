@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 03:07:48 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 12:02:05 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 11:29:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	len2 = ft_strlen(s + start);
 	if (len2 < len)
 		len = len2;
-	res = malloc(sizeof(char) * (len + 1));
+	res = ft_malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
 	ft_strlcpy(res, s + start, len + 1);

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 17:52:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 11:28:34 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_before_equal(char *env)
 		i++;
 	if (env[i] == '\0')
 		return (NULL);
-	res = (char *)malloc(sizeof(char) * i + 1);
+	res = (char *)ft_malloc(sizeof(char) * i + 1);
 	i = 0;
 	while (env[i] && env[i] != '=')
 	{
@@ -59,7 +59,7 @@ char	*ft_after_equal(char *env)
 	}
 	if (flag == 0)
 		return (NULL);
-	res = (char *)malloc(sizeof(char) * j + 1);
+	res = (char *)ft_malloc(sizeof(char) * j + 1);
 	i = 0;
 	while (env[k])
 	{

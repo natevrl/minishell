@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:53:49 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/13 18:17:44 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 12:02:06 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_load_env(t_list **list, char *env, char **envp)
 {
 	t_myenv *t;
 
-	t = (t_myenv *)malloc(sizeof(t_myenv));
+	t = (t_myenv *)ft_malloc(sizeof(t_myenv));
 	t->name = ft_before_equal(env);
 	t->value = ft_after_equal(env);
 	t->env = ft_strdup(env);
@@ -90,7 +90,7 @@ void	ft_add_under(char **envp, t_list **list)
 {
 	t_myenv *t;
 
-	t = (t_myenv *)malloc(sizeof(t_myenv));
+	t = (t_myenv *)ft_malloc(sizeof(t_myenv));
 	t->name = ft_strdup("_");
 	t->value = ft_strdup("/usr/bin/env");
 	t->env = ft_strdup("_=/usr/bin/env");
@@ -102,7 +102,7 @@ void	ft_add_pwd(char **envp, t_list **list)
 {
 	t_myenv *t;
 
-	t = (t_myenv *)malloc(sizeof(t_myenv));
+	t = (t_myenv *)ft_malloc(sizeof(t_myenv));
 	t->name = ft_strdup("PWD");
 	t->value = ft_strdup("/");
 	t->env = ft_strdup("PWD=/");
@@ -114,7 +114,7 @@ void	ft_add_shlvl(char **envp, t_list **list)
 {
 	t_myenv *t;
 
-	t = (t_myenv *)malloc(sizeof(t_myenv));
+	t = (t_myenv *)ft_malloc(sizeof(t_myenv));
 	t->name = ft_strdup("SHLVL");
 	t->value = ft_strdup("1");
 	t->env = ft_strdup("SHLVL=1");

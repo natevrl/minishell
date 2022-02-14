@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:36:15 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/13 12:28:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 12:28:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_list
 	char			*cmd_translated;
 	struct s_list	*next;
 }					t_list;
+
+void	clear_memory(void);
+void	*ft_malloc(size_t size);
 
 //Linked list
 void	ft_lstadd_back(t_list **alst, t_list *new);

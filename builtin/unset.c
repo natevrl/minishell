@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 12:23:05 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 20:09:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/14 12:31:55 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ void	ft_unset(t_list **cmd)
 	list = *cmd;
 	if (list->arg[1] == NULL)
 		return ;
-	while (list->env && ft_strncmp(((t_myenv *)list->env->content)->name, list->arg[1], ft_strlen(list->arg[1])) != 0)
+	while (list->env)
+	{
+		printf("%s\n", ((t_myenv *)list->env->content)->value);
+		list->env = list->env->next;
+	}
+/*	while (list->env && ft_strncmp(((t_myenv *)list->env->content)->name, list->arg[1], ft_strlen(list->arg[1])) != 0)
 		list->env = list->env->next;
 	if (list->env == NULL)
 		return ;
@@ -31,5 +36,5 @@ void	ft_unset(t_list **cmd)
 		else
 			list->env = NULL;
 		return ;
-	}
+	}*/
 }
