@@ -145,6 +145,13 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			j = 0;
 			pos = i + 1;
 		}
+		else if (token->cmd_translated[i] == '<' && token->cmd_translated[i + 1] == '<')
+		{
+			i++;
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), RD_ID));
+			j = 0;
+			pos = i + 1;
+		}
 		else if (token->cmd_translated[i] == '>')
 		{
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, j), RD_O));
