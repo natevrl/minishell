@@ -116,10 +116,20 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 				while (token->next->token == RD_I)
 				{
 					token->fd = open(token->next->arg[0], O_RDONLY);
+					if (token->fd == -1)
+					{
+						perror(token->next->arg[0]);
+						return ;
+					}
 					redirect_in_cmd((*tmp), token->fd);
 					token = token->next;
 				}
 				token->fd = open(token->next->arg[0], O_RDONLY);
+				if (token->fd == -1)
+				{
+					perror(token->next->arg[0]);
+					return ;
+				}
 				redirect_in_cmd((*tmp), token->fd);
 				token = token->next;
 			}
