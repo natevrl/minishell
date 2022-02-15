@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <parsing_minishell.h>
+# include <get_next_line.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
@@ -66,7 +67,7 @@ void	intHandler(int sig);
 char	*get_cmd(char **path, char *cmd, char *path_cmd);
 void	redirect_out_cmd(t_list	*cmd, int fd);
 void	redirect_in_cmd(t_list	*cmd, int fd);
-void	redirect_heredoc_cmd(t_list	*cmd, int fd);
+void	here_doc(char *limiter);
 char	*ft_get_env_without(char *str);
 char	*ft_get_env(char *str, t_list **list);
 void	list_push(t_list **lst_addr, void *data);

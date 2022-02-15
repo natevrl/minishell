@@ -34,6 +34,7 @@ FILES = minishell \
 		execve/redirection \
 		memory/memory0		\
 		memory/memory1		\
+		get_next_line/get_next_line \
 		env/env		\
 		env/env_utils		\
 		signal/signaux		\
@@ -72,6 +73,7 @@ $(OBJS_DIR):
 		@mkdir objs/env
 		@mkdir objs/signal
 		@mkdir objs/execve
+		@mkdir objs/get_next_line
 
 $(OBJS_B_DIR):
 		@mkdir $@
