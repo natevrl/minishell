@@ -113,13 +113,8 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 		{
 			if (token->next != NULL)
 			{
-				while (token->next->token == RD_ID)
-				{
-					write(1, "ok\n", 3);
-					token = token->next;
-				}
-				write(1, "ok\n", 3);
-				token = token->next;
+				token->fd = open(token->next->arg[0], O_CREAT | O_RDWR | O_TRUNC, 0664);
+				redirect_heredoc_cmd((*tmp), token->fd);
 			}
 			else
 				ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
