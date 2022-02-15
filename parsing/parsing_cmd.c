@@ -109,6 +109,22 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 			else
 				ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
 		}
+		else if (token->token == RD_OA)
+		{
+			if (token->next != NULL)
+			{
+				while (token->next->token == RD_OA)
+				{
+					token->fd = open(token->next->arg[0], O_CREAT | O_RDWR | O_CREAT | O_APPEND, 0664);
+					token = token->next;
+				}
+				token->fd = open(token->next->arg[0], O_CREAT | O_RDWR | O_APPEND, 0664);
+				redirect_out_cmd((*tmp), token->fd);
+				token = token->next;
+			}
+			else
+				ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
+		}
 		else if (token->token == RD_I)
 		{
 			if (token->next != NULL)

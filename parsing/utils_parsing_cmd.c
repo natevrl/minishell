@@ -53,7 +53,8 @@ void	ft_set_option(t_list **tmp)
 	cmd_token = *tmp;
 	while (cmd_token != NULL)
 	{
-		if (cmd_token->token == CMD || cmd_token->token == RD_O || cmd_token->token == RD_I)
+		if (cmd_token->token == CMD || cmd_token->token == RD_O || cmd_token->token == RD_I 
+			|| cmd_token->token == RD_OA)
 			cmd_token->arg = ft_split((char *)cmd_token->content, ' ');
 		else
 			cmd_token->arg = NULL;
