@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 11:02:58 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 14:04:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void	ft_check_signal(int pid)
 
 	signal(SIGQUIT, sig_handler);
 	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+	if (WIFSIGNALED(status))
 	{
-		ft_putstr_fd("Quit (core dumped)\n", 2);
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putstr_fd("Quit (core dumped)\n", 2);
 		g_err = 131;
 	}
 	else

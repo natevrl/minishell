@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 11:32:28 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 14:26:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_export(t_list **list);
 void	ft_unset(t_list **list);
 void	sort_and_print_env(char **envp);
 void	built_exit(t_list **list);
+int		no_equal(char *str);
 int		ft_builtin_without_fork(t_list **tmp);
 int		launch_bash(t_list	*cmd);
 void	prompt(t_list *lst);

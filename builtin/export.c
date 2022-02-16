@@ -6,59 +6,21 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 12:58:47 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 14:28:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	no_equal(char *str)
+void	add_in_envp(char **envp, char *arg)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == '=')
-			return (0);
-	return (1);
-}
-
-int	already_in_env(t_list **cmd, char *arg)
-{
-	char	*cmp2;
-	t_list *envlist;
-
-	envlist = *cmd;
-	while (envlist->env)
-	{
-		cmp2 = ft_before_equal(arg);
-		if (ft_strncmp(((t_myenv *)envlist->env->content)->name, cmp2, 100) == 0)
-		{
-			if (ft_strncmp(((t_myenv *)envlist->env->content)->value, ft_after_equal(arg), 100) != 0)
-				((t_myenv *)envlist->env->content)->env = arg;
-			return (1);
-		}
-		envlist->env = envlist->env->next;
-	}
-	return (0);
-}
-
-char	**ft_update2_env(char **env, char *newenv)
-{
-	char	**res;
 	int	i;
 
 	i = 0;
-	res = (char **)malloc(sizeof(char *) * ft_strlen_double(env) + 2);
-	while (env[i])
-	{
-		res[i] = (char *)malloc(sizeof(char) * ft_strlen(env[i]));
-		res[i] = env[i];
+	while (envp[i])
 		i++;
-	}
-	res[i] = ft_strdup(newenv);
-	res[i + 1] = NULL;
-	return (res);
+	envp[i] = arg;
+	envp[++i] = NULL;
 }
 
 void	add_new_envlist(t_list **list, char *arg)
@@ -69,8 +31,48 @@ void	add_new_envlist(t_list **list, char *arg)
 	t->name = ft_before_equal(arg);
 	t->value = ft_strdup(ft_after_equal(arg));
 	t->env = ft_strdup(arg);
-	t->envp = NULL;
-	list_push(&(*list)->env, t);
+	t->envp = ((t_myenv *)(*list)->content)->envp;
+	list_push(list, t);
+}
+
+int	already_in_env(t_list **cmd, char *arg)
+{
+	char	*cmp1;
+	char	*cmp2;
+	char	**envp;
+	int		i;
+
+	envp = ((t_myenv *)(*cmd)->env->content)->envp;
+	i = -1;
+	while (envp[++i])
+	{
+		cmp1 = ft_before_equal(envp[i]);
+		cmp2 = ft_before_equal(arg);
+		if (ft_strncmp(cmp1, cmp2, ft_strlen(cmp1) + ft_strlen(cmp2)) == 0)
+		{
+			if (ft_strncmp(ft_after_equal(envp[i]), ft_after_equal(arg), 100) != 0)
+				envp[i] = arg;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	export_error(char *arg)
+{
+	int		i;
+	char	*before;
+
+	before = ft_before_equal(arg);
+	i = -1;
+	if (ft_isdigit(arg[0]))
+		return (1);
+	while (before[++i])
+	{
+		if (!ft_isalnum(before[i]) && before[i] != '_')
+			return (1) ;
+	}
+	return (0);
 }
 
 void	ft_export(t_list **list)
@@ -86,9 +88,15 @@ void	ft_export(t_list **list)
 	{
 		if (no_equal(envlist->arg[i]))
 			continue ;
-		if (already_in_env(list, envlist->arg[i]))
+		if (export_error(envlist->arg[i]))
+		{
+			printf("minishell: export: `%s': not a valid identifier\n",
+				envlist->arg[i]);
 			continue ;
-//		((t_myenv *)(*list)->env->content)->envp = ft_update2_env(((t_myenv *)(*list)->env->content)->envp, envlist->arg[i]);
-		add_new_envlist(list, envlist->arg[i]);
+		}
+		if (already_in_env(&envlist, envlist->arg[i]))
+			continue ;
+		add_in_envp(((t_myenv *)(*list)->env->content)->envp, envlist->arg[i]);
+		add_new_envlist(&(*list)->env, envlist->arg[i]);
 	}
 }

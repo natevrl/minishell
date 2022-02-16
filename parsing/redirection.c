@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 13:24:23 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 14:02:18 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_redirect_to_output(t_list **token, t_list **tmp)
 		{
 			(*token)->fd = open((*token)->next->arg[0],
 					O_CREAT | O_RDWR | O_TRUNC, 0664);
+			close((*token)->fd);
 			*token = (*token)->next;
 		}
 		(*token)->fd = open((*token)->next->arg[0],

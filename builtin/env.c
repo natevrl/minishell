@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:20:43 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 10:53:19 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 14:15:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	ft_print_env(t_list **cmd)
 		write(1, "\n", 1);
 		list->env = list->env->next;
 	}
-	exit(0);
+	ft_exit(0);
 }
