@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 05:55:32 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 09:11:33 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
 void	ft_pwd(char **argv);
 void	ft_cd(t_list **list);
+void	ft_export(t_list **list);
 void	ft_unset(t_list **list);
 void	built_exit(t_list **list);
 int		ft_builtin_without_fork(t_list **tmp);
