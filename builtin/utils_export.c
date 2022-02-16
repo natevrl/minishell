@@ -6,16 +6,16 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:32:04 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 12:33:51 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:01:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char **envp_copy(char **envp, int max)
+static char	**envp_copy(char **envp, int max)
 {
-	char **tab;
-	int i;
+	char	**tab;
+	int		i;
 
 	tab = malloc(sizeof(char **) * max);
 	i = -1;
@@ -35,10 +35,10 @@ static void	str_swap(char **s1, char **s2)
 
 void	sort_and_print_env(char **envp)
 {
-	int y;
-	int i;
-	int max;
-	char **tab;
+	int		y;
+	int		i;
+	int		max;
+	char	**tab;
 
 	max = 0;
 	while (envp[max] != NULL)
@@ -50,7 +50,8 @@ void	sort_and_print_env(char **envp)
 		y = i + 1;
 		while (y < max)
 		{
-			if (ft_strncmp(tab[i], tab[y], ft_strlen(tab[i]) + ft_strlen(tab[y])) > 0)
+			if (ft_strncmp(tab[i], tab[y], ft_strlen(tab[i])
+					+ ft_strlen(tab[y])) > 0)
 				str_swap(&tab[i], &tab[y]);
 			y++;
 		}
