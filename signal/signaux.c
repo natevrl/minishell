@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 05:07:54 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 11:02:58 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,19 @@ void	sig_handler(const int sig)
 		rl_redisplay();
 		g_err = 130;
 	}
+}
+
+void	ft_check_signal(int pid)
+{
+	int	status;
+
+	signal(SIGQUIT, sig_handler);
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+	{
+		ft_putstr_fd("Quit (core dumped)\n", 2);
+		g_err = 131;
+	}
+	else
+		g_err = WEXITSTATUS(status);
 }

@@ -22,16 +22,10 @@ void	unset_env(t_list **cmd, int i)
 	else
 	{
 		if ((*cmd)->env->next->next != NULL)
-		{
-			ft_update_env(((t_myenv *)(*cmd)->env->content)->envp, (*cmd)->arg[i]);
 			(*cmd)->env->next = (*cmd)->env->next->next;
-		}
 		else
-		{
-			ft_update_env(((t_myenv *)(*cmd)->env->content)->envp, (*cmd)->arg[i]);
 			(*cmd)->env->next = NULL;
-		}
-		return ;
+		ft_update_env(((t_myenv *)(*cmd)->env->content)->envp, (*cmd)->arg[i]);
 	}
 }
 
