@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 09:21:27 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 11:21:44 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	ft_builtin_without_fork(t_list **tmp)
 	ft_load_builtin(&list, NULL, built_exit, "exit");
 	ft_load_builtin(&list, NULL, ft_cd, "cd");
 	ft_load_builtin(&list, NULL, ft_unset, "unset");
+	ft_load_builtin(&list, NULL, ft_export, "export");
 	ft_load_builtin(&list, ft_pwd, NULL, "pwd");
 	if (ft_strncmp("exit", cmd->arg[0], 4) == 0)
 	{

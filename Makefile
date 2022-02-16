@@ -6,7 +6,7 @@
 #    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/16 09:08:28 by nabentay         ###   ########.fr        #
+#    Updated: 2022/02/16 11:32:42 by nabentay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ FILES = minishell \
 		builtin/exit \
 		builtin/pwd \
 		builtin/export \
+		builtin/utils_export \
 		builtin/load_builtin \
 		execve/execve \
 		execve/redirection \
