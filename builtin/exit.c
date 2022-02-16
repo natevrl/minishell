@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:58:04 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 14:48:30 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 14:53:03 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	built_exit(t_list **cmd)
 
 	i = 0;
 	list = *cmd;
-	while (list->arg[i])
-		i++;
-	if (i == 1)
-		ft_exit(2);
+	if (ft_strlen_double(list->arg) == 1)
+	{
+		ft_putstr_fd("exit\n", 2);
+		ft_exit(0);
+	}
 	i = 0;
 	while (list->arg[1][i])
 	{
@@ -33,13 +34,11 @@ void	built_exit(t_list **cmd)
 		}
 		i++;
 	}
-	i = 0;
-	while (list->arg[i])
-		i++;
-	if (i > 2)
+	if (ft_strlen_double(list->arg) > 2)
 	{
 		write(2, "exit: too many arguments\n", 25);
 		ft_exit(5);
 	}
+	ft_putstr_fd("exit\n", 2);
 	ft_exit(ft_atoi(list->arg[1]));
 }
