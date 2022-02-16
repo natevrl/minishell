@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:32:04 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 11:35:26 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 12:33:51 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	sort_and_print_env(char **envp)
 	int max;
 	char **tab;
 
+	max = 0;
 	while (envp[max] != NULL)
 		max++;
 	tab = envp_copy(envp, max);
@@ -49,7 +50,7 @@ void	sort_and_print_env(char **envp)
 		y = i + 1;
 		while (y < max)
 		{
-			if (ft_strncmp(tab[i], tab[y], 1000) > 0)
+			if (ft_strncmp(tab[i], tab[y], ft_strlen(tab[i]) + ft_strlen(tab[y])) > 0)
 				str_swap(&tab[i], &tab[y]);
 			y++;
 		}
