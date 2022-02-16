@@ -14,8 +14,10 @@
 
 void	unset_env(t_list **cmd, int i)
 {
-	while ((*cmd)->env->next && ft_strncmp(((t_myenv *)(*cmd)->env->next->content)->name,
-	(*cmd)->arg[i], ft_strlen((*cmd)->arg[i]) + ft_strlen(((t_myenv *)(*cmd)->env->next->content)->name)) != 0)
+	while ((*cmd)->env->next
+		&& ft_strncmp(((t_myenv *)(*cmd)->env->next->content)->name,
+		(*cmd)->arg[i], ft_strlen((*cmd)->arg[i])
+		+ ft_strlen(((t_myenv *)(*cmd)->env->next->content)->name)) != 0)
 		(*cmd)->env = (*cmd)->env->next;
 	if ((*cmd)->env->next == NULL)
 		return ;
@@ -51,7 +53,7 @@ int	ft_check_unset(char *str)
 
 void	ft_unset(t_list **cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((*cmd)->arg[++i])
