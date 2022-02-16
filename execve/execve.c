@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 05:54:06 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 11:00:57 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,23 @@ void	ft_check_signal(int pid)
 		g_err = WEXITSTATUS(status);
 }
 
+char	*ft_find_path(t_list *lst)
+{
+	while (lst)
+	{
+		if (ft_strncmp("PATH", ((t_myenv *)lst->content)->name, 4) == 0)
+			return (((t_myenv *)lst->content)->value);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
 int	ft_get_path(t_list *cmd, char **exec_cmd)
 {
 	char	*path_cmd;
 	char	**cmd_path;
 
-	path_cmd = getenv("PATH");
+	path_cmd = ft_find_path(cmd->env);
 	cmd_path = ft_split(path_cmd, ':');
 	if (cmd->arg[0] == NULL)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 06:23:18 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:46:22 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ void	ft_update_env(char **env, char *name)
 		{
 			while (env[i] && env[i + 1])
 			{
-				*env[i] = *env[i + 1];
+				env[i] = env[i + 1];
 				i++;
 			}
 			env[i] = NULL;
 		}
 		i++;
 	}
+	i = 0;
 }
 
 size_t	ft_strlen_double(char **str)

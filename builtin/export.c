@@ -6,13 +6,13 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 09:12:24 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 09:51:21 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	add_in_envp(char **envp, char *arg)
+/*void	add_in_envp(char **envp, char *arg)
 {
 	int	i;
 
@@ -86,4 +86,4 @@ void	ft_export(t_list **list)
 			continue ;
 		add_in_envp(((t_myenv *)(*list)->env->content)->envp, envlist->arg[i]);
 	}
-}
+}*/
