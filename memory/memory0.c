@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:02:41 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/07 20:06:50 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 13:32:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	clear_memory(void)
 		free(ptr->content);
 		free(ptr);
 	}
+	rl_clear_history();
 }
