@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
+#    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/13 21:52:28 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/16 05:35:52 by nabentay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES = minishell \
 		parsing/parsing_cmd	\
 		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
+		parsing/convert	\
 		builtin/echo \
 		builtin/unset \
 		builtin/env \
@@ -36,6 +37,7 @@ FILES = minishell \
 		memory/memory1		\
 		get_next_line/get_next_line \
 		env/env		\
+		env/add_basic_env		\
 		env/env_utils		\
 		signal/signaux		\
 

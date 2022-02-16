@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/14 12:29:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 05:26:27 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	list_push(t_list **lst_addr, void *data)
 
 void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name)
 {
-	t_builtin *t;
+	t_builtin	*t;
 
 	t = (t_builtin *)malloc(sizeof(t_builtin));
 	t->name = ft_strdup(name);
@@ -37,7 +37,8 @@ void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name)
 
 void	ft_launch_builtin(t_list *list, t_list *cmd, char *name)
 {
-	while (ft_strncmp(((t_builtin *)list->content)->name, name, ft_strlen(name)) != 0)
+	while (ft_strncmp(((t_builtin *)list->content)->name, name,
+			ft_strlen(name)) != 0)
 		list = list->next;
 	if (((t_builtin *)list->content)->built != NULL)
 		((t_builtin *)list->content)->built(cmd->arg);
@@ -49,8 +50,8 @@ void	ft_bultin(t_list **tmp)
 {
 	t_list	*list;
 	t_list	*cmd;
-	list = NULL;
 
+	list = NULL;
 	cmd = *tmp;
 	ft_load_builtin(&list, NULL, ft_print_env, "env");
 	ft_load_builtin(&list, ft_echo, NULL, "echo");
@@ -71,8 +72,8 @@ int	ft_builtin_without_fork(t_list **tmp)
 {
 	t_list	*list;
 	t_list	*cmd;
-	list = NULL;
 
+	list = NULL;
 	cmd = *tmp;
 	ft_load_builtin(&list, NULL, built_exit, "exit");
 	ft_load_builtin(&list, NULL, ft_cd, "cd");

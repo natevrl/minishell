@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 19:01:54by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 05:19:36 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_strlen_token(t_list *token)
 		{
 			i++;
 			if (getenv(ft_get_env_without((char *)token->content)) != NULL)
-				i += ft_strlen(getenv(ft_get_env_without((char *)token->content)));
+				i += ft_strlen(getenv(ft_get_env_without(
+								(char *)token->content)));
 		}
 		i++;
 		token = token->next;
@@ -53,7 +54,8 @@ void	ft_set_option(t_list **tmp)
 	cmd_token = *tmp;
 	while (cmd_token != NULL)
 	{
-		if (cmd_token->token == CMD || cmd_token->token == RD_O || cmd_token->token == RD_I 
+		if (cmd_token->token == CMD || cmd_token->token == RD_O
+			|| cmd_token->token == RD_I
 			|| cmd_token->token == RD_OA || cmd_token->token == RD_ID)
 			cmd_token->arg = ft_split((char *)cmd_token->content, ' ');
 		else

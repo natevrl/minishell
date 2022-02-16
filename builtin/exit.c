@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:58:04 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/12 19:57:57 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 05:23:39 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	built_exit(t_list **cmd)
 {
 	t_list	*list;
-	int	i;
+	int		i;
 
 	i = 0;
 	list = *cmd;

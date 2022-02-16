@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/14 14:08:52 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 05:54:06 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,53 @@ char	*get_cmd(char **path, char *cmd, char *path_cmd)
 	return (NULL);
 }
 
-void	exec_cmd(t_list	*cmd)
+void	ft_check_signal(int pid)
 {
-	pid_t	pid;
-	int		status;
+	int	status;
+
+	signal(SIGQUIT, sig_handler);
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+	{
+		ft_putstr_fd("Quit (core dumped)\n", 2);
+		g_err = 131;
+	}
+	else
+		g_err = WEXITSTATUS(status);
+}
+
+int	ft_get_path(t_list *cmd, char **exec_cmd)
+{
 	char	*path_cmd;
 	char	**cmd_path;
-	char	*exec_cmd;
 
 	path_cmd = getenv("PATH");
 	cmd_path = ft_split(path_cmd, ':');
 	if (cmd->arg[0] == NULL)
+		return (1);
+	*exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
+	return (0);
+}
+
+void	exec_cmd(t_list	*cmd)
+{
+	pid_t	pid;
+	char	*exec_cmd;
+
+	if (ft_get_path(cmd, &exec_cmd) || ft_builtin_without_fork(&cmd))
 		return ;
-	exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
-	if (ft_builtin_without_fork(&cmd) == 1)
-		return ;
-	if (!cmd)
-		ft_exit(127);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
 	else if (pid > 0)
-	{
-		signal(SIGQUIT, intHandler);
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
-			g_err = 127;
-		else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
-		{
-			ft_putstr_fd("Quit (core dumped)\n", 2);
-			g_err = 131;
-		}
-		else
-			g_err = WEXITSTATUS(status);
-	}
+		ft_check_signal(pid);
 	else
 	{
 		ft_bultin(&cmd);
-		g_err = execve(exec_cmd, cmd->arg, ((t_myenv *)cmd->env->content)->envp);
+		g_err = execve(exec_cmd, cmd->arg,
+				((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
-			exit_failure("command not found");
+			exit_failure(cmd->arg[0]);
 		ft_exit(g_err);
 	}
 }

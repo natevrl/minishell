@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/14 20:10:24 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 05:55:32 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <parsing_minishell.h>
+# include <env_minishell.h>
 # include <get_next_line.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -50,11 +51,11 @@ typedef struct s_builtin {
 	t_ls	*built_lm;
 }				t_builtin;
 
-int		g_err;
+int				g_err;
 
 void	exec_cmd(t_list	*cmd);
 void	ft_echo(char **argv);
-void	ft_pwd();
+void	ft_pwd(char **argv);
 void	ft_cd(t_list **list);
 void	ft_unset(t_list **list);
 void	built_exit(t_list **list);
@@ -62,7 +63,7 @@ int		ft_builtin_without_fork(t_list **tmp);
 int		launch_bash(t_list	*cmd);
 void	prompt(t_list *lst);
 void	print_err_code(t_list	*cmd);
-void	intHandler(int sig);
+void	sig_handler(const int sig);
 
 char	*get_cmd(char **path, char *cmd, char *path_cmd);
 void	redirect_out_cmd(t_list	*cmd, int fd);
@@ -74,6 +75,9 @@ void	list_push(t_list **lst_addr, void *data);
 void	ft_fill_basic_env(char **env, t_list **lst);
 void	ft_check_env(char **env, t_list **lst);
 size_t	ft_strlen_double(char **str);
+
+int		ft_get_path(t_list *cmd, char **exec_cmd);
+void	ft_check_signal(int pid);
 
 void	ft_bultin(t_list **cmd);
 void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name);

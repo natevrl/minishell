@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/14 14:12:44 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 05:37:57 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,32 @@ void	ft_update_env(char **env, char *name)
 		}
 		i++;
 	}
+}
+
+size_t	ft_strlen_double(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_get_env_without(char *str)
+{
+	char	*env;
+	int		i;
+
+	i = 0;
+	env = NULL;
+	if (str[i] == '$')
+	{
+		i++;
+		while (str[i] != '\0' && str[i] != ' ' && str[i] != '$')
+			i++;
+		env = ft_substr(str, 1, i - 1);
+		return (env);
+	}
+	return (NULL);
 }
