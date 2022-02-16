@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 11:21:44 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:16:55 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_load_builtin(t_list **list, t_fun *fun, t_ls *ls, char *name)
 {
 	t_builtin	*t;
 
-	t = (t_builtin *)malloc(sizeof(t_builtin));
+	t = (t_builtin *)ft_malloc(sizeof(t_builtin));
 	t->name = ft_strdup(name);
 	t->built = fun;
 	t->built_l = ls;

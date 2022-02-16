@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 05:19:36 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:16:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strlen_token(t_list *token)
 	int		i;
 
 	i = 0;
-	while (token->next != NULL)
+	while (token != NULL)
 	{
 		if (token->token == EXIT_CODE)
 			i += ft_strlen(ft_itoa(g_err));
@@ -38,7 +38,7 @@ t_list	*ft_lstnew_token(void	*content, int token)
 {
 	t_list	*list;
 
-	list = malloc(sizeof(t_list));
+	list = ft_malloc(sizeof(t_list));
 	if (!list)
 		return (NULL);
 	list->content = content;

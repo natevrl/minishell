@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 22:43:58 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 12:02:05 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 13:15:17 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_fill(char const *s, char c, char **tab)
 		len = 0;
 		while (*s != c && *s && ++s)
 			len++;
-		tab[i] = (char *)malloc(sizeof(char) * len + 1);
+		tab[i] = (char *)ft_malloc(sizeof(char) * len + 1);
 		if (!tab[i])
 		{
 			while (i)
@@ -63,7 +63,7 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	while (*s == c && *s)
 		s++;
-	tab = (char **)malloc(sizeof(char *) * (ft_word(s, c) + 1));
+	tab = (char **)ft_malloc(sizeof(char *) * (ft_word(s, c) + 1));
 	if (!tab)
 		return (NULL);
 	if (ft_fill(s, c, tab))

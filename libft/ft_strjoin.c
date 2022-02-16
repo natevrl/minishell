@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:36:57 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 12:02:05 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 13:17:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = -1;
 	j = -1;
 	len = ft_strlen(s1) + ft_strlen(s2);
-	tab = malloc(sizeof(char) * len + 1);
+	tab = ft_malloc(sizeof(char) * len + 1);
 	if (!tab)
 		return (NULL);
 	while (s1[++i])

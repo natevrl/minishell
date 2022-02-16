@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 11:02:48 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:18:54 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ char	*get_cmd(char **path, char *cmd, char *path_cmd)
 	{
 		tmp = ft_strjoin(*path, "/");
 		res = ft_strjoin(tmp, cmd);
-		free (tmp);
+		ft_free (tmp);
 		if (access(res, 0) == 0)
 			return (res);
-		free (res);
+		ft_free (res);
 		path++;
 	}
 	return (NULL);

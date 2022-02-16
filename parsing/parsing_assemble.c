@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 06:13:11 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:17:50 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_translate_token(t_list **tmp)
 
 	token = *tmp;
 	i = 0;
-	cmd = (char *)malloc(sizeof(char) * ft_strlen_token(token));
+	cmd = (char *)ft_malloc(sizeof(char) * ft_strlen_token(token));
 	while (token != NULL)
 	{
 		if (token->token == QUOTE)
