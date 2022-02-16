@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 14:28:19 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/16 14:59:15 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	add_in_envp(char **envp, char *arg)
 
 void	add_new_envlist(t_list **list, char *arg)
 {
-	t_myenv *t;
+	t_myenv	*t;
 
 	t = (t_myenv *)ft_malloc(sizeof(t_myenv));
 	t->name = ft_before_equal(arg);
@@ -50,7 +50,8 @@ int	already_in_env(t_list **cmd, char *arg)
 		cmp2 = ft_before_equal(arg);
 		if (ft_strncmp(cmp1, cmp2, ft_strlen(cmp1) + ft_strlen(cmp2)) == 0)
 		{
-			if (ft_strncmp(ft_after_equal(envp[i]), ft_after_equal(arg), 100) != 0)
+			if (ft_strncmp(ft_after_equal(envp[i]),
+					ft_after_equal(arg), 100) != 0)
 				envp[i] = arg;
 			return (1);
 		}
@@ -70,7 +71,7 @@ int	export_error(char *arg)
 	while (before[++i])
 	{
 		if (!ft_isalnum(before[i]) && before[i] != '_')
-			return (1) ;
+			return (1);
 	}
 	return (0);
 }
