@@ -6,7 +6,7 @@
 #    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/16 05:35:52 by nabentay         ###   ########.fr        #
+#    Updated: 2022/02/16 06:19:32 by nabentay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FILES = minishell \
 		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
 		parsing/convert	\
+		parsing/redirection	\
 		builtin/echo \
 		builtin/unset \
 		builtin/env \

@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 12:23:05 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 05:23:22 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 06:56:03 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 
 void	ft_unset(t_list **cmd)
 {
-	t_list	*list;
-
-	list = *cmd;
-	if (list->arg[1] == NULL)
+	if ((*cmd)->arg[1] == NULL)
 		return ;
-	while (list->env && ft_strncmp(((t_myenv *)list->env->content)->name,
-			list->arg[1], ft_strlen(list->arg[1])) != 0)
-		list->env = list->env->next;
-	if (list->env == NULL)
+	while ((*cmd)->env && ft_strncmp(((t_myenv *)(*cmd)->env->content)->name, (*cmd)->arg[1], ft_strlen((*cmd)->arg[1])) != 0)
+		(*cmd)->env = (*cmd)->env->next;
+	if ((*cmd)->env == NULL)
 		return ;
 	else
 	{
-		if (list->env->next != NULL)
+		if ((*cmd)->env->next != NULL)
 		{
-			ft_update_env(((t_myenv *)list->env->content)->envp, list->arg[1]);
-			list->env->content = NULL;
-			*list->env = *list->env->next;
+			ft_update_env(((t_myenv *)(*cmd)->env->content)->envp, (*cmd)->arg[1]);
+			(*cmd)->env->content = NULL;
+			*(*cmd)->env = *(*cmd)->env->next;
 		}
 		else
 		{
-			ft_update_env(((t_myenv *)list->env->content)->envp, list->arg[1]);
-			list->env = NULL;
+			ft_update_env(((t_myenv *)(*cmd)->env->content)->envp, (*cmd)->arg[1]);
+			(*cmd)->env->content = NULL;
 		}
 		return ;
 	}

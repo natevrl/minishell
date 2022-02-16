@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 06:06:13 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 06:16:38 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,10 @@ void	ft_assemble_dquote(t_list **token, char **cmd, int *i);
 void	ft_assemble_exit(t_list **token, char **cmd, int *i);
 void	ft_assemble_dollard(t_list **token, char **cmd, int *i);
 void	ft_assemble_quote(t_list **token, char **cmd, int *i);
+
+void	ft_redirect_to_output(t_list **token, t_list **tmp);
+void	ft_input_to_heredoc(t_list **token);
+void	ft_redirect_to_outputa(t_list **token, t_list **tmp);
+void	ft_redirect_input(t_list **token, t_list **tmp);
 
 #endif

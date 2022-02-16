@@ -6,70 +6,34 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 05:37:57 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/16 06:23:18 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parsing_minishell.h>
 
-char	*ft_before_equal(char *env)
+char	*ft_before_equal(char *str)
 {
-	char	*res;
-	int		i;
+	int	i;
 
-	i = 0;
-	while (env[i] && env[i] != '=')
-		i++;
-	if (env[i] == '\0')
-		return (NULL);
-	res = (char *)ft_malloc(sizeof(char) * i + 1);
-	i = 0;
-	while (env[i] && env[i] != '=')
-	{
-		res[i] = env[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
+	i = -1;
+	while (str[++i])
+		if (str[i] == '=')
+			return (ft_substr(str, 0, i));
+	return (NULL);
 }
 
-char	*ft_after_equal(char *env)
+char	*ft_after_equal(char *str)
 {
-	char	*res;
-	int		i;
-	int		j;
-	int		k;
-	int		flag;
+	int	i;
 
-	i = 0;
-	j = 0;
-	flag = 0;
-	while (env[i] && env[i] != '=')
-		i++;
-	if (env[i] == '=')
-	{
-		flag = 1;
-		i++;
-	}
-	k = i;
-	while (env[i])
-	{
-		i++;
-		j++;
-	}
-	if (flag == 0)
-		return (NULL);
-	res = (char *)ft_malloc(sizeof(char) * j + 1);
-	i = 0;
-	while (env[k])
-	{
-		res[i] = env[k];
-		i++;
-		k++;
-	}
-	res[i] = '\0';
-	return (res);
+	i = -1;
+	while (str[++i])
+		if (str[i] == '=')
+			return (str + i + 1);
+	return (NULL);
 }
+
 
 void	ft_update_env(char **env, char *name)
 {
