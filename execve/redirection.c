@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 13:08:01 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 14:24:57 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	redirect_out_cmd(t_list	*cmd, int fd)
 		ft_check_signal(pid);
 	else
 	{
+		signal(SIGQUIT, sig_handler);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		ft_bultin(&cmd);
@@ -51,6 +52,7 @@ void	redirect_in_cmd(t_list	*cmd, int fd)
 		ft_check_signal(pid);
 	else
 	{
+		signal(SIGQUIT, sig_handler);
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		ft_bultin(&cmd);
