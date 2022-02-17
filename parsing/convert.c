@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/17 15:47:13 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 17:41:09 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_assemble_dollard(t_list **token, char **cmd, int *i)
 	}
 	if (getenv(env) != NULL)
 	{
+		(*token)->token = LITERAL;
 		(*cmd)[*i] = '\0';
 		*i = ft_strlen(*cmd) + ft_strlen(getenv(env));
 		ft_strlcat(*cmd, getenv(env), (*i) + 1);
@@ -65,6 +66,7 @@ void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 			ft_assemble_dollard(token, cmd, i);
 		else
 		{
+			(*token)->token = LITERAL;
 			(*cmd)[*i] = *(char *)(*token)->content;
 			(*i)++;
 		}
