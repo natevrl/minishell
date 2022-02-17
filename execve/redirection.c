@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 16:38:04 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 16:59:27 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,32 @@ void	redirect_in_cmd(t_list	*cmd, int fd)
 		close(fd);
 		ft_bultin(&cmd);
 		g_err = execve(exec_cmd, cmd->arg,
+				((t_myenv *)cmd->env->content)->envp);
+		if (g_err == -1)
+			exit_failure("command not found");
+		ft_exit(g_err);
+	}
+}
+
+void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
+{
+	pid_t	pid;
+	char	*exec_cmd;
+
+	if (ft_get_path_with_env_arg(cmd, arg, &exec_cmd) || ft_builtin_without_fork(&arg))
+		return ;
+	pid = fork();
+	if (pid == -1)
+		perror("fork");
+	else if (pid > 0)
+		ft_check_signal(pid);
+	else
+	{
+		signal(SIGQUIT, sig_handler);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+		ft_bultin(&arg);
+		g_err = execve(exec_cmd, arg->arg,
 				((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
 			exit_failure("command not found");

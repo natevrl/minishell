@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 13:16:55 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 17:07:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_builtin_without_fork(t_list **tmp)
 		ft_launch_builtin(list, cmd, "unset");
 		return (1);
 	}
-	else if (ft_strncmp("export", cmd->arg[0], 3) == 0)
+	else if (ft_strncmp("export", cmd->arg[0], 6) == 0)
 	{
 		ft_launch_builtin(list, cmd, "export");
 		return (1);
