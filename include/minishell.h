@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/17 12:10:32 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 16:09:43 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		launch_bash(t_list	*cmd);
 void	prompt(t_list *lst);
 void	print_err_code(t_list	*cmd);
 void	sig_handler(const int sig);
+int		ft_get_path_with_env(t_list *env, t_list *cmd, char **exec_cmd);
 
 char	*get_cmd(char **path, char *cmd, char *path_cmd);
 void	redirect_out_cmd(t_list	*cmd, int fd);

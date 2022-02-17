@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 15:00:04 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 15:50:37 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	launch_bash(t_list *cmd)
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = get_pid;
+	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	while (1)
 	{

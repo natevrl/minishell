@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 12:14:20 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 15:49:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int	ft_strlen_token(t_list *token)
 	i = 0;
 	while (token != NULL)
 	{
+//		printf("%d\n", token->token);
 		if (token->token == EXIT_CODE)
 			i += ft_strlen(ft_itoa(g_err));
+		else if (token->token == DQUOTE || token->token == QUOTE)
+			i -= 1;
 		else if (token->token == DOLLARD)
 		{
 			i++;

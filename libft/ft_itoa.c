@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 01:41:54 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/07 12:02:05 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 15:18:50 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_itoa(int n)
 	i = 0;
 	nb = n;
 	len = ft_len_nb(nb);
-	res = malloc(sizeof(char) * len + 1);
+	res = ft_malloc(sizeof(char) * len + 1);
 	if (!res)
 		return (NULL);
 	return (ft_conv(nb, res, len, i));

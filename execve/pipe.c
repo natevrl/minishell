@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:07:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 14:13:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 16:29:44 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,27 @@ int	ft_get_path_with_env(t_list *env, t_list *cmd, char **exec_cmd)
 	cmd_path = ft_split(path_cmd, ':');
 	if (cmd->arg[0] == NULL)
 		return (1);
+	*exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
+	return (0);
+}
+
+int	ft_get_path_with_env_arg(t_list *env, t_list *cmd, char **exec_cmd)
+{
+	char	*path_cmd;
+	char	**cmd_path;
+	int		i;
+
+	path_cmd = ft_find_path(env->env);
+	cmd_path = ft_split(path_cmd, ':');
+	if (cmd->arg[0] == NULL)
+		return (1);
+	i = 0;
+	while (cmd->arg[i + 1])
+	{
+		cmd->arg[i] = cmd->arg[i + 1];
+		i++;
+	}
+	cmd->arg[i] = '\0';
 	*exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
 	return (0);
 }
