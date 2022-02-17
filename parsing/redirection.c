@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 14:02:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 12:34:15 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ft_redirect_input(t_list **token, t_list **tmp)
 			}
 			redirect_in_cmd((*tmp), (*token)->fd);
 			*token = (*token)->next;
+
 		}
 		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
 		if ((*token)->fd == -1)

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 15:04:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 13:39:44 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			ft_add_token_line(cmd_token, tmp, &pos, &j, &i, RD_O);
 		else if (token->cmd_translated[i] == '<')
 			ft_add_token_line(cmd_token, tmp, &pos, &j, &i, RD_I);
+		else if (token->cmd_translated[i] == '|')
+			ft_add_token_line(cmd_token, tmp, &pos, &j, &i, PIPE);
 		else
 			j++;
 		i++;

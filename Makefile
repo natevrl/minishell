@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
+#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/16 11:32:42 by nabentay         ###   ########.fr        #
+#    Updated: 2022/02/17 12:09:00 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ FILES = minishell \
 		builtin/load_builtin \
 		execve/execve \
 		execve/redirection \
+		execve/pipe \
 		memory/memory0		\
 		memory/memory1		\
 		get_next_line/get_next_line \

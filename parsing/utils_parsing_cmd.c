@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 13:16:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/17 12:14:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_set_option(t_list **tmp)
 	{
 		if (cmd_token->token == CMD || cmd_token->token == RD_O
 			|| cmd_token->token == RD_I
-			|| cmd_token->token == RD_OA || cmd_token->token == RD_ID)
+			|| cmd_token->token == RD_OA || cmd_token->token == RD_ID || cmd_token->token == PIPE)
 			cmd_token->arg = ft_split((char *)cmd_token->content, ' ');
 		else
 			cmd_token->arg = NULL;

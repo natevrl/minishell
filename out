@@ -1,0 +1,15 @@
+Makefile
+builtin
+env
+execve
+get_next_line
+include
+libft
+memory
+minishell
+minishell.c
+objs
+out
+parsing
+signal
+valgrind.supp
