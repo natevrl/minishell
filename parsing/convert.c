@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/17 17:41:09 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/18 11:32:57 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_assemble_quote(t_list **token, char **cmd, int *i)
 	*token = (*token)->next;
 	while (*token != NULL && (*token)->token != QUOTE)
 	{
+		(*token)->token = QVALUE;
 		(*cmd)[*i] = *(char *)(*token)->content;
 		(*i)++;
 		*token = (*token)->next;
@@ -66,7 +67,7 @@ void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 			ft_assemble_dollard(token, cmd, i);
 		else
 		{
-			(*token)->token = LITERAL;
+			(*token)->token = QVALUE;
 			(*cmd)[*i] = *(char *)(*token)->content;
 			(*i)++;
 		}
