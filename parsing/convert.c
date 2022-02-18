@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/18 11:32:57 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/18 13:46:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ void	ft_assemble_exit(t_list **token, char **cmd, int *i)
 
 void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 {
-	*token = (*token)->next;
+	(*token) = (*token)->next;
 	while (*token != NULL && (*token)->token != DQUOTE)
 	{
-		if ((*token)->token == EXIT_CODE)
+/*		if ((*token)->token == EXIT_CODE)
 			ft_assemble_exit(token, cmd, i);
 		else if ((*token)->token == DOLLARD)
 			ft_assemble_dollard(token, cmd, i);
 		else
-		{
+		{*/
 			(*token)->token = QVALUE;
 			(*cmd)[*i] = *(char *)(*token)->content;
 			(*i)++;
-		}
-		*token = (*token)->next;
+//		}
+		(*token) = (*token)->next;
 	}
 	if (*token == NULL)
 	{
