@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/18 13:46:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:25:21 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 	(*token) = (*token)->next;
 	while (*token != NULL && (*token)->token != DQUOTE)
 	{
-/*		if ((*token)->token == EXIT_CODE)
+		if ((*token)->token == EXIT_CODE)
 			ft_assemble_exit(token, cmd, i);
 		else if ((*token)->token == DOLLARD)
 			ft_assemble_dollard(token, cmd, i);
 		else
-		{*/
+		{
 			(*token)->token = QVALUE;
 			(*cmd)[*i] = *(char *)(*token)->content;
 			(*i)++;
-//		}
+		}
 		(*token) = (*token)->next;
 	}
 	if (*token == NULL)

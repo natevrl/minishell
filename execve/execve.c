@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 14:23:38 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:33:05 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	exec_cmd(t_list	*cmd)
 	{
 		signal(SIGQUIT, sig_handler);
 		ft_bultin(&cmd);
+		if (!exec_cmd)
+			exit_failure(cmd->arg[0]);
 		g_err = execve(exec_cmd, cmd->arg,
 				((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
