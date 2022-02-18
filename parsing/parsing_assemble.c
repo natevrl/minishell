@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/18 14:19:50 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:17:31 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	j = 0;
 	pos = 0;
 	token = *tmp;
-	while ((*tmp)->cmd_translated[i] || token->next != NULL)
+	while ((*tmp)->cmd_translated[i] && token != NULL && token->next != NULL)
 	{
 		if (token->cmd_translated[i] == ';' && token->token != QVALUE)
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, CMD);
@@ -106,14 +106,8 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			j++;
 		i++;
 		if (token->next != NULL)
-		{
-			printf("OK1\n");
 			token = token->next;
-			printf("OK2\n");
-		}
-		printf("OK3\n");
 	}
-	printf("OK\n");
 	if (pos != i)
 		ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, i), CMD));
 }
