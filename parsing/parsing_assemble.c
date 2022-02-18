@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/18 17:28:04 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:49:55 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, PIPE);
 		else
 			j++;
-		i++;
+		if ((*tmp)->cmd_translated[i])
+			i++;
 		if (token != NULL && token->next != NULL)
 			token = token->next;
 	}
