@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/19 18:41:06 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 19:24:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	ft_strlen_token(t_list *token)
 		{
 			i++;
 			if (getenv(ft_get_env_without((char *)token->content)) != NULL)
+			{
 				i += ft_strlen(getenv(ft_get_env_without(
 								(char *)token->content)));
+			}
 		}
 		i++;
 		token = token->next;
