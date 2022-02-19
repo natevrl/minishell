@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/17 17:16:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 15:39:29 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 	{
 		token->env = lst;
 		if (token->token == CMD)
+		{
+			printf("CENRTES\n");
 			exec_cmd(token);
+		}
 		else if (token->token == RD_O)
 			ft_redirect_to_output(&token, tmp);
 		else if (token->token == RD_ID)
@@ -92,9 +95,10 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 			ft_redirect_to_outputa(&token, tmp);
 		else if (token->token == RD_I)
 			ft_redirect_input(&token, tmp);
-		else if (token->token == PIPE)
-			ft_pipe(&token);
-		token = token->next;
+		if (token->token == PIPE)
+			ft_pipe(&token, tmp);
+		else
+			token = token->next;
 	}
 }
 
