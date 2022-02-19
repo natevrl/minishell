@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/17 16:59:53 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 13:53:58 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_pwd(char **argv);
 void	ft_cd(t_list **list);
 void	ft_export(t_list **list);
 void	ft_unset(t_list **list);
-void	ft_pipe(t_list **token);
+void	ft_pipe(t_list **token, t_list **cmp);
 char	*ft_find_path(t_list *lst);
 void	sort_and_print_env(char **envp);
 void	built_exit(t_list **list);
