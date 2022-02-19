@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:07:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/19 15:40:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 17:53:01 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,15 @@ void	ft_pipe(t_list **token, t_list **cmp)
 			dup2(fd_read, 0);
 			if ((*token)->next != NULL)
 				dup2(fd[1], 1);
-			if (execve(exec_tube1, (*token)->arg,
-					((t_myenv *)(*cmp)->env->content)->envp) == -1)
-				exit_failure("execve() error");
-			exit(EXIT_FAILURE);
+			ft_bultin(token);
+			g_err = execve(exec_tube1, (*token)->arg,
+					((t_myenv *)(*cmp)->env->content)->envp);
+			if (g_err == -1)
+				exit_failure((*token)->arg[0]);
+			ft_exit(g_err);
 		}
-		waitpid(pid, NULL, 0);
 		ft_close(fd[1], fd_read);
+		ft_check_signal(pid);
 		fd_read = fd[0];
 		*token = (*token)->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/18 13:11:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 16:01:01 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_bultin(t_list **tmp)
 	list = NULL;
 	cmd = *tmp;
 	ft_load_builtin(&list, NULL, ft_print_env, "env");
+	ft_load_builtin(&list, NULL, ft_export, "export");
 	ft_load_builtin(&list, ft_echo, NULL, "echo");
 	ft_load_builtin(&list, ft_pwd, NULL, "pwd");
 	while (cmd != NULL)
@@ -64,6 +65,8 @@ void	ft_bultin(t_list **tmp)
 			ft_launch_builtin(list, cmd, "pwd");
 		else if (ft_strncmp("env", cmd->arg[0], 3) == 0 && ft_strlen(cmd->arg[0]) == 3)
 			ft_launch_builtin(list, cmd, "env");
+		else if (ft_strncmp("export", cmd->arg[0], 6) == 0 && ft_strlen(cmd->arg[0]) == 6)
+			ft_launch_builtin(list, cmd, "export");
 		cmd = cmd->next;
 	}
 }
@@ -78,7 +81,6 @@ int	ft_builtin_without_fork(t_list **tmp)
 	ft_load_builtin(&list, NULL, built_exit, "exit");
 	ft_load_builtin(&list, NULL, ft_cd, "cd");
 	ft_load_builtin(&list, NULL, ft_unset, "unset");
-	ft_load_builtin(&list, NULL, ft_export, "export");
 	if (ft_strncmp("exit", cmd->arg[0], 4) == 0 && ft_strlen(cmd->arg[0]) == 4)
 	{
 		ft_launch_builtin(list, cmd, "exit");
@@ -92,11 +94,6 @@ int	ft_builtin_without_fork(t_list **tmp)
 	else if (ft_strncmp("unset", cmd->arg[0], 5) == 0 && ft_strlen(cmd->arg[0]) == 5)
 	{
 		ft_launch_builtin(list, cmd, "unset");
-		return (1);
-	}
-	else if (ft_strncmp("export", cmd->arg[0], 6) == 0 && ft_strlen(cmd->arg[0]) == 6)
-	{
-		ft_launch_builtin(list, cmd, "export");
 		return (1);
 	}
 	return (0);

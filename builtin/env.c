@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:20:43 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 14:15:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 15:55:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_print_env(t_list **cmd)
 	t_list	*list;
 
 	list = *cmd;
+	printf("OK\n");
 	while (list->env)
 	{
 		write(1, ((t_myenv *)list->env->content)->env,

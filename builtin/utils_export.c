@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:32:04 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/18 13:09:04 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 18:05:41 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	**envp_copy(char **envp, int max)
 	char	**tab;
 	int		i;
 
-	tab = malloc(sizeof(char **) * max);
+	tab = ft_malloc(sizeof(char **) * max);
 	i = -1;
 	while (envp[++i])
 		tab[i] = envp[i];

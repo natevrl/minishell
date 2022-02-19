@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/19 15:27:17 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 18:44:37 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_add_token_line(t_list **cmd_token, t_list **tmp, int *pos, int *j, int i
 void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 {
 	t_list	*token;
+	char	**white;
 	int		i;
 	int		j;
 	int		pos;
@@ -111,6 +112,9 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	}
 	if (token != NULL)
 		i++;
-	if (pos != i)
+	white = ft_split(ft_substr((*tmp)->cmd_translated, pos, i), ' ');
+	if (*white == NULL)
+		return ;
+	else if (pos != i)
 		ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, i), CMD));
 }

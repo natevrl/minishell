@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/18 12:55:12 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/19 17:48:28 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,15 @@ void	ft_check_signal(int pid)
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGQUIT)
+		{
+			g_err = 131;
 			ft_putstr_fd("Quit (core dumped)\n", 2);
-		g_err = 131;
+		}
+		else if (WTERMSIG(status) == SIGINT)
+			g_err = 130;
+		else
+			g_err = 131;
 	}
-	else
+	else if (WIFEXITED(status))
 		g_err = WEXITSTATUS(status);
 }
