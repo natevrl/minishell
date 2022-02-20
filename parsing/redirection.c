@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/17 16:59:18 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 17:10:29 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_redirect_input(t_list **token, t_list **tmp)
 			(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
 			if ((*token)->fd == -1)
 			{
-				perror((*token)->next->arg[0]);
+				write(2, "bash: parse error near `\\n'\n", 28);
 				while ((*token)->token == RD_I)
 					*token = (*token)->next;
 				return ;
@@ -90,7 +90,8 @@ void	ft_redirect_input(t_list **token, t_list **tmp)
 		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
 		if ((*token)->fd == -1)
 		{
-			perror((*token)->next->arg[0]);
+			write(2, "bash: parse error near `\\n'\n", 28);
+			*token = (*token)->next;
 			return ;
 		}
 		if (*(*token)->arg)

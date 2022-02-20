@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/19 15:45:16 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 17:05:24 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 			ft_input_to_heredoc(&token);
 		else if (token->token == RD_OA)
 			ft_redirect_to_outputa(&token, tmp);
-		else if (token->token == RD_I)
+		if (token->token == RD_I)
 			ft_redirect_input(&token, tmp);
 		if (token->token == PIPE)
 			ft_pipe(&token, tmp);

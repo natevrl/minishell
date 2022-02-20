@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/19 19:18:22 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 16:58:46 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ void	ft_translate_token(t_list **tmp)
 	while (token != NULL)
 	{
 		if (token->token == QUOTE)
-			ft_assemble_quote(&token, &cmd, &i);
+		{
+			if (ft_assemble_quote(&token, &cmd, &i))
+				break ;
+		}
 		else if (token->token == DQUOTE)
-			ft_assemble_dquote(&token, &cmd, &i);
+		{
+			if (ft_assemble_dquote(&token, &cmd, &i))
+				break ;
+		}
 		else if (token->token == EXIT_CODE)
 			ft_assemble_exit(&token, &cmd, &i);
 		else if (token->token == DOLLARD)

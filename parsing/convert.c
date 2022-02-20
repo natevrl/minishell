@@ -6,13 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/19 19:27:43 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 16:17:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parsing_minishell.h>
 
-void	ft_assemble_quote(t_list **token, char **cmd, int *i)
+int	ft_assemble_quote(t_list **token, char **cmd, int *i)
 {
 	*token = (*token)->next;
 	while (*token != NULL && (*token)->token != QUOTE)
@@ -25,8 +25,9 @@ void	ft_assemble_quote(t_list **token, char **cmd, int *i)
 	if ((*token) == NULL)
 	{
 		printf("Not closed quote\n");
-		exit(1);
+		return (1);
 	}
+	return (0);
 }
 
 void	ft_assemble_dollard(t_list **token, char **cmd, int *i)
@@ -56,7 +57,7 @@ void	ft_assemble_exit(t_list **token, char **cmd, int *i)
 	*token = (*token)->next;
 }
 
-void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
+int	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 {
 	(*token) = (*token)->next;
 	while (*token != NULL && (*token)->token != DQUOTE)
@@ -76,6 +77,7 @@ void	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 	if (*token == NULL)
 	{
 		printf("Not closed quote\n");
-		exit(1);
+		return (1);
 	}
+	return (0);
 }
