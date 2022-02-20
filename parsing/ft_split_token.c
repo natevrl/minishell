@@ -73,14 +73,14 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 		len = 0;
 		while (*s && *s != ' ' && ++s)
 			ft_check_token(&token, &len, &s);
-		if (token && token->token == DQUOTE)
+		if (token && (token->token == DQUOTE || token->token == QUOTE))
 			token = token->next;
 		while (token && token->token == QVALUE && *s && ++s)
 		{
 			len++;
 			token = token->next;
 		}
-		if (token && token->token == DQUOTE)
+		if (token && (token->token == DQUOTE || token->token == DQUOTE))
 			token = token->next;
 		tab[i] = (char *)ft_malloc(sizeof(char) * len + 1);
 		if (!tab[i])
@@ -91,7 +91,7 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 			return (1);
 		}
 		ft_strlcpy(tab[i++], s - len, len + 1);
-		while (token && *s && *s == ' ')
+		while (token && token->token != QVALUE && token->token != DQUOTE && token->token != QUOTE && *s && *s == ' ')
 		{
 			token = token->next;
 			s++;
@@ -107,8 +107,6 @@ char	**ft_split_token(const char *s, t_list *token)
 
 	if (!s)
 		return (NULL);
-	while (*s == ' ' && *s)
-		s++;
 	tab = (char **)ft_malloc(sizeof(char *) * (ft_word(&token) + 1));
 	if (!tab)
 		return (NULL);
