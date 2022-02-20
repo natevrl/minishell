@@ -6,11 +6,12 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 22:43:58 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 13:15:17 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 18:37:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <minishell.h>
 
 static size_t	ft_word(const char *s, char c)
 {
@@ -43,8 +44,8 @@ static int	ft_fill(char const *s, char c, char **tab)
 		if (!tab[i])
 		{
 			while (i)
-				free(tab[--i]);
-			free(tab);
+				ft_free(tab[--i]);
+			ft_free(tab);
 			return (1);
 		}
 		ft_strlcpy(tab[i++], s - len, len + 1);

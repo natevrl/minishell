@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 16:54:34 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 20:46:36 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,20 @@ t_list	*ft_lstnew_token(void	*content, int token)
 	return (list);
 }
 
-void	ft_set_option(t_list **tmp)
+void	ft_set_option(t_list **tmp, t_list **tmp2)
 {
 	t_list	*cmd_token;
+	t_list	*token;
 
 	cmd_token = *tmp;
+	token = *tmp2;
+	(void)token;
 	while (cmd_token != NULL)
 	{
 		if (cmd_token->token == CMD || cmd_token->token == RD_O
 			|| cmd_token->token == RD_I
 			|| cmd_token->token == RD_OA || cmd_token->token == RD_ID || cmd_token->token == PIPE)
-			cmd_token->arg = ft_split((char *)cmd_token->content, ' ');
+			cmd_token->arg = ft_split_token((char *)cmd_token->content, token);
 		else
 			cmd_token->arg = NULL;
 		cmd_token = cmd_token->next;

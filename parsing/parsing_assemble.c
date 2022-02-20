@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 16:58:46 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 20:30:42 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ void	ft_fill_translated(t_list **tmp, char *cmd)
 	}
 }
 
+void	ft_fill_size(t_list **tmp)
+{
+	t_list	*token;
+
+	token = *tmp;
+	while (token != NULL)
+	{
+		token->size_env = 0;
+		token = token->next;
+	}
+}
+
 void	ft_translate_token(t_list **tmp)
 {
 	t_list	*token;
@@ -42,6 +54,7 @@ void	ft_translate_token(t_list **tmp)
 
 	token = *tmp;
 	i = 0;
+	ft_fill_size(tmp);
 	cmd = (char *)ft_malloc(sizeof(char) * ft_strlen_token(token));
 	while (token != NULL)
 	{

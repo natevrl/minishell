@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/20 16:17:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 20:24:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_assemble_dollard(t_list **token, char **cmd, int *i)
 	}
 	if (getenv(env) != NULL)
 	{
-		(*token)->token = LITERAL;
+		(*token)->token = DOLLARD;
+		(*token)->size_env = ft_strlen(getenv(env));
 		(*cmd)[*i] = '\0';
 		*i = ft_strlen(*cmd) + ft_strlen(getenv(env));
 		ft_strlcat(*cmd, getenv(env), (*i) + 1);

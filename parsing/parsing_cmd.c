@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 17:05:24 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/20 18:36:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 	while (token != NULL)
 	{
 		token->env = lst;
-		if (token->token == CMD)
+		if (token->token == CMD || QVALUE)
 			exec_cmd(token);
 		else if (token->token == RD_O)
 			ft_redirect_to_output(&token, tmp);
@@ -114,6 +114,6 @@ void	parse_cmd(char *cmd, t_list *lst)
 	ft_tokenize_input_condition(&token);
 	ft_translate_token(&token);
 	ft_assemble_token(&cmd_token, &token);
-	ft_set_option(&cmd_token);
+	ft_set_option(&cmd_token, &token);
 	ft_check_execution(&cmd_token, lst);
 }
