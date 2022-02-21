@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 18:36:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 00:05:41 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 	while (token != NULL)
 	{
 		token->env = lst;
-		if (token->token == CMD || QVALUE)
+		if (token->token == CMD)
 			exec_cmd(token);
 		else if (token->token == RD_O)
 			ft_redirect_to_output(&token, tmp);
