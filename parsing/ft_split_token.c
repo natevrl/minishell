@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:19:34 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:36:34 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ void	ft_check_token(t_list **token, size_t *len, const char **s)
 	}
 }
 
+static void	ft_check_token_split(t_list **token, size_t *len, const char **s)
+{
+	if (*token && ((*token)->token == DQUOTE || (*token)->token == QUOTE))
+		*token = (*token)->next;
+	while (*token && (*token)->token == QVALUE && *(*s) && ++(*s))
+	{
+		(*len)++;
+		*token = (*token)->next;
+	}
+	if ((*token) && ((*token)->token == DQUOTE || (*token)->token == DQUOTE))
+		*token = (*token)->next;
+}
+
 static int	ft_fill(char const *s, char **tab, t_list **tmp)
 {
 	size_t	i;
@@ -73,15 +86,7 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 		len = 0;
 		while (*s && *s != ' ' && ++s)
 			ft_check_token(&token, &len, &s);
-		if (token && (token->token == DQUOTE || token->token == QUOTE))
-			token = token->next;
-		while (token && token->token == QVALUE && *s && ++s)
-		{
-			len++;
-			token = token->next;
-		}
-		if (token && (token->token == DQUOTE || token->token == DQUOTE))
-			token = token->next;
+		ft_check_token_split(&token, &len, &s);
 		tab[i] = (char *)ft_malloc(sizeof(char) * len + 1);
 		if (!tab[i])
 		{

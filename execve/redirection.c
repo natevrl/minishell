@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:17:22 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 18:18:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 void	child_heredoc(char *limiter)
 {
 	char	*tmp;
-	
+
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
