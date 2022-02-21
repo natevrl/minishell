@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:55:16 by nabentay          #+#    #+#             */
-/*   Updated: 2021/12/09 13:17:36 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:29:03 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,11 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 char	*ft_joinline(ssize_t i, char **file);
 char	*ft_line(int fd, char **file, char *buff);
 char	*get_next_line(int fd);
+
+void	ft_exit(int status);
+void	exit_failure(const char *msg);
+void	*ft_malloc(size_t size);
+void	ft_free(void *addr);
+void	clear_memory(void);
 
 #endif

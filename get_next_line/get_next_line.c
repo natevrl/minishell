@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 12:08:36 by nabentay          #+#    #+#             */
-/*   Updated: 2021/12/09 13:13:27 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:31:15 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <get_next_line.h>
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
@@ -42,7 +42,7 @@ char	*ft_joinline(ssize_t i, char **file)
 	{
 		if (!**file)
 		{
-			free(*file);
+			ft_free(*file);
 			*file = NULL;
 			return (NULL);
 		}
@@ -72,7 +72,7 @@ char	*ft_line(int fd, char **file, char *buff)
 		buff[i] = 0;
 		tmp = ft_strjoin(*file, buff);
 		if (*file)
-			free(*file);
+			ft_free(*file);
 		*file = tmp;
 		nl = ft_strchr(*file, '\n');
 	}
@@ -87,13 +87,13 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
-	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buff = (char *)ft_malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
 	if (!file[fd])
 		file[fd] = ft_strdup("");
 	res = ft_line(fd, &file[fd], buff);
 	if (buff)
-		free (buff);
+		ft_free (buff);
 	return (res);
 }

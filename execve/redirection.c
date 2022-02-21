@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 14:24:49 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 15:55:57 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,33 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 
 void	here_doc(char *limiter)
 {
-	pid_t	reader;
-	int		fd[2];
-	char	*line;
+	pid_t	pid;
+	char	*tmp;
 
-	if (pipe(fd) == -1)
-		printf("error\n");
-	reader = fork();
-	if (reader == 0)
-	{
-		close(fd[0]);
-		while ((line = get_next_line(fd[1])))
-		{
-			printf("OK\n");
-			if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-				exit(EXIT_SUCCESS);
-			write(fd[1], line, ft_strlen(line));
-		}
-	}
+	pid = fork();
+	if (pid == -1)
+		perror("fork");
+	else if (pid > 0)
+		ft_check_signal(pid);
 	else
 	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		wait(NULL);
+		while (1)
+		{
+			ft_putstr_fd("> ", 1);
+			tmp = get_next_line(STDIN_FILENO);
+			if (tmp == NULL)
+				ft_exit(130);
+			else if (ft_strncmp(tmp, limiter, ft_strlen(limiter)) == 0
+				&& tmp[ft_strlen(limiter)] == '\n')
+			{
+				close(0);
+				close(1);
+				tmp = get_next_line(STDIN_FILENO);
+				break ;
+			}
+			if (*tmp != '\n')
+				ft_putstr_fd(tmp, 1);
+		}
+		ft_exit(0);
 	}
 }
