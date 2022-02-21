@@ -112,7 +112,7 @@ void	parse_cmd(char *cmd, t_list *lst)
 		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
 	ft_tokenize_input(&token);
 	ft_tokenize_input_condition(&token);
-	ft_translate_token(&token);
+	ft_translate_token(&token, lst);
 	ft_assemble_token(&cmd_token, &token);
 	ft_set_option(&cmd_token, &token);
 	ft_check_execution(&cmd_token, lst);

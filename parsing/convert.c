@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 14:01:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:59:42 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,24 @@ int	ft_assemble_quote(t_list **token, char **cmd, int *i)
 	return (0);
 }
 
-void	ft_assemble_dollard(t_list **token, char **cmd, int *i)
+void	ft_assemble_dollard(t_list **token, char **cmd, int *i, t_list *lst)
 {
 	char	*env;
 
+	(void)lst;
 	env = ft_get_env((char *)(*token)->content, token);
 	if (ft_strlen(env) == 0)
 	{
 		(*cmd)[*i] = *(char *)(*token)->content;
 		(*i)++;
 	}
-	if (getenv(env) != NULL)
+	if (ft_find_env(lst, env) != NULL)
 	{
 		(*token)->token = DOLLARD;
-		(*token)->size_env = ft_strlen(getenv(env));
+		(*token)->size_env = ft_strlen(ft_find_env(lst, env));
 		(*cmd)[*i] = '\0';
-		*i = ft_strlen(*cmd) + ft_strlen(getenv(env));
-		ft_strlcat(*cmd, getenv(env), (*i) + 1);
+		*i = ft_strlen(*cmd) + ft_strlen(ft_find_env(lst, env));
+		ft_strlcat(*cmd, ft_find_env(lst, env), (*i) + 1);
 	}
 }
 
@@ -58,7 +59,7 @@ void	ft_assemble_exit(t_list **token, char **cmd, int *i)
 	*token = (*token)->next;
 }
 
-int	ft_assemble_dquote(t_list **token, char **cmd, int *i)
+int	ft_assemble_dquote(t_list **token, char **cmd, int *i, t_list *lst)
 {
 	(*token) = (*token)->next;
 	while (*token != NULL && (*token)->token != DQUOTE)
@@ -66,7 +67,7 @@ int	ft_assemble_dquote(t_list **token, char **cmd, int *i)
 		if ((*token)->token == EXIT_CODE)
 			ft_assemble_exit(token, cmd, i);
 		else if ((*token)->token == DOLLARD)
-			ft_assemble_dollard(token, cmd, i);
+			ft_assemble_dollard(token, cmd, i, lst);
 		else
 		{
 			(*token)->token = QVALUE;

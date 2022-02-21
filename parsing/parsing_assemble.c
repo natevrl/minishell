@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 14:07:41 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:41:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_fill_size(t_list **tmp)
 	}
 }
 
-void	ft_translate_token(t_list **tmp)
+void	ft_translate_token(t_list **tmp, t_list *lst)
 {
 	t_list	*token;
 	char	*cmd;
@@ -65,13 +65,13 @@ void	ft_translate_token(t_list **tmp)
 		}
 		else if (token->token == DQUOTE)
 		{
-			if (ft_assemble_dquote(&token, &cmd, &i))
+			if (ft_assemble_dquote(&token, &cmd, &i, lst))
 				break ;
 		}
 		else if (token->token == EXIT_CODE)
 			ft_assemble_exit(&token, &cmd, &i);
 		else if (token->token == DOLLARD)
-			ft_assemble_dollard(&token, &cmd, &i);
+			ft_assemble_dollard(&token, &cmd, &i, lst);
 		else
 		{
 			cmd[i] = *(char *)token->content;

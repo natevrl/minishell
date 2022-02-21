@@ -50,7 +50,7 @@ void	ft_check_token(t_list **token, size_t *len, const char **s)
 			*token = (*token)->next;
 		if (*token && (*token)->size_env > 0)
 		{
-			while (*s && (*token)->size_env-- != count)
+			while (*s && (*token)->size_env-- > count)
 			{
 				++(*s);
 				(*len)++;

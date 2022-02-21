@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 14:13:57 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 15:14:24 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	already_in_env(t_list **cmd, char *arg)
 			if (ft_strncmp(ft_after_equal(envp[i]),
 					ft_after_equal(arg), 100) != 0)
 				envp[i] = arg;
+
 			return (1);
 		}
 	}
@@ -66,7 +67,7 @@ int	export_error(char *arg)
 
 	before = ft_before_equal(arg);
 	i = -1;
-	if (ft_isdigit(arg[0]))
+	if (!before[0] || ft_isdigit(arg[0]))
 		return (1);
 	while (before[++i])
 	{

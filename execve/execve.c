@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 13:52:46 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 15:02:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_find_env(t_list *lst, char	*name)
 {
 	while (lst)
 	{
-		if (ft_strncmp(name, ((t_myenv *)lst->content)->name, 4) == 0)
+		if (ft_strncmp(name, ((t_myenv *)lst->content)->name, ft_strlen(name)) == 0 && ft_strlen(name) == ft_strlen(((t_myenv *)lst->content)->name))
 			return (((t_myenv *)lst->content)->value);
 		lst = lst->next;
 	}

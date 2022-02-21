@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 20:46:25 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:40:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ void	ft_exec_token(t_list **cmd_token);
 int		ft_strlen_token(t_list *token);
 void	ft_set_option(t_list **tmp, t_list **tmp2);
 
-void	ft_translate_token(t_list **tmp);
+void	ft_translate_token(t_list **tmp, t_list *lst);
 void	ft_assemble_token(t_list **cmd_token, t_list **tmp);
-int		ft_assemble_dquote(t_list **token, char **cmd, int *i);
+int		ft_assemble_dquote(t_list **token, char **cmd, int *i, t_list *lst);
 void	ft_assemble_exit(t_list **token, char **cmd, int *i);
-void	ft_assemble_dollard(t_list **token, char **cmd, int *i);
+void	ft_assemble_dollard(t_list **token, char **cmd, int *i, t_list *lst);
 int		ft_assemble_quote(t_list **token, char **cmd, int *i);
 
 void	ft_redirect_to_output(t_list **token, t_list **tmp);
