@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:57:08 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 22:04:43 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ void	add_new_envlist(t_list **list, char *arg)
 	list_push(list, t);
 }
 
-int	already_in_env(t_list **cmd, char *arg)
+int	already_in_env(t_list **list, t_list **tmp, char *arg)
 {
 	char	*cmp1;
 	char	*cmp2;
 	char	**envp;
+	t_list	*cmd;
 	int		i;
 
-	envp = ((t_myenv *)(*cmd)->env->content)->envp;
+	cmd = *tmp;
+	envp = ((t_myenv *)(*list)->env->content)->envp;
 	i = -1;
 	while (envp[++i])
 	{
@@ -53,9 +55,15 @@ int	already_in_env(t_list **cmd, char *arg)
 			if (ft_strncmp(ft_after_equal(envp[i]),
 					ft_after_equal(arg), ft_strlen(ft_after_equal(envp[i]))
 					+ ft_strlen(ft_after_equal(arg))) != 0)
+			{
 				envp[i] = arg;
+				((t_myenv *)cmd->content)->env = arg;
+				((t_myenv *)cmd->content)->name = ft_before_equal(arg);
+				((t_myenv *)cmd->content)->value = ft_after_equal(arg);
+			}
 			return (1);
 		}
+		cmd = cmd->next;
 	}
 	return (0);
 }
@@ -96,7 +104,7 @@ void	ft_export(t_list **list)
 				envlist->arg[i]);
 			continue ;
 		}
-		if (already_in_env(&envlist, envlist->arg[i]))
+		if (already_in_env(list, &(*list)->env, envlist->arg[i]))
 			continue ;
 		add_in_envp(((t_myenv *)(*list)->env->content)->envp, envlist->arg[i]);
 		add_new_envlist(&(*list)->env, envlist->arg[i]);
