@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:18:12 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:08:39 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 	pid_t	pid;
 	char	*exec_cmd;
 
-	if (ft_get_path_with_env_arg(cmd, arg, &exec_cmd) || ft_builtin_without_fork(&arg))
+	if (ft_get_path_with_env_arg(cmd, arg, &exec_cmd)
+		|| ft_builtin_without_fork(&arg))
 		return ;
 	pid = fork();
 	if (pid == -1)

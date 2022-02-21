@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:17:16 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:57:08 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	already_in_env(t_list **cmd, char *arg)
 		{
 			if (ft_strncmp(ft_after_equal(envp[i]),
 					ft_after_equal(arg), ft_strlen(ft_after_equal(envp[i]))
-					 + ft_strlen(ft_after_equal(arg))) != 0)
+					+ ft_strlen(ft_after_equal(arg))) != 0)
 				envp[i] = arg;
 			return (1);
 		}

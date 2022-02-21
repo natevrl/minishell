@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:17:43 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:55:25 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ char	*ft_get_env_without(char *str)
 	if (str[i] == '$')
 	{
 		i++;
-		while (str[i] != '\0' && str[i] != ' ' && str[i] != '$' && str[i] != '\"' && str[i] != '\'')
+		while (str[i] != '\0' && str[i] != ' '
+			&& str[i] != '$' && str[i] != '\"' && str[i] != '\'')
 			i++;
 		env = ft_substr(str, 1, i - 1);
 		return (env);
