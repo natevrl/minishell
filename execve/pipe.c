@@ -102,12 +102,12 @@ void	ft_pipe(t_list **token, t_list **cmp)
 			ft_exit(g_err);
 		}
 		i++;
+		fd_read = fd[0];
 		if (i % 2 == 0 && (*token)->next)
 			waitpid(-1, NULL, WNOHANG);
 		else
 			ft_check_signal(pid);
 		ft_close(fd[1], fd_read);
-		fd_read = fd[0];
 		*token = (*token)->next;
 	}
 	ft_close(fd[1], fd_read);
