@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:53:49 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 20:20:42 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:59:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_find_add_env(char **envp, t_list **lst_env, char *name)
 	while (list && ft_strncmp(((t_myenv *)list->content)->name, name,
 			ft_strlen(name)) != 0)
 		list = list->next;
-	if (((t_myenv *)list->content) == NULL)
+	if (list == NULL)
 	{
 		if (ft_strncmp(name, "_", 4) == 0)
 			ft_add_under(envp, lst_env);
