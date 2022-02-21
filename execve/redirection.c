@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 19:08:39 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:17:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,33 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 	}
 }
 
+void	child_heredoc(char *limiter)
+{
+	char	*tmp;
+	
+	while (1)
+	{
+		ft_putstr_fd("> ", 1);
+		tmp = get_next_line(STDIN_FILENO);
+		if (tmp == NULL)
+			ft_exit(130);
+		else if (ft_strncmp(tmp, limiter, ft_strlen(limiter)) == 0
+			&& tmp[ft_strlen(limiter)] == '\n')
+		{
+			close(0);
+			close(1);
+			tmp = get_next_line(STDIN_FILENO);
+			break ;
+		}
+		if (*tmp != '\n')
+			ft_putstr_fd(tmp, 1);
+	}
+	ft_exit(0);
+}
+
 void	here_doc(char *limiter)
 {
 	pid_t	pid;
-	char	*tmp;
 
 	pid = fork();
 	if (pid == -1)
@@ -102,24 +125,5 @@ void	here_doc(char *limiter)
 	else if (pid > 0)
 		ft_check_signal(pid);
 	else
-	{
-		while (1)
-		{
-			ft_putstr_fd("> ", 1);
-			tmp = get_next_line(STDIN_FILENO);
-			if (tmp == NULL)
-				ft_exit(130);
-			else if (ft_strncmp(tmp, limiter, ft_strlen(limiter)) == 0
-				&& tmp[ft_strlen(limiter)] == '\n')
-			{
-				close(0);
-				close(1);
-				tmp = get_next_line(STDIN_FILENO);
-				break ;
-			}
-			if (*tmp != '\n')
-				ft_putstr_fd(tmp, 1);
-		}
-		ft_exit(0);
-	}
+		child_heredoc(limiter);
 }
