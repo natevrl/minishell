@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:36:34 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 19:39:35 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static size_t	ft_word(t_list **tmp)
 	token = *tmp;
 	while (token)
 	{
-		while ((token && token->token == QVALUE) || (token && token->token != SP))
+		while ((token && token->token == QVALUE)
+			|| (token && token->token != SP))
 			token = token->next;
 		cnt++;
 		while (token && token->token == SP)
@@ -40,7 +41,8 @@ void	ft_check_token(t_list **token, size_t *len, const char **s)
 	{
 		if ((*token)->token == DOLLARD)
 		{
-			while (*token && (*token)->next && (*token)->token == DOLLARD && (*token)->next->token == DOLLARD)
+			while (*token && (*token)->next && (*token)->token
+				== DOLLARD && (*token)->next->token == DOLLARD)
 			{
 				*token = (*token)->next;
 				count++;
@@ -96,7 +98,8 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 			return (1);
 		}
 		ft_strlcpy(tab[i++], s - len, len + 1);
-		while (token && token->token != QVALUE && token->token != DQUOTE && token->token != QUOTE && *s && *s == ' ')
+		while (token && token->token != QVALUE && token->token
+			!= DQUOTE && token->token != QUOTE && *s && *s == ' ')
 		{
 			token = token->next;
 			s++;
