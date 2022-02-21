@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 16:44:19 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 17:07:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	already_in_env(t_list **cmd, char *arg)
 			if (ft_strncmp(ft_after_equal(envp[i]),
 					ft_after_equal(arg), 100) != 0)
 				envp[i] = arg;
-
 			return (1);
 		}
 	}

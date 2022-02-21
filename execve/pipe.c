@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:07:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 14:53:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 17:07:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_get_path_with_env_arg(t_list *env, t_list *cmd, char **exec_cmd)
 		cmd->arg[i] = cmd->arg[i + 1];
 		i++;
 	}
-	cmd->arg[i] = '\0';
+	cmd->arg[i] = NULL;
 	*exec_cmd = get_cmd(cmd_path, cmd->arg[0], path_cmd);
 	return (0);
 }
