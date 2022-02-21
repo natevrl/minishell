@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:07:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:18:08 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 20:08:47by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void	ft_pipe(t_list **token, t_list **cmp)
 	int		pid;
 	int		fd_read;
 	char	*exec_tube1;
+	int		i;
 
 	fd_read = 0;
+	i = 1;
 	while ((*token) != NULL)
 	{
 		if (ft_get_path2(cmp, *token, &exec_tube1))
@@ -99,8 +101,13 @@ void	ft_pipe(t_list **token, t_list **cmp)
 				exit_failure((*token)->arg[0]);
 			ft_exit(g_err);
 		}
+//		i++;
+		if (i % 2 == 0)
+			waitpid(-1, NULL, WNOHANG);
+		else
+			waitpid(-1, NULL, 0);
 		ft_close(fd[1], fd_read);
-		ft_check_signal(pid);
+//		ft_check_signal(pid);
 		fd_read = fd[0];
 		*token = (*token)->next;
 	}
