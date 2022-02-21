@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 11:38:58 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 14:14:16 by ubuntu           ###   ########.fr       */
+/*   Created: 2022/02/21 14:23:17 by ubuntu            #+#    #+#             */
+/*   Updated: 2022/02/21 14:32:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#ifndef REDIRECTION_H
+# define REDIRECTION_H
 
-void	ft_pwd(char **argv)
-{
-	char	*p;
+# include <minishell.h>
+# include <libft.h>
+# include <builtin.h>
 
-	(void)argv;
-	p = getcwd(NULL, 0);
-	if (p != NULL)
-		printf("%s\n", p);
-	else
-	{
-		write(2, ".", 1);
-		return ;
-	}
-	if (p)
-		free(p);
-	ft_exit(0);
-}
+void	redirect_out_cmd(t_list	*cmd, int fd);
+void	redirect_in_cmd(t_list	*cmd, int fd);
+void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd);
+void	here_doc(char *limiter);
+
+#endif

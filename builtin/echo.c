@@ -6,11 +6,11 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:02 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/16 14:12:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:21:07 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <builtin.h>
 
 void	ft_echo(char **argv)
 {

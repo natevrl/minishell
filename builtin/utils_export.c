@@ -6,11 +6,11 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:32:04 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/19 18:05:41 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:14:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <builtin.h>
 
 static char	**envp_copy(char **envp, int max)
 {

@@ -6,11 +6,11 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/19 16:49:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:24:49 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <redirection.h>
 
 void	redirect_out_cmd(t_list	*cmd, int fd)
 {

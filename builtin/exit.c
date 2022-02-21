@@ -6,11 +6,11 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:58:04 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/16 14:54:47 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 14:13:51 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <builtin.h>
 
 void	built_exit(t_list **cmd)
 {
