@@ -108,7 +108,10 @@ char	**ft_split_token(const char *s, t_list *token)
 	if (!s)
 		return (NULL);
 	while (*s == ' ' && *s)
+	{
+		token = token->next;
 		s++;
+	}
 	tab = (char **)ft_malloc(sizeof(char *) * (ft_word(&token) + 1));
 	if (!tab)
 		return (NULL);

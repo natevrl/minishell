@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/20 16:49:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 13:52:46 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ char	*get_cmd(char **path, char *cmd, char *path_cmd)
 	return (NULL);
 }
 
-char	*ft_find_path(t_list *lst)
+char	*ft_find_env(t_list *lst, char	*name)
 {
 	while (lst)
 	{
-		if (ft_strncmp("PATH", ((t_myenv *)lst->content)->name, 4) == 0)
+		if (ft_strncmp(name, ((t_myenv *)lst->content)->name, 4) == 0)
 			return (((t_myenv *)lst->content)->value);
 		lst = lst->next;
 	}
@@ -62,7 +62,7 @@ int	ft_get_path(t_list *cmd, char **exec_cmd)
 	char	*path_cmd;
 	char	**cmd_path;
 
-	path_cmd = ft_find_path(cmd->env);
+	path_cmd = ft_find_env(cmd->env, "PATH");
 	cmd_path = ft_split(path_cmd, ':');
 	if (cmd->arg == NULL || cmd->arg[0] == NULL)
 		return (1);
