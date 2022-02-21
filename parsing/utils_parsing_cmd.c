@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:20:01 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:12:23 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void	ft_set_option(t_list **tmp, t_list **tmp2)
 	token = *tmp2;
 	while (cmd_token != NULL)
 	{
-		if (cmd_token->token == CMD || cmd_token->token == RD_OA || cmd_token->token == RD_ID || cmd_token->token == PIPE || cmd_token->token == RD_O || cmd_token->token == RD_I)
+		if (cmd_token->token == CMD || cmd_token->token == RD_OA
+			|| cmd_token->token == RD_ID || cmd_token->token == PIPE
+			|| cmd_token->token == RD_O || cmd_token->token == RD_I)
 			cmd_token->arg = ft_split_token((char *)cmd_token->content, token);
 		else
 			cmd_token->arg = NULL;

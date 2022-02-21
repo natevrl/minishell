@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:47:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:20:07 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:12:50 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	get_pid(int sig, siginfo_t *info, void *context)
 
 int	launch_bash(t_list *cmd)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = get_pid;
