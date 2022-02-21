@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 14:14:04 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:43:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_bultin(t_list **tmp)
 	list = NULL;
 	cmd = *tmp;
 	ft_load_builtin(&list, NULL, ft_print_env, "env");
-//	ft_load_builtin(&list, NULL, ft_export, "export");
 	ft_load_builtin(&list, ft_echo, NULL, "echo");
 	ft_load_builtin(&list, ft_pwd, NULL, "pwd");
 	while (cmd != NULL)
@@ -65,8 +64,6 @@ void	ft_bultin(t_list **tmp)
 			ft_launch_builtin(list, cmd, "pwd");
 		else if (ft_strncmp(cmd->arg[0], "env", 3) == 0 && ft_strlen(cmd->arg[0]) == 3)
 			ft_launch_builtin(list, cmd, "env");
-//		else if (ft_strncmp("export", cmd->arg[0], 6) == 0 && ft_strlen(cmd->arg[0]) == 6)
-//			ft_launch_builtin(list, cmd, "export");
 		cmd = cmd->next;
 	}
 }

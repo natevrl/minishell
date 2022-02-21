@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 15:14:24 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:44:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,4 @@ void	ft_export(t_list **list)
 		add_in_envp(((t_myenv *)(*list)->env->content)->envp, envlist->arg[i]);
 		add_new_envlist(&(*list)->env, envlist->arg[i]);
 	}
-//	ft_exit(0);
 }

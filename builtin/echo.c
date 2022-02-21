@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:02 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 14:21:07 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:42:30 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_echo(char **argv)
 
 	i = 1;
 	flag = 0;
-	if (argv[1] != NULL && strncmp(argv[1], "-n", 2) == 0)
+	if (argv[1] != NULL && ft_strncmp(argv[1], "-n", 2) == 0)
 	{
 		flag = 1;
 		i++;
