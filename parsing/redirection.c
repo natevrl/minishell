@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 17:45:07 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/22 17:00:05 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,28 @@ void	ft_redirect_to_outputa(t_list **token, t_list **tmp)
 		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
 }
 
+int	ft_redirect_input_loop(t_list **token)
+{
+	while ((*token)->next->token == RD_I)
+	{
+		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
+		if ((*token)->fd == -1)
+		{
+			write(2, "bash: parse error near `\\n'\n", 28);
+			while ((*token)->token == RD_I)
+				*token = (*token)->next;
+			return ;
+		}
+		close((*token)->fd);
+		*token = (*token)->next;
+	}
+}
+
 void	ft_redirect_input(t_list **token, t_list **tmp)
 {
 	if ((*token)->next != NULL)
 	{
-		while ((*token)->next->token == RD_I)
-		{
-			(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
-			if ((*token)->fd == -1)
-			{
-				write(2, "bash: parse error near `\\n'\n", 28);
-				while ((*token)->token == RD_I)
-					*token = (*token)->next;
-				return ;
-			}
-			close((*token)->fd);
-			*token = (*token)->next;
-		}
+		ft_redirect_input_loop(&token);
 		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
 		if ((*token)->fd == -1)
 		{
