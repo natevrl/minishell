@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 19:55:09 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:56:26 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ static size_t	ft_word(t_list **tmp)
 	return (cnt);
 }
 
-static void	ft_check(t_list ***token, const char **s, int count, size_t *len)
-{
-	if (**token && (**token)->size_env > 0)
-	{
-		while (*s && (**token)->size_env-- > count)
-		{
-			++(*s);
-			(*len)++;
-		}
-		**token = (**token)->next;
-	}
-}
-
 void	ft_check_token(t_list **token, size_t *len, const char **s)
 {
 	int	count;
@@ -63,7 +50,15 @@ void	ft_check_token(t_list **token, size_t *len, const char **s)
 		}
 		else
 			*token = (*token)->next;
-		ft_check(&token, s, count, len);
+		if (*token && (*token)->size_env > 0)
+		{
+			while (*s && (*token)->size_env-- > count)
+			{
+				++(*s);
+				(*len)++;
+			}
+			*token = (*token)->next;
+		}
 	}
 }
 
