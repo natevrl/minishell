@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 17:00:05 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:02:12 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,30 @@ void	ft_redirect_to_outputa(t_list **token, t_list **tmp)
 		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
 }
 
-int	ft_redirect_input_loop(t_list **token)
+int	ft_redirect_input_loop(t_list ***token)
 {
-	while ((*token)->next->token == RD_I)
+	while ((**token)->next->token == RD_I)
 	{
-		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
-		if ((*token)->fd == -1)
+		(**token)->fd = open((**token)->next->arg[0], O_RDONLY);
+		if ((**token)->fd == -1)
 		{
 			write(2, "bash: parse error near `\\n'\n", 28);
-			while ((*token)->token == RD_I)
-				*token = (*token)->next;
-			return ;
+			while ((**token)->token == RD_I)
+				**token = (**token)->next;
+			return (1);
 		}
-		close((*token)->fd);
-		*token = (*token)->next;
+		close((**token)->fd);
+		**token = (**token)->next;
 	}
+	return (0);
 }
 
 void	ft_redirect_input(t_list **token, t_list **tmp)
 {
 	if ((*token)->next != NULL)
 	{
-		ft_redirect_input_loop(&token);
+		if (ft_redirect_input_loop(&token))
+			return ;
 		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
 		if ((*token)->fd == -1)
 		{
