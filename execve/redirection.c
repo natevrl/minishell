@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:18:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:23:37 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	redirect_in_cmd(t_list	*cmd, int fd)
 		g_err = execve(exec_cmd, cmd->arg,
 				((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
-			exit_failure("command not found");
+			exit_failure("bash");
 		ft_exit(g_err);
 	}
 }
@@ -86,7 +86,7 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 		g_err = execve(exec_cmd, arg->arg,
 				((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
-			exit_failure("command not found");
+			exit_failure("bash");
 		ft_exit(g_err);
 	}
 }

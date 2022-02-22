@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 16:02:12 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:22:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_redirect_input_loop(t_list ***token)
 		(**token)->fd = open((**token)->next->arg[0], O_RDONLY);
 		if ((**token)->fd == -1)
 		{
-			write(2, "bash: parse error near `\\n'\n", 28);
+			write(2, "bash: No such file or directory\n", 32);
 			while ((**token)->token == RD_I)
 				**token = (**token)->next;
 			return (1);
@@ -97,7 +97,7 @@ void	ft_redirect_input(t_list **token, t_list **tmp)
 		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
 		if ((*token)->fd == -1)
 		{
-			write(2, "bash: parse error near `\\n'\n", 28);
+			write(2, "bash: No such file or directory\n", 32);
 			*token = (*token)->next;
 			return ;
 		}
