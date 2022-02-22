@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:42 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 17:31:30 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:33:13 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,6 @@ void	ft_tokenize_input_condition(t_list **tmp)
 	}
 }
 
-int	ft_token_condition(t_list *token)
-{
-	if (ft_isalnum(*(char *)token->content))
-		token->token = LITERAL;
-	else if (*(char *)token->content == ' ')
-		token->token = SP;
-	else if (*(char *)token->content == '<')
-		token->token = RD_I;
-	else if (*(char *)token->content == '>')
-		token->token = RD_O;
-	else if (*(char *)token->content == '|')
-		token->token = PIPE;
-	else if (*(char *)token->content == ';')
-		token->token = EXEC;
-	else if (*(char *)token->content == '$')
-		token->token = DOLLARD;
-	else if (*(char *)token->content == '?')
-		token->token = INTERO;
-	else if (*(char *)token->content == '\'')
-		token->token = QUOTE;
-	else if (*(char *)token->content == '\"')
-		token->token = DQUOTE;
-	else
-		return (1);
-	return (0);
-}
-
 void	ft_tokenize_input(t_list **tmp)
 {
 	t_list	*token;
@@ -75,7 +48,26 @@ void	ft_tokenize_input(t_list **tmp)
 	token = *tmp;
 	while (token != NULL)
 	{
-		if (ft_token_condition(token));
+		if (ft_isalnum(*(char *)token->content))
+			token->token = LITERAL;
+		else if (*(char *)token->content == ' ')
+			token->token = SP;
+		else if (*(char *)token->content == '<')
+			token->token = RD_I;
+		else if (*(char *)token->content == '>')
+			token->token = RD_O;
+		else if (*(char *)token->content == '|')
+			token->token = PIPE;
+		else if (*(char *)token->content == ';')
+			token->token = EXEC;
+		else if (*(char *)token->content == '$')
+			token->token = DOLLARD;
+		else if (*(char *)token->content == '?')
+			token->token = INTERO;
+		else if (*(char *)token->content == '\'')
+			token->token = QUOTE;
+		else if (*(char *)token->content == '\"')
+			token->token = DQUOTE;
 		else
 			token->token = LITERAL;
 		token = token->next;
