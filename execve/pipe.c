@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 20:45:26 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 22:31:57 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 		{
 			if (i > 0)
 				dup2(fdr, 0);
+			else
+				signal(SIGQUIT, sig_handler);
 			if ((*token)->next != NULL)
 				dup2(fd[1], 1);
 			ft_close(fd);
@@ -92,5 +94,5 @@ void	ft_pipe(t_list **token, t_list **cmp)
 	close(fdr);
 	i = -1;
 	while (++i <= number_of_pipe(cmp))
-		wait(NULL);
+		ft_check_signal(0);
 }
