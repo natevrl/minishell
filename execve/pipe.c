@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 19:28:09 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 20:30:13 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,11 @@ int	ft_parse_pipe(t_list **token, t_list **cmp)
 		if (!parse->arg[0])
 		{
 			if (number_of_pipe(cmp) == 1)
-			{
 				printf("minishell: syntax error near unexpected token `|'\n");
-				while (*token)
-					*token = (*token)->next;
-			}
 			else
-			{
 				printf("minishell: syntax error near unexpected token `||'\n");
-				while (*token)
-					*token = (*token)->next;
-			}
+			while (*token)
+				*token = (*token)->next;
 			return (1);
 		}
 		else if (finished_with_pipe(cmp))
