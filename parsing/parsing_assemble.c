@@ -6,17 +6,39 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 17:37:03 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:57:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	ft_check_token_associated(t_list **token, char **cmd, int *i, t_list *lst)
+{
+	if ((*token)->token == QUOTE)
+	{
+		if (ft_assemble_quote(token, cmd, i))
+			return (2);
+	}
+	else if ((*token)->token == DQUOTE)
+	{
+		if (ft_assemble_dquote(token, cmd, i, lst))
+			return (2);
+	}
+	else if ((*token)->token == EXIT_CODE)
+		ft_assemble_exit(token, cmd, i);
+	else if ((*token)->token == DOLLARD)
+		ft_assemble_dollard(token, cmd, i, lst);
+	else
+		return (0);
+	return (1);
+}
 
 void	ft_translate_token(t_list **tmp, t_list *lst)
 {
 	t_list	*token;
 	char	*cmd;
 	int		i;
+	int		res;
 
 	token = *tmp;
 	i = 0;
@@ -24,21 +46,10 @@ void	ft_translate_token(t_list **tmp, t_list *lst)
 	cmd = (char *)ft_malloc(sizeof(char) * ft_strlen_token(token));
 	while (token != NULL)
 	{
-		if (token->token == QUOTE)
-		{
-			if (ft_assemble_quote(&token, &cmd, &i))
-				break ;
-		}
-		else if (token->token == DQUOTE)
-		{
-			if (ft_assemble_dquote(&token, &cmd, &i, lst))
-				break ;
-		}
-		else if (token->token == EXIT_CODE)
-			ft_assemble_exit(&token, &cmd, &i);
-		else if (token->token == DOLLARD)
-			ft_assemble_dollard(&token, &cmd, &i, lst);
-		else
+		res = ft_check_token_associated(&token, &cmd, &i, lst);
+		if (res == 2)
+			break ;
+		else if (res == 0)
 		{
 			cmd[i] = *(char *)token->content;
 			i++;
@@ -72,14 +83,12 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	{
 		if (token->cmd_translated[i] == ';' && token->token != QVALUE)
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, CMD);
-		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1]
-			== '>' && token->token != QVALUE)
+		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1] == '>' && token->token != QVALUE)
 		{
 			i++;
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_OA);
 		}
-		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1]
-			== '<' && token->token != QVALUE)
+		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1] == '<' && token->token != QVALUE)
 		{
 			i++;
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_ID);
