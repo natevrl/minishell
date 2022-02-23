@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 22:04:43 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 14:34:29 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,7 @@ int	already_in_env(t_list **list, t_list **tmp, char *arg)
 			if (ft_strncmp(ft_after_equal(envp[i]),
 					ft_after_equal(arg), ft_strlen(ft_after_equal(envp[i]))
 					+ ft_strlen(ft_after_equal(arg))) != 0)
-			{
-				envp[i] = arg;
-				((t_myenv *)cmd->content)->env = arg;
-				((t_myenv *)cmd->content)->name = ft_before_equal(arg);
-				((t_myenv *)cmd->content)->value = ft_after_equal(arg);
-			}
+				ft_fill_env(arg, cmd, &envp[i]);
 			return (1);
 		}
 		cmd = cmd->next;

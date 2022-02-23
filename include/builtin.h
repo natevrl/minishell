@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:12:10 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:18:20 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:34:46 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_echo(char **argv);
 void	ft_pwd(char **argv);
 void	ft_cd(t_list **list);
 void	ft_export(t_list **list);
+void	ft_fill_env(char *arg, t_list *cmd, char **env);
 void	ft_unset(t_list **list);
 
 void	ft_bultin(t_list **cmd);

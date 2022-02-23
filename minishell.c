@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 20:54:36 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 23:02:50 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 14:36:37 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	prompt(t_list *lst)
 		write(1, "exit\n", 5);
 		ft_exit(g_err);
 	}
-
 	if (*cmd == '\0')
 		return ;
 	else

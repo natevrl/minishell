@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:32:04 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:17:32 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:34:33 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ void	sort_and_print_env(char **envp)
 		printf("declare -x %s\n", tab[i]);
 		i++;
 	}
+}
+
+void	ft_fill_env(char *arg, t_list *cmd, char **env)
+{
+	*env = arg;
+	((t_myenv *)cmd->content)->env = arg;
+	((t_myenv *)cmd->content)->name = ft_before_equal(arg);
+	((t_myenv *)cmd->content)->value = ft_after_equal(arg);
 }
