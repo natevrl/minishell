@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 19:58:05 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:39:46 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ static size_t	ft_word(t_list **tmp)
 	return (cnt);
 }
 
+static void	ft_check_env(t_list **token, int *count)
+{
+	if ((*token)->token == DOLLARD)
+	{
+		while (*token && (*token)->next && (*token)->token
+			== DOLLARD && (*token)->next->token == DOLLARD)
+		{
+			*token = (*token)->next;
+			(*count)++;
+		}
+	}
+	else
+		*token = (*token)->next;
+}
+
 void	ft_check_token(t_list **token, size_t *len, const char **s)
 {
 	int	count;
@@ -39,17 +54,7 @@ void	ft_check_token(t_list **token, size_t *len, const char **s)
 	count = 0;
 	if (*token)
 	{
-		if ((*token)->token == DOLLARD)
-		{
-			while (*token && (*token)->next && (*token)->token
-				== DOLLARD && (*token)->next->token == DOLLARD)
-			{
-				*token = (*token)->next;
-				count++;
-			}
-		}
-		else
-			*token = (*token)->next;
+		ft_check_env(token, &count);
 		if (*token && (*token)->size_env > 0)
 		{
 			while (*s && (*token)->size_env-- > count)
