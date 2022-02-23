@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 18:20:23 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:22:28 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,41 +83,41 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 		if (token->cmd_translated[i] == ';' && token->token != QVALUE)
 		{
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
-					->cmd_translated, pos, j), CMD));
+						->cmd_translated, pos, j), CMD));
 			rst_pos(&pos, &j, i);
 		}
 		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1]
-				== '>' && token->token != QVALUE)
+			== '>' && token->token != QVALUE)
 		{
 			i++;
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
-					->cmd_translated, pos, j), RD_OA));
+						->cmd_translated, pos, j), RD_OA));
 			rst_pos(&pos, &j, i);
 		}
-		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1]
-				== '<' && token->token != QVALUE)
+		else if (token->cmd_translated[i] == '<' && token->cmd_translated[i + 1]
+			== '<' && token->token != QVALUE)
 		{
 			i++;
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
-					->cmd_translated, pos, j), RD_ID));
+						->cmd_translated, pos, j), RD_ID));
 			rst_pos(&pos, &j, i);
 		}
 		else if (token->cmd_translated[i] == '>' && token->token != QVALUE)
 		{
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
-					->cmd_translated, pos, j), RD_O));
+						->cmd_translated, pos, j), RD_O));
 			rst_pos(&pos, &j, i);
 		}
 		else if (token->cmd_translated[i] == '<' && token->token != QVALUE)
 		{
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
-					->cmd_translated, pos, j), RD_I));
+						->cmd_translated, pos, j), RD_I));
 			rst_pos(&pos, &j, i);
 		}
 		else if (token->cmd_translated[i] == '|' && token->token != QVALUE)
 		{
 			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
-					->cmd_translated, pos, j), PIPE));
+						->cmd_translated, pos, j), PIPE));
 			rst_pos(&pos, &j, i);
 		}
 		else
@@ -133,5 +133,6 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	if (*white == NULL)
 		return ;
 	else if (pos != i)
-		ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, pos, i), CMD));
+		ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, i), CMD));
 }
