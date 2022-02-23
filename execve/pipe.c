@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 12:07:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 20:08:47by ubuntu           ###   ########.fr       */
+/*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
+/*   Updated: 2022/02/23 17:18:41 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,3 @@ void	ft_pipe(t_list **token, t_list **cmp)
 	while (++i <= number_of_pipe(cmp))
 		wait(NULL);
 }
-
