@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 17:13:16 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:23:00 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static size_t	ft_word(t_list **tmp)
 		while ((token && token->token == QVALUE)
 			|| (token && token->token != SP))
 		{
-			if	(token && token->next && ((token->token == DQUOTE
-			&& token->next->token == DQUOTE) || (token->token == QUOTE
-			&& token->next->token == QUOTE)))
+			if (token && token->next && ((token->token == DQUOTE
+						&& token->next->token == DQUOTE) || (token->token
+						== QUOTE && token->next->token == QUOTE)))
 			{
 				token = token->next;
 				break ;
@@ -77,7 +77,8 @@ static void	ft_check_token_split(t_list **token, size_t *len, const char **s)
 {
 	if (*token && ((*token)->token == DQUOTE || (*token)->token == QUOTE))
 		*token = (*token)->next;
-	while (*token && ((*token)->token == QVALUE || (*token)->token == DOLLARD) && *(*s))
+	while (*token && ((*token)->token == QVALUE
+			|| (*token)->token == DOLLARD) && *(*s))
 	{
 		if ((*token) && ((*token)->token == DOLLARD))
 			ft_check_token(token, len, s);
@@ -85,26 +86,23 @@ static void	ft_check_token_split(t_list **token, size_t *len, const char **s)
 			*token = (*token)->next;
 		(*len)++;
 		++(*s);
-
 	}
 	if ((*token) && ((*token)->token == DQUOTE || (*token)->token == QUOTE))
 		*token = (*token)->next;
 }
 
-static int	ft_fill(char const *s, char **tab, t_list **tmp)
+static int	ft_fill(char const *s, char **tab, t_list **token)
 {
 	size_t	i;
 	size_t	len;
-	t_list	*token;
 
 	i = 0;
-	token = *tmp;
 	while (*s)
 	{
 		len = 0;
-		ft_check_token_split(&token, &len, &s);
+		ft_check_token_split(token, &len, &s);
 		while (*s && *s != ' ')
-			ft_check_token(&token, &len, &s);
+			ft_check_token(token, &len, &s);
 		tab[i] = (char *)ft_malloc(sizeof(char) * len + 1);
 		if (!tab[i])
 		{
@@ -115,9 +113,9 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 		}
 		ft_strlcpy(tab[i++], s - len, len + 1);
 		printf("%s\n", tab[i - 1]);
-		while (token && token->token != QVALUE && *s && *s == ' ')
+		while (*token && (*token)->token != QVALUE && *s && *s == ' ')
 		{
-			token = token->next;
+			*token = (*token)->next;
 			s++;
 		}
 	}
