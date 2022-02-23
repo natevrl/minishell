@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 22:55:27 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 23:20:04 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_bultin(t_list **tmp)
 			ft_launch_builtin(list, cmd, "env");
 		cmd = cmd->next;
 	}
-	ft_free(list);
 }
 
 int	ft_builtin_without_fork(t_list **tmp)
@@ -96,9 +95,6 @@ int	ft_builtin_without_fork(t_list **tmp)
 		&& ft_strlen(cmd->arg[0]) == 6)
 		ft_launch_builtin(list, cmd, "export");
 	else
-	{
-		ft_free(list);
 		return (0);
-	}
 	return (1);
 }

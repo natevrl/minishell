@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:42 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 19:45:38 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 23:25:54 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 	t_list	*token;
 
 	token = *tmp;
+	ft_fill_list_env(tmp, lst);
 	while (token != NULL)
 	{
-		token->env = lst;
 		if (token->token == CMD)
 			exec_cmd(token);
 		else if (token->token == RD_O)

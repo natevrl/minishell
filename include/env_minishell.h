@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_minishell.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:33:32 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:18:24 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:26:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char	*ft_get_env_without(char *str);
 char	*ft_get_env(char *str, t_list **list);
 void	ft_fill_basic_env(char **env, t_list **lst);
 void	ft_check_env(char **env, t_list **lst);
+void	ft_fill_list_env(t_list **tmp, t_list *env);
 
 #endif
