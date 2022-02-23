@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 19:53:51 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 20:52:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,16 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 void	child_heredoc(char *limiter)
 {
 	char	*tmp;
+	int		i;
 
+	i = 1;
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
 		tmp = get_next_line(STDIN_FILENO);
 		if (tmp == NULL)
 		{
-			printf("\nbash: warning: here-document at line 1 delimited by end-of-file (wanted `o')\n");
+			printf("\nbash: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", i, limiter);
 			ft_exit(130);
 		}
 		if (ft_strncmp(tmp, limiter, ft_strlen(limiter)) == 0
@@ -112,6 +114,7 @@ void	child_heredoc(char *limiter)
 			tmp = get_next_line(STDIN_FILENO);
 			break ;
 		}
+		i++;
 	}
 	ft_exit(0);
 }

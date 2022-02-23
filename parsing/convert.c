@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:08:47 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/21 18:19:07 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:57:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_assemble_dollard(t_list **token, char **cmd, int *i, t_list *lst)
 {
 	char	*env;
 
-	(void)lst;
 	env = ft_get_env((char *)(*token)->content, token);
 	if (ft_strlen(env) == 0)
 	{
