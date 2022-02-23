@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 14:39:46 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:13:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,16 @@ static size_t	ft_word(t_list **tmp)
 	{
 		while ((token && token->token == QVALUE)
 			|| (token && token->token != SP))
+		{
+			if	(token && token->next && ((token->token == DQUOTE
+			&& token->next->token == DQUOTE) || (token->token == QUOTE
+			&& token->next->token == QUOTE)))
+			{
+				token = token->next;
+				break ;
+			}
 			token = token->next;
+		}
 		cnt++;
 		while (token && token->token == SP)
 			token = token->next;
@@ -31,7 +40,7 @@ static size_t	ft_word(t_list **tmp)
 	return (cnt);
 }
 
-static void	ft_check_env(t_list **token, int *count)
+static void	ft_check_env_count(t_list **token)
 {
 	if ((*token)->token == DOLLARD)
 	{
@@ -39,7 +48,6 @@ static void	ft_check_env(t_list **token, int *count)
 			== DOLLARD && (*token)->next->token == DOLLARD)
 		{
 			*token = (*token)->next;
-			(*count)++;
 		}
 	}
 	else
@@ -48,16 +56,12 @@ static void	ft_check_env(t_list **token, int *count)
 
 void	ft_check_token(t_list **token, size_t *len, const char **s)
 {
-	int	count;
-
-	(*len)++;
-	count = 0;
 	if (*token)
 	{
-		ft_check_env(token, &count);
+		ft_check_env_count(token);
 		if (*token && (*token)->size_env > 0)
 		{
-			while (*s && (*token)->size_env-- > count)
+			while (*s && (*token)->size_env-- > 2)
 			{
 				++(*s);
 				(*len)++;
@@ -65,18 +69,25 @@ void	ft_check_token(t_list **token, size_t *len, const char **s)
 			*token = (*token)->next;
 		}
 	}
+	++(*s);
+	(*len)++;
 }
 
 static void	ft_check_token_split(t_list **token, size_t *len, const char **s)
 {
 	if (*token && ((*token)->token == DQUOTE || (*token)->token == QUOTE))
 		*token = (*token)->next;
-	while (*token && (*token)->token == QVALUE && *(*s) && ++(*s))
+	while (*token && ((*token)->token == QVALUE || (*token)->token == DOLLARD) && *(*s))
 	{
+		if ((*token) && ((*token)->token == DOLLARD))
+			ft_check_token(token, len, s);
+		else
+			*token = (*token)->next;
 		(*len)++;
-		*token = (*token)->next;
+		++(*s);
+
 	}
-	if ((*token) && ((*token)->token == DQUOTE || (*token)->token == DQUOTE))
+	if ((*token) && ((*token)->token == DQUOTE || (*token)->token == QUOTE))
 		*token = (*token)->next;
 }
 
@@ -91,9 +102,9 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 	while (*s)
 	{
 		len = 0;
-		while (*s && *s != ' ' && ++s)
-			ft_check_token(&token, &len, &s);
 		ft_check_token_split(&token, &len, &s);
+		while (*s && *s != ' ')
+			ft_check_token(&token, &len, &s);
 		tab[i] = (char *)ft_malloc(sizeof(char) * len + 1);
 		if (!tab[i])
 		{
@@ -103,8 +114,8 @@ static int	ft_fill(char const *s, char **tab, t_list **tmp)
 			return (1);
 		}
 		ft_strlcpy(tab[i++], s - len, len + 1);
-		while (token && token->token != QVALUE && token->token
-			!= DQUOTE && token->token != QUOTE && *s && *s == ' ')
+		printf("%s\n", tab[i - 1]);
+		while (token && token->token != QVALUE && *s && *s == ' ')
 		{
 			token = token->next;
 			s++;

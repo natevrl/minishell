@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:58:04 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:17:09 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:25:14 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	built_exit(t_list **cmd)
 	}
 	while (list->arg[1][++i])
 	{
-		if (ft_isalpha(list->arg[1][i]))
+		if (ft_isalpha(list->arg[1][i]) || ft_strlen(list->arg[1]) > 20)
 		{
 			write(1, "numeric argument required\n", 26);
 			ft_exit(2);
