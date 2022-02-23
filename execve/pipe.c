@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 19:24:26 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 20:26:04 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int	ft_parse_pipe(t_list **token, t_list **cmp)
 		{
 			printf("minishell: syntax error near unexpected token `|'\n");
 			while (*token)
-					*token = (*token)->next;
-				return (1);
+				*token = (*token)->next;
+			return (1);
 		}
 		parse = parse->next;
 	}
