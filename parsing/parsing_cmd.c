@@ -6,17 +6,11 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:42 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 17:32:21 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:39:13 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	set_token(t_list **token, int t)
-{
-	(*token)->token = t;
-	(*token)->next->token = t;
-}
 
 void	ft_tokenize_input_condition(t_list **tmp)
 {

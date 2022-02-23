@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:37:05 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 17:37:13 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:39:18 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,10 @@ void	ft_fill_size(t_list **tmp)
 		token->size_env = 0;
 		token = token->next;
 	}
+}
+
+void	set_token(t_list **token, int t)
+{
+	(*token)->token = t;
+	(*token)->next->token = t;
 }
