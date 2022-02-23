@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:25:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 19:07:00 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:55:27 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,18 @@ void	ft_bultin(t_list **tmp)
 	ft_load_builtin(&list, ft_pwd, NULL, "pwd");
 	while (cmd != NULL)
 	{
-		if (ft_strncmp(cmd->arg[0], "echo", 4) == 0
+		if (cmd->arg[0] && ft_strncmp(cmd->arg[0], "echo", 4) == 0
 			&& ft_strlen(cmd->arg[0]) == 4)
 			ft_launch_builtin(list, cmd, "echo");
-		else if (ft_strncmp(cmd->arg[0], "pwd", 3) == 0
+		else if (cmd->arg[0] && ft_strncmp(cmd->arg[0], "pwd", 3) == 0
 			&& ft_strlen(cmd->arg[0]) == 3)
 			ft_launch_builtin(list, cmd, "pwd");
-		else if (ft_strncmp(cmd->arg[0], "env", 3) == 0
+		else if (cmd->arg[0] && ft_strncmp(cmd->arg[0], "env", 3) == 0
 			&& ft_strlen(cmd->arg[0]) == 3)
 			ft_launch_builtin(list, cmd, "env");
 		cmd = cmd->next;
 	}
+	ft_free(list);
 }
 
 int	ft_builtin_without_fork(t_list **tmp)
@@ -82,18 +83,22 @@ int	ft_builtin_without_fork(t_list **tmp)
 	ft_load_builtin(&list, NULL, ft_cd, "cd");
 	ft_load_builtin(&list, NULL, ft_unset, "unset");
 	ft_load_builtin(&list, NULL, ft_export, "export");
-	if (ft_strncmp("exit", cmd->arg[0], 4) == 0 && ft_strlen(cmd->arg[0]) == 4)
+	if (cmd->arg[0] && ft_strncmp("exit", cmd->arg[0], 4) == 0
+		&& ft_strlen(cmd->arg[0]) == 4)
 		ft_launch_builtin(list, cmd, "exit");
 	else if (ft_strncmp("cd", cmd->arg[0], 2) == 0
 		&& ft_strlen(cmd->arg[0]) == 2)
 		ft_launch_builtin(list, cmd, "cd");
-	else if (ft_strncmp("unset", cmd->arg[0], 5) == 0
+	else if (cmd->arg[0] && ft_strncmp("unset", cmd->arg[0], 5) == 0
 		&& ft_strlen(cmd->arg[0]) == 5)
 		ft_launch_builtin(list, cmd, "unset");
-	else if (ft_strncmp("export", cmd->arg[0], 6) == 0
+	else if (cmd->arg[0] && ft_strncmp("export", cmd->arg[0], 6) == 0
 		&& ft_strlen(cmd->arg[0]) == 6)
 		ft_launch_builtin(list, cmd, "export");
 	else
+	{
+		ft_free(list);
 		return (0);
+	}
 	return (1);
 }

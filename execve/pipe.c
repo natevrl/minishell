@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 22:31:57 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 23:07:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	pipe_exec(t_list **token, t_list **cmp, char *exec_tube1)
 {
 	ft_bultin(token);
+	if (ft_builtin_without_fork(token))
+		ft_exit(g_err);
 	g_err = execve(exec_tube1, (*token)->arg,
 			((t_myenv *)(*cmp)->env->content)->envp);
 	if (g_err == -1)
@@ -82,7 +84,6 @@ int	ft_parse_pipe(t_list **token, t_list **cmp)
 	return (0);
 }
 
-// gerer les builtins = export | grep USER
 void	ft_pipe(t_list **token, t_list **cmp)
 {
 	int	fdr;
