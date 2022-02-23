@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 18:47:41 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:51:48 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	ft_translate_token(t_list **tmp, t_list *lst)
 
 void	ft_add_token_line(t_list **cmd_token, t_list **tmp, int i, int token)
 {
-	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, (*tmp)->j), token));
+	ft_lstadd_back(cmd_token, ft_lstnew_token
+		(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, (*tmp)->j), token));
 	(*tmp)->j = 0;
 	(*tmp)->pos = i + 1;
 }
@@ -71,12 +72,14 @@ int	ft_check_assembly(t_list **cmd_token, t_list **tmp, t_list *token, int i)
 {
 	if (token->cmd_translated[i] == ';' && token->token != QVALUE)
 		ft_add_token_line(cmd_token, tmp, i, CMD);
-	else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1] == '>' && token->token != QVALUE)
+	else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1]
+		== '>' && token->token != QVALUE)
 	{
 		i++;
 		ft_add_token_line(cmd_token, tmp, i, RD_OA);
 	}
-	else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1] == '<' && token->token != QVALUE)
+	else if (token->cmd_translated[i] == '<' && token->cmd_translated[i + 1]
+		== '<' && token->token != QVALUE)
 	{
 		i++;
 		ft_add_token_line(cmd_token, tmp, i, RD_ID);
@@ -103,7 +106,6 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	token->pos = 0;
 	while ((*tmp)->cmd_translated[i] || (token != NULL && token->next != NULL))
 	{
-
 		if (ft_check_assembly(cmd_token, tmp, token, i))
 			(*tmp)->j++;
 		if ((*tmp)->cmd_translated[i])
@@ -117,5 +119,6 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	if (*white == NULL)
 		return ;
 	else if ((*tmp)->pos != i)
-		ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, i), CMD));
+		ft_lstadd_back(cmd_token, ft_lstnew_token
+			(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, i), CMD));
 }
