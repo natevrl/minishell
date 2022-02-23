@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_minishell.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:18:41 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:28:53 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_list	*ft_lstnew_token(void	*content, int token);
 void	ft_exec_token(t_list **cmd_token);
 int		ft_strlen_token(t_list *token);
 void	ft_set_option(t_list **tmp, t_list **tmp2);
+void	ft_check_token(t_list **token, size_t *len, const char **s);
 
 void	ft_translate_token(t_list **tmp, t_list *lst);
 void	ft_assemble_token(t_list **cmd_token, t_list **tmp);

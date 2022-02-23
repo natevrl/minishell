@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/23 17:16:24 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/23 17:29:38 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FILES = minishell \
 		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
 		parsing/ft_split_token	\
+		parsing/ft_split_token_utils	\
 		parsing/convert	\
 		parsing/redirection	\
 		builtin/echo \
