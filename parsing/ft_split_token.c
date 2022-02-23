@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 17:23:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:24:03 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ static int	ft_fill(char const *s, char **tab, t_list **token)
 			return (1);
 		}
 		ft_strlcpy(tab[i++], s - len, len + 1);
-		printf("%s\n", tab[i - 1]);
 		while (*token && (*token)->token != QVALUE && *s && *s == ' ')
 		{
 			*token = (*token)->next;
