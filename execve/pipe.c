@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 17:18:41 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:01:07 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,12 @@ void	ft_pipe(t_list **token, t_list **cmp)
 		if (number_of_pipe(cmp) == 1)
 			printf("minishell: syntax error near unexpected token `|'\n");
 		else
+		{
 			printf("minishell: syntax error near unexpected token `||'\n");
+			while (*token)
+				*token = (*token)->next;
+			return ;
+		}
 		(*token) = (*token)->next;
 		return ;
 	}
