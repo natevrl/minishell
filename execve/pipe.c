@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 19:01:07 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:24:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ int	number_of_pipe(t_list **token)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+int	finished_with_pipe(t_list **token)
+{
+	t_list	*tmp;
+
+	tmp = *token;
+	while (tmp)
+	{
+		if (tmp->token == PIPE && tmp->next == NULL)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 void	pipe_exec(t_list **token, t_list **cmp, char *exec_tube1)
@@ -73,6 +87,41 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 	}
 }
 
+int	ft_parse_pipe(t_list **token, t_list **cmp)
+{
+	t_list	*parse;
+
+	parse = *token;
+	while (parse)
+	{
+		if (!parse->arg[0])
+		{
+			if (number_of_pipe(cmp) == 1)
+			{
+				printf("minishell: syntax error near unexpected token `|'\n");
+				while (*token)
+					*token = (*token)->next;
+			}
+			else
+			{
+				printf("minishell: syntax error near unexpected token `||'\n");
+				while (*token)
+					*token = (*token)->next;
+			}
+			return (1);
+		}
+		else if (finished_with_pipe(cmp))
+		{
+			printf("minishell: syntax error near unexpected token `|'\n");
+			while (*token)
+					*token = (*token)->next;
+				return (1);
+		}
+		parse = parse->next;
+	}
+	return (0);
+}
+
 // gerer les builtins = export | grep USER
 // quand plein de ||||| = pleins de messages d'erreur
 void	ft_pipe(t_list **token, t_list **cmp)
@@ -80,20 +129,8 @@ void	ft_pipe(t_list **token, t_list **cmp)
 	int	fdr;
 	int	i;
 
-	if (!(*token)->arg[0])
-	{
-		if (number_of_pipe(cmp) == 1)
-			printf("minishell: syntax error near unexpected token `|'\n");
-		else
-		{
-			printf("minishell: syntax error near unexpected token `||'\n");
-			while (*token)
-				*token = (*token)->next;
-			return ;
-		}
-		(*token) = (*token)->next;
+	if (ft_parse_pipe(token, cmp))
 		return ;
-	}
 	pipe_loop(token, cmp, fdr = dup(0), i = 0);
 	close(fdr);
 	i = -1;
