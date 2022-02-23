@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 22:13:01 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/24 00:09:36 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 			token = token->next;
 		if (!token)
 		{
-			while((*tmp)->cmd_translated[i])
+			while ((*tmp)->cmd_translated[i])
 				i++;
 			break ;
 		}
