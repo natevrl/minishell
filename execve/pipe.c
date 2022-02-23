@@ -61,12 +61,26 @@ int	ft_get_path2(t_list **env, t_list *cmd, char **exec_cmd)
 	return (0);
 }
 
-void	ft_close(int fd1, int fd2)
+void	ft_close(int *fd)
 {
-	if (fd1)
-		close(fd1);
-	if (fd2)
-		close(fd2);
+	close(fd[0]);
+	close(fd[1]);
+}
+
+int	number_of_pipe(t_list **token)
+{
+	t_list	*tmp;
+	int		i;
+
+	tmp = *token;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->token == PIPE)
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
 
 void	ft_pipe(t_list **token, t_list **cmp)
@@ -77,8 +91,8 @@ void	ft_pipe(t_list **token, t_list **cmp)
 	char	*exec_tube1;
 	int		i;
 
-	fd_read = 0;
-	i = 1;
+	fd_read = dup(0);
+	i = 0;
 	while ((*token) != NULL)
 	{
 		if (ft_get_path2(cmp, *token, &exec_tube1))
@@ -90,10 +104,13 @@ void	ft_pipe(t_list **token, t_list **cmp)
 			exit_failure("fork() error");
 		else if (pid == 0)
 		{
-			dup2(fd_read, 0);
+
+			if (i > 0)
+				dup2(fd_read, 0);
 			if ((*token)->next != NULL)
 				dup2(fd[1], 1);
-			close(fd[0]);
+			ft_close(fd);
+			close(fd_read);
 			ft_bultin(token);
 			g_err = execve(exec_tube1, (*token)->arg,
 					((t_myenv *)(*cmp)->env->content)->envp);
@@ -101,14 +118,13 @@ void	ft_pipe(t_list **token, t_list **cmp)
 				exit_failure((*token)->arg[0]);
 			ft_exit(g_err);
 		}
+		dup2(fd[0], fd_read);
 		i++;
-		ft_close(fd[1], fd_read);
-		if (i % 2 == 0 && (*token)->next)
-			waitpid(0, NULL, WNOHANG);
-		 else
-			ft_check_signal(pid);
-		fd_read = fd[0];
+		ft_close(fd);
 		*token = (*token)->next;
 	}
-	ft_close(fd[1], fd_read);
+	i = -1;
+	close(fd_read);
+	while (++i <= number_of_pipe(cmp))
+		wait(NULL);
 }
