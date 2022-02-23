@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 17:57:16 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 18:20:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ void	ft_translate_token(t_list **tmp, t_list *lst)
 	ft_fill_translated(tmp, cmd);
 }
 
-void	ft_add_token_line(t_list **cmd_token, t_list **tmp, int *pos, int *j, int i, int token)
+void	rst_pos(int *pos, int *j, int i)
 {
-	ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)->cmd_translated, *pos, *j), token));
 	*j = 0;
 	*pos = i + 1;
 }
@@ -82,23 +81,45 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	while ((*tmp)->cmd_translated[i] || (token != NULL && token->next != NULL))
 	{
 		if (token->cmd_translated[i] == ';' && token->token != QVALUE)
-			ft_add_token_line(cmd_token, tmp, &pos, &j, i, CMD);
-		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1] == '>' && token->token != QVALUE)
 		{
-			i++;
-			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_OA);
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, j), CMD));
+			rst_pos(&pos, &j, i);
 		}
-		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1] == '<' && token->token != QVALUE)
+		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1]
+				== '>' && token->token != QVALUE)
 		{
 			i++;
-			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_ID);
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, j), RD_OA));
+			rst_pos(&pos, &j, i);
+		}
+		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1]
+				== '<' && token->token != QVALUE)
+		{
+			i++;
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, j), RD_ID));
+			rst_pos(&pos, &j, i);
 		}
 		else if (token->cmd_translated[i] == '>' && token->token != QVALUE)
-			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_O);
+		{
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, j), RD_O));
+			rst_pos(&pos, &j, i);
+		}
 		else if (token->cmd_translated[i] == '<' && token->token != QVALUE)
-			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_I);
+		{
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, j), RD_I));
+			rst_pos(&pos, &j, i);
+		}
 		else if (token->cmd_translated[i] == '|' && token->token != QVALUE)
-			ft_add_token_line(cmd_token, tmp, &pos, &j, i, PIPE);
+		{
+			ft_lstadd_back(cmd_token, ft_lstnew_token(ft_substr((*tmp)
+					->cmd_translated, pos, j), PIPE));
+			rst_pos(&pos, &j, i);
+		}
 		else
 			j++;
 		if ((*tmp)->cmd_translated[i])
