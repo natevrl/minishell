@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 19:08:13 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:47:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,28 @@ void	ft_add_token_line(t_list **cmd_token, t_list **tmp, int i, int token)
 	(*tmp)->pos = i + 1;
 }
 
-int	ft_check_assembly(t_list **cmd_token, t_list **tmp, t_list *token, int i)
+int	ft_check_assembly(t_list **cmd_token, t_list **tmp, t_list *token, int *i)
 {
-	if (token->cmd_translated[i] == ';' && token->token != QVALUE)
-		ft_add_token_line(cmd_token, tmp, i, CMD);
-	else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1]
+	if (token->cmd_translated[*i] == ';' && token->token != QVALUE)
+		ft_add_token_line(cmd_token, tmp, *i, CMD);
+	else if (token->cmd_translated[*i] == '>' && token->cmd_translated[*i + 1]
 		== '>' && token->token != QVALUE)
 	{
-		i++;
-		ft_add_token_line(cmd_token, tmp, i, RD_OA);
+		(*i)++;
+		ft_add_token_line(cmd_token, tmp, *i, RD_OA);
 	}
-	else if (token->cmd_translated[i] == '<' && token->cmd_translated[i + 1]
+	else if (token->cmd_translated[*i] == '<' && token->cmd_translated[*i + 1]
 		== '<' && token->token != QVALUE)
 	{
-		i++;
-		ft_add_token_line(cmd_token, tmp, i, RD_ID);
+		(*i)++;
+		ft_add_token_line(cmd_token, tmp, *i, RD_ID);
 	}
-	else if (token->cmd_translated[i] == '>' && token->token != QVALUE)
-		ft_add_token_line(cmd_token, tmp, i, RD_O);
-	else if (token->cmd_translated[i] == '<' && token->token != QVALUE)
-		ft_add_token_line(cmd_token, tmp, i, RD_I);
-	else if (token->cmd_translated[i] == '|' && token->token != QVALUE)
-		ft_add_token_line(cmd_token, tmp, i, PIPE);
+	else if (token->cmd_translated[*i] == '>' && token->token != QVALUE)
+		ft_add_token_line(cmd_token, tmp, *i, RD_O);
+	else if (token->cmd_translated[*i] == '<' && token->token != QVALUE)
+		ft_add_token_line(cmd_token, tmp, *i, RD_I);
+	else if (token->cmd_translated[*i] == '|' && token->token != QVALUE)
+		ft_add_token_line(cmd_token, tmp, *i, PIPE);
 	else
 		return (1);
 	return (0);
@@ -107,7 +107,7 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	i = 0;
 	while ((*tmp)->cmd_translated[i] || (token != NULL && token->next != NULL))
 	{
-		if (ft_check_assembly(cmd_token, tmp, token, i))
+		if (ft_check_assembly(cmd_token, tmp, token, &i))
 			(*tmp)->j++;
 		if ((*tmp)->cmd_translated[i])
 			i++;

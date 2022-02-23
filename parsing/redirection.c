@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 16:22:23 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:48:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_input_to_heredoc(t_list **token)
 {
 	if ((*token)->next != NULL)
 	{
-		while ((*token)->next->token == RD_OA)
+		while ((*token)->next->token == RD_ID)
 		{
 			here_doc((*token)->next->arg[0]);
 			*token = (*token)->next;
