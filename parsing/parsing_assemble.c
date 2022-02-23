@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 19:47:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 21:43:15 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	i = 0;
 	while ((*tmp)->cmd_translated[i] || (token != NULL && token->next != NULL))
 	{
+		if (token && (token->token == QUOTE || token->token == DQUOTE))
+			token = token->next;
 		if (ft_check_assembly(cmd_token, tmp, token, &i))
 			(*tmp)->j++;
 		if ((*tmp)->cmd_translated[i])

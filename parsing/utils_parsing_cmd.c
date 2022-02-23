@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 17:34:23 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 21:36:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_set_option(t_list **tmp, t_list **tmp2)
 
 	cmd_token = *tmp;
 	token = *tmp2;
+	(void)token;
 	while (cmd_token != NULL)
 	{
 		if (cmd_token->token == CMD || cmd_token->token == RD_OA
