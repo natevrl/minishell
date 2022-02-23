@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:05:17 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 17:28:53 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:37:49 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ void	ft_redirect_to_outputa(t_list **token, t_list **tmp);
 void	ft_redirect_input(t_list **token, t_list **tmp);
 
 char	**ft_split_token(const char *s, t_list *token);
+void	ft_fill_translated(t_list **tmp, char *cmd);
+void	ft_fill_size(t_list **tmp);
 
 #endif

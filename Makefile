@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/23 17:29:38 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/23 17:38:14 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ RM = rm -rf
 
 FILES = minishell \
 		parsing/parsing_cmd	\
+		parsing/parsing_assemble_utils	\
 		parsing/parsing_assemble	\
 		parsing/utils_parsing_cmd	\
 		parsing/ft_split_token	\
