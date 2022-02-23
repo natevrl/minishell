@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/21 22:54:33 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/23 17:16:24 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ FILES = minishell \
 		builtin/utils_export \
 		builtin/load_builtin \
 		execve/execve \
+		execve/path_utils \
 		execve/redirection \
 		execve/pipe \
 		memory/memory0		\
