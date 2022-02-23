@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 20:52:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 21:02:20 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void	child_heredoc(char *limiter)
 		tmp = get_next_line(STDIN_FILENO);
 		if (tmp == NULL)
 		{
-			printf("\nbash: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", i, limiter);
+			printf("\nbash: warning: here-document at line %d delimited by
+				end-of-file (wanted `%s')\n", i, limiter);
 			ft_exit(130);
 		}
 		if (ft_strncmp(tmp, limiter, ft_strlen(limiter)) == 0
