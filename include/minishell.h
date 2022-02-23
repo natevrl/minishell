@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 17:28:44 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:29:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	prompt(t_list *lst);
 
 char	*get_cmd(char **path, char *cmd, char *path_cmd);
 size_t	ft_strlen_double(char **str);
+
+int		number_of_pipe(t_list **token);
+void	ft_close(int *fd);
+int		finished_with_pipe(t_list **token);
 
 void	ft_check_signal(int pid);
 void	sig_handler(const int sig);

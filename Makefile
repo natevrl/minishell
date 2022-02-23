@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/23 17:38:14 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/23 19:29:25 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILES = minishell \
 		execve/execve \
 		execve/path_utils \
 		execve/redirection \
+		execve/pipe_utils \
 		execve/pipe \
 		memory/memory0		\
 		memory/memory1		\
