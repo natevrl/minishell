@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 19:11:36 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:35:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,14 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 	{
 		if (token->cmd_translated[i] == ';' && token->token != QVALUE)
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, CMD);
-		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1] == '>')
+		else if (token->cmd_translated[i] == '>' && token->cmd_translated[i + 1]
+			== '>' && token->token != QVALUE)
 		{
 			i++;
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_OA);
 		}
-		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1] == '<')
+		else if (token->cmd_translated[i] == '<'  && token->cmd_translated[i + 1]
+			== '<' && token->token != QVALUE)
 		{
 			i++;
 			ft_add_token_line(cmd_token, tmp, &pos, &j, i, RD_ID);

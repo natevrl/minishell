@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:42 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/22 17:33:13 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:32:21 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ void	ft_tokenize_input(t_list **tmp)
 	{
 		if (ft_isalnum(*(char *)token->content))
 			token->token = LITERAL;
-		else if (*(char *)token->content == ' ')
-			token->token = SP;
-		else if (*(char *)token->content == '<')
-			token->token = RD_I;
-		else if (*(char *)token->content == '>')
-			token->token = RD_O;
-		else if (*(char *)token->content == '|')
-			token->token = PIPE;
 		else if (*(char *)token->content == ';')
 			token->token = EXEC;
 		else if (*(char *)token->content == '$')
@@ -70,6 +62,25 @@ void	ft_tokenize_input(t_list **tmp)
 			token->token = DQUOTE;
 		else
 			token->token = LITERAL;
+		token = token->next;
+	}
+}
+
+void	ft_tokenize_input_two(t_list **tmp)
+{
+	t_list	*token;
+
+	token = *tmp;
+	while (token != NULL)
+	{
+		if (*(char *)token->content == ' ')
+			token->token = SP;
+		else if (*(char *)token->content == '<')
+			token->token = RD_I;
+		else if (*(char *)token->content == '>')
+			token->token = RD_O;
+		else if (*(char *)token->content == '|')
+			token->token = PIPE;
 		token = token->next;
 	}
 }
@@ -111,6 +122,7 @@ void	parse_cmd(char *cmd, t_list *lst)
 	while (cmd[++i])
 		ft_lstadd_back(&token, ft_lstnew(&cmd[i]));
 	ft_tokenize_input(&token);
+	ft_tokenize_input_two(&token);
 	ft_tokenize_input_condition(&token);
 	ft_translate_token(&token, lst);
 	ft_assemble_token(&cmd_token, &token);
