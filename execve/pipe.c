@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/24 12:53:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/24 13:23:54 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ void	pipe_exec(t_list **token, t_list **cmp, char *exec_tube1)
 	ft_bultin(token);
 	if (ft_builtin_without_fork(token))
 		ft_exit(g_err);
-	if (!exec_tube1)
-		exit_failure("bash");
 	g_err = execve(exec_tube1, (*token)->arg,
 			((t_myenv *)(*cmp)->env->content)->envp);
 	if (g_err == -1)
 		exit_failure((*token)->arg[0]);
 	ft_exit(g_err);
+}
+
+void	dup_read(int i, int fdr)
+{
+	if (i > 0)
+		dup2(fdr, 0);
+	else
+		signal(SIGQUIT, sig_handler);
 }
 
 void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
@@ -35,15 +41,12 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 	while ((*token) != NULL)
 	{
 		if (ft_get_path_with_env(*cmp, *token, &exec_tube1))
-			exit_failure("bash");
+			exit_failure("invalid cmd");
 		pipe(fd);
 		pid = fork();
 		if (pid == 0)
 		{
-			if (i > 0)
-				dup2(fdr, 0);
-			else
-				signal(SIGQUIT, sig_handler);
+			dup_read(i, fdr);
 			if ((*token)->next != NULL)
 				dup2(fd[1], 1);
 			ft_close(fd);

@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:16:02 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/24 12:52:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/24 13:22:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_get_path_with_env_arg(t_list *env, t_list *cmd, char **exec_cmd)
 
 	path_cmd = ft_find_env(env->env, "PATH");
 	cmd_path = ft_split(path_cmd, ':');
-	if (cmd->arg || cmd->arg[0] == NULL)
+	if (!cmd->arg || cmd->arg[0] == NULL)
 		return (1);
 	i = 0;
 	while (cmd->arg[i + 1])
