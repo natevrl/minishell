@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assemble_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:37:05 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 23:25:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/24 13:55:20 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_fill_list_env(t_list **tmp, t_list *env)
 	t_list	*token;
 
 	token = *tmp;
-	while(token)
+	while (token)
 	{
 		token->env = env;
 		token = token->next;
