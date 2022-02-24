@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 23:21:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/24 12:53:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	pipe_exec(t_list **token, t_list **cmp, char *exec_tube1)
 	ft_bultin(token);
 	if (ft_builtin_without_fork(token))
 		ft_exit(g_err);
+	if (!exec_tube1)
+		exit_failure("bash");
 	g_err = execve(exec_tube1, (*token)->arg,
 			((t_myenv *)(*cmp)->env->content)->envp);
 	if (g_err == -1)
@@ -33,7 +35,7 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 	while ((*token) != NULL)
 	{
 		if (ft_get_path_with_env(*cmp, *token, &exec_tube1))
-			exit_failure("invalid cmd");
+			exit_failure("bash");
 		pipe(fd);
 		pid = fork();
 		if (pid == 0)
