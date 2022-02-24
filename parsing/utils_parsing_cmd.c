@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:03:54 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 21:36:38 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/24 14:14:03 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,14 @@ void	ft_set_option(t_list **tmp, t_list **tmp2)
 			cmd_token->arg = NULL;
 		cmd_token = cmd_token->next;
 	}
+}
+
+size_t	ft_strlen_double(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

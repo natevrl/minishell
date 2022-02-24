@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:33 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/24 13:57:48 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:12:42 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	ft_check_assembly(t_list **cmd_token, t_list **tmp, t_list *token, int *i)
 void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 {
 	t_list	*token;
-	char	**white;
 	int		i;
 
 	token = *tmp;
@@ -122,12 +121,5 @@ void	ft_assemble_token(t_list **cmd_token, t_list **tmp)
 		if (token != NULL && token->next != NULL)
 			token = token->next;
 	}
-	if (token != NULL)
-		i++;
-	white = ft_split(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, i), ' ');
-	if (*white == NULL)
-		return ;
-	else if ((*tmp)->pos != i)
-		ft_lstadd_back(cmd_token, ft_lstnew_token
-			(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, i), CMD));
+	ft_last_step(cmd_token, tmp, token, i);
 }

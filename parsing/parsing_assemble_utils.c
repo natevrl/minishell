@@ -6,21 +6,11 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:37:05 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/24 13:55:20 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:13:44 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-size_t	ft_strlen_double(char **str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 void	ft_fill_translated(t_list **tmp, char *cmd)
 {
@@ -62,4 +52,16 @@ void	ft_fill_list_env(t_list **tmp, t_list *env)
 		token->env = env;
 		token = token->next;
 	}
+}
+
+void	ft_last_step(t_list **cmd_token, t_list **tmp, t_list *token, int i)
+{
+	if (token != NULL)
+		i++;
+	if (*ft_split(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, i), ' ')
+		== NULL)
+		return ;
+	else if ((*tmp)->pos != i)
+		ft_lstadd_back(cmd_token, ft_lstnew_token
+			(ft_substr((*tmp)->cmd_translated, (*tmp)->pos, i), CMD));
 }
