@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/23 19:29:25 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/24 13:29:12 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,14 +67,14 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 all: $(OBJS_DIR) $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-		@echo "\033[1;31m************ $< COMPILED SUCESSFULLY ************"
+		@echo "\033[1;32m************ $< COMPILED SUCESSFULLY ************\033[0m"
 		@$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
 
 $(NAME): $(OBJS)
 		@make -C libft all
 		@make -C libft bonus
 		@$(CC) $(CFLAGS) -I $(INCLUDE) -o $@ $^ $(LFLAGS) libft/libft.a
-		@echo "\033[1;31m************ $@ SUCESS ************"
+		@echo "\033[1;32m************ $@ SUCESS ************\033[0m"
 
 $(OBJS_DIR):
 		@mkdir $@
@@ -90,24 +90,24 @@ $(OBJS_B_DIR):
 		@mkdir $@
 
 $(OBJS_B_DIR)%.o: $(BONUS_DIR)%.c
-		@echo "\033[1;31m************ $< COMPILED SUCESSFULLY ************"
+		@echo "\033[1;32m************ $< COMPILED SUCESSFULLY ************\033[0m"
 		@$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
 
 bonus: $(OBJS_B_DIR) $(BONUS_NAME)
 
 $(BONUS_NAME): $(OBJS_B)
 		@make -C libft all
-		$(CC) $(CFLAGS) $(OBJS_B) -o $@
+		@$(CC) $(CFLAGS) $(OBJS_B) -o $@
 
 clean:
-		@echo "\033[1;31m************ $(OBJS_DIR) DELETE SUCESS ************"
+		@echo "\033[1;32m************ $(OBJS_DIR) DELETE SUCESS ************\033[0m"
 		@make -C libft clean
 		@$(RM) $(OBJS_DIR) $(OBJS_B_DIR)
 
 fclean: clean
 		@rm -f $(NAME)
 		@rm -f libft/libft.a
-		@echo "\033[1;31m************ $(NAME) DELETE SUCESS ************"
+		@echo "\033[1;32m************ $(NAME) DELETE SUCESS ************\033[0m"
 
 re: clean all
 

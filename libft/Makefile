@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/24 20:38:18 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/07 12:08:18 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/24 13:25:54 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,21 +74,21 @@ OBJS_B = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_B)))
 
 
 .c.o: $(SRCS)
-	$(CC) $(CFLAGS) -c -o $@ $< -I ../include/
+	@$(CC) $(CFLAGS) -c -o $@ $< -I ../include/
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 bonus: $(OBJS_B)
-	$(AR) $(NAME) $^
+	@$(AR) $(NAME) $^
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_B)
+	@$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: clean all
 
