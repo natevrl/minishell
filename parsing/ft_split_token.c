@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:22 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 23:54:29 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:40:22 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static size_t	ft_word(t_list **tmp)
 static void	ft_check_token_split(t_list **token, size_t *len, const char **s)
 {
 	if (*token && ((*token)->token == DQUOTE || (*token)->token == QUOTE))
-		*token = (*token)->next;
-	while (*token && (*token)->token == EXIT_CODE)
 		*token = (*token)->next;
 	while (*token && ((*token)->token == QVALUE
 			|| (*token)->token == DOLLARD) && *(*s))

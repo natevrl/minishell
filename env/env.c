@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:53:49 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/23 20:56:34 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:25:30 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ char	*ft_get_env(char *str, t_list **list)
 	if (str[i] == '$')
 	{
 		i++;
-		while (str[i] != '\0' && str[i] != ' ' && str[i] != '$'
-			&& str[i] != '\"' && str[i] != '\'' && str[i] != '='
-			&& str[i] != '+')
+		while (ft_isalnum(str[i]))
 		{
 			i++;
 			(*list)->token = DOLLARD;

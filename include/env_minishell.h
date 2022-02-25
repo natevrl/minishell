@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_minishell.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 05:33:32 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 23:26:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/25 23:33:25 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		ft_get_path_with_env(t_list *env, t_list *cmd, char **exec_cmd);
 int		ft_get_path(t_list *cmd, char **exec_cmd);
 
 void	sort_and_print_env(char **envp);
-int		no_equal(char *str);
 void	ft_print_env(t_list **lst);
 void	ft_update_env(char **env, char *name);
 

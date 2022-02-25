@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 14:34:29 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/25 23:32:49 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_export(t_list **list)
 	i = 0;
 	while (envlist->arg[++i])
 	{
-		if (no_equal(envlist->arg[i]))
+		if (!ft_strchr(envlist->arg[i], '='))
 			continue ;
 		if (export_error(envlist->arg[i]))
 		{

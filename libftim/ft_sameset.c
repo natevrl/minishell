@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_sameset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 21:13:02 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/25 23:11:16 by nabentay         ###   ########.fr       */
+/*   Created: 2022/02/25 21:59:20 by nabentay          #+#    #+#             */
+/*   Updated: 2022/02/25 22:01:16 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#include <libftim.h>
 
-void	ft_echo(char **argv)
+int	ft_sameset(const char *s, int c)
 {
-	int	nflag;
 	int	i;
 
-	i = 1;
-	nflag = 0;
-	if (argv[1] != NULL && ft_strncmp(argv[1], "-n", 2) == 0)
+	i = 0;
+	while (s[i])
 	{
-		nflag = 1;
-		if (ft_strlen(argv[1]) > 2 && ft_sameset(argv[1] + 2, 'n'))
-			nflag = 0;
-		else
-			i++;
+		if (s[i] != c)
+			return (1);
+		i++;
 	}
-	while (argv[i])
-	{
-		if (argv[i])
-			ft_putstr_fd(argv[i], 1);
-		if (argv[++i] != NULL)
-			ft_putchar_fd(' ', 1);
-	}
-	if (!nflag)
-		ft_putchar_fd('\n', 1);
-	ft_exit(0);
+	return (0);
 }

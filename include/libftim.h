@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   libftim.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/11 22:31:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/25 23:18:05 by nabentay         ###   ########.fr       */
+/*   Created: 2021/07/24 20:36:15 by nabentay          #+#    #+#             */
+/*   Updated: 2022/02/25 22:04:17 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#ifndef LIBFTIM_H
+# define LIBFTIM_H
+# include <stdlib.h>
+# include <string.h>
+# include <fcntl.h>
+# include <unistd.h>
 
-void	ft_cd(t_list **cmd)
-{
-	t_list	*list;
-	char	*env;
+int	ft_sameset(const char *s, int c);
 
-	list = *cmd;
-
-	if (list->arg[1] == NULL)
-	{
-		if (getenv("HOME") == NULL)
-			write(1, "HOME not set\n", 13);
-		else
-		{
-			env = getenv("HOME");
-			chdir(env);
-		}
-	}
-	else if (chdir(list->arg[1]) == -1)
-		write(1, "No such file or directory\n", 26);
-}
+#endif

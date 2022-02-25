@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
+#    By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 19:39:21 by nabentay          #+#    #+#              #
-#    Updated: 2022/02/24 13:29:12 by ubuntu           ###   ########.fr        #
+#    Updated: 2022/02/25 23:37:13 by nabentay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ BONUS_NAME = minishell_bonus
 
 CC = gcc
 INCLUDE = include
-CFLAGS = -Werror -Wextra -Wall -g
+CFLAGS = -Werror -Wextra -Wall
+DEBUG = -g
 LFLAGS = -lreadline
 RM = rm -rf
 
@@ -67,14 +68,22 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 all: $(OBJS_DIR) $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-		@echo "\033[1;32m************ $< COMPILED SUCESSFULLY ************\033[0m"
 		@$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
+		@echo "$(GREEN)************ $< COMPILED SUCESSFULLY$(RST)"
 
 $(NAME): $(OBJS)
-		@make -C libft all
-		@make -C libft bonus
-		@$(CC) $(CFLAGS) -I $(INCLUDE) -o $@ $^ $(LFLAGS) libft/libft.a
-		@echo "\033[1;32m************ $@ SUCESS ************\033[0m"
+		@make -C libft all --no-print-directory
+		@make -C libftim all --no-print-directory
+		@make -C libft bonus --no-print-directory
+		@$(CC) $(CFLAGS) -I $(INCLUDE) -o $@ $^ $(LFLAGS) libft/libft.a libftim/libftim.a
+		@echo "$(GREEN)************ $@ SUCESS$(RST)"
+		@echo "$(CYAN)┌────────────────────────────────────┐$(RST)"
+		@echo "$(CYAN)│             Minishell              │$(RST)"
+		@echo "$(CYAN)│ Authors                            │$(RST)"
+		@echo "$(CYAN)│                                    │$(RST)"
+		@echo "$(CYAN)│ Bentayeb Naofel                    │$(RST)"
+		@echo "$(CYAN)│ Benhado Nathan                     │$(RST)"
+		@echo "$(CYAN)└────────────────────────────────────┘$(RST)"
 
 $(OBJS_DIR):
 		@mkdir $@
@@ -85,30 +94,49 @@ $(OBJS_DIR):
 		@mkdir objs/signal
 		@mkdir objs/execve
 		@mkdir objs/get_next_line
+		@echo "$(GREEN)************ OBJS FOLDER CREATED$(RST)"
 
 $(OBJS_B_DIR):
 		@mkdir $@
 
 $(OBJS_B_DIR)%.o: $(BONUS_DIR)%.c
-		@echo "\033[1;32m************ $< COMPILED SUCESSFULLY ************\033[0m"
 		@$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDE)
+		@echo "$(GREEN)************ $< COMPILED SUCESSFULLY$(RST)"
+
+debug: $(OBJS_DIR) $(OBJS)
+		@make -C libft all --no-print-directory
+		@make -C libftim all --no-print-directory
+		@make -C libft bonus --no-print-directory
+		@$(CC) $(DEBUG) -I $(INCLUDE) -o $(NAME) $(OBJS) $(LFLAGS) libft/libft.a libftim/libftim.a
+		@echo "$(YELLOW)**/ DEBUG MODE (wo/ flags w/ -g) \**$(RST)"
+
 
 bonus: $(OBJS_B_DIR) $(BONUS_NAME)
 
 $(BONUS_NAME): $(OBJS_B)
-		@make -C libft all
+		@make -C libft all --no-print-directory
+		@make -C libftim all --no-print-directory
 		@$(CC) $(CFLAGS) $(OBJS_B) -o $@
 
 clean:
-		@echo "\033[1;32m************ $(OBJS_DIR) DELETE SUCESS ************\033[0m"
-		@make -C libft clean
+		@make -C libft clean --no-print-directory
+		@make -C libftim clean --no-print-directory
 		@$(RM) $(OBJS_DIR) $(OBJS_B_DIR)
+		@echo "$(GREEN)************ OBJS DELETE SUCESS$(RST)"
 
 fclean: clean
 		@rm -f $(NAME)
 		@rm -f libft/libft.a
-		@echo "\033[1;32m************ $(NAME) DELETE SUCESS ************\033[0m"
+		@rm -f libftim/libftim.a
+		@echo "$(GREEN)************ $(NAME) DELETE SUCESS$(RST)"
 
 re: clean all
 
 .PHONY: bonus all clean fclean re
+
+#COLORS
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+CYAN = \033[1;36m
+RST = \033[0m

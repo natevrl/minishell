@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:32:45 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:55:25 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/25 23:33:05 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,6 @@ void	ft_update_env(char **env, char *name)
 	i = 0;
 }
 
-int	no_equal(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == '=')
-			return (0);
-	return (1);
-}
-
 char	*ft_get_env_without(char *str)
 {
 	char	*env;
@@ -76,8 +65,7 @@ char	*ft_get_env_without(char *str)
 	if (str[i] == '$')
 	{
 		i++;
-		while (str[i] != '\0' && str[i] != ' '
-			&& str[i] != '$' && str[i] != '\"' && str[i] != '\'')
+		while (ft_isalnum(str[i]))
 			i++;
 		env = ft_substr(str, 1, i - 1);
 		return (env);
