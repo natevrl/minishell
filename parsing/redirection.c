@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/26 01:25:19 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 01:42:19 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_input_to_heredoc(t_list **token)
 			*token = (*token)->next;
 		}
 		here_doc((*token)->next->arg[0]);
-		*token = (*token)->next;
+		*token = (*token)->next->next;
 	}
 	else
 	{
