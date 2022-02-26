@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/26 00:51:15 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 01:25:19 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,26 @@ void	ft_input_to_heredoc(t_list **token)
 		*token = (*token)->next;
 	}
 	else
+	{
 		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
+		*token = (*token)->next;
+	}
 }
 
-int	ft_redirect_input_loop(t_list ***token)
+int	ft_redirect_input_loop(t_list **token)
 {
-	while ((**token)->next->token == RD_I)
+	while ((*token)->next->token == RD_I)
 	{
-		(**token)->fd = open((**token)->next->arg[0], O_RDONLY);
-		if ((**token)->fd == -1)
+		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
+		if ((*token)->fd == -1)
 		{
-			err_found_msg((**token)->next->arg[0], 0);
-			while ((**token)->token == RD_I)
-				**token = (**token)->next;
+			err_found_msg((*token)->next->arg[0], 0);
+			while ((*token) && (*token)->token != PIPE)
+				*token = (*token)->next;
 			return (1);
 		}
-		close((**token)->fd);
-		**token = (**token)->next;
+		close((*token)->fd);
+		*token = (*token)->next;
 	}
 	return (0);
 }
@@ -103,21 +106,25 @@ void	ft_redirect_input(t_list **token, t_list **tmp)
 {
 	if ((*token)->next != NULL)
 	{
-		if (ft_redirect_input_loop(&token))
+		if (ft_redirect_input_loop(token))
 			return ;
-		(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
-		if ((*token)->fd == -1)
+		if ((*token)->token == RD_I)
 		{
-			err_found_msg((*token)->next->arg[0], 0);
-			*token = (*token)->next;
-			return ;
+			(*token)->fd = open((*token)->next->arg[0], O_RDONLY);
+			if ((*token)->fd == -1)
+			{
+				err_found_msg((*token)->next->arg[0], 0);
+				while (*token && (*token)->token != PIPE)
+					*token = (*token)->next;
+				return ;
+			}
+			if (*(*token)->arg)
+				redirect_in_cmd((*tmp), (*token)->fd);
+			else if ((*tmp)->next->arg[1])
+				redirect_in_cmd2((*tmp), (*tmp)->next, (*token)->fd);
+			close((*token)->fd);
+			*token = (*token)->next->next;
 		}
-		if (*(*token)->arg)
-			redirect_in_cmd((*tmp), (*token)->fd);
-		else if ((*tmp)->next->arg[1])
-			redirect_in_cmd2((*tmp), (*tmp)->next, (*token)->fd);
-		close((*token)->fd);
-		*token = (*token)->next;
 	}
 	else
 	{

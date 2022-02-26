@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/26 00:31:01 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 01:32:41 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	exec_cmd(t_list	**cmd)
 	char	*exec_cmd;
 
 	if (ft_get_path(*cmd, &exec_cmd) || ft_builtin_without_fork(cmd))
+	{
+		*cmd = (*cmd)->next;
 		return ;
+	}
 	pid = fork();
 	if (pid == -1)
 		perror("fork");

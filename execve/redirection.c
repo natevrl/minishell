@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/26 00:18:31 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 01:33:22 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	redirect_out_cmd(t_list	*cmd, int fd)
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		ft_bultin(&cmd);
+		if (!exec_cmd)
+			exit_failure(cmd->arg[0]);
 		g_err = execve(exec_cmd, cmd->arg,
 				((t_myenv *)cmd->env->content)->envp);
 		if (g_err == -1)
-			exit_failure("command not found");
+			exit_failure("bash");
 		ft_exit(g_err);
 	}
 }
@@ -104,7 +106,7 @@ void	child_heredoc(char *limiter)
 		if (tmp == NULL)
 		{
 			printf("\nbash: warning: here-document at line %d", i);
-			printf("delimited by end-of-file (wanted `%s')\n", limiter);
+			printf(" delimited by end-of-file (wanted `%s')\n", limiter);
 			ft_exit(130);
 		}
 		if (ft_strncmp(tmp, limiter, ft_strlen(limiter)) == 0
