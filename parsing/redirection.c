@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 06:04:18 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/26 01:42:19 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 02:58:46 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,16 @@
 
 void	ft_loop_redir(t_list **token)
 {
-	while ((*token)->next->token == RD_O)
-	{
-		(*token)->fd = open((*token)->next->arg[0],
-				O_CREAT | O_RDWR | O_TRUNC, 0664);
-		close((*token)->fd);
-		*token = (*token)->next;
-	}
+	(*token)->fd = open((*token)->next->arg[0],
+			O_CREAT | O_RDWR | O_TRUNC, 0664);
+	close((*token)->fd);
 }
 
 void	ft_loop_redira(t_list **token)
 {
-	while ((*token)->next->token == RD_OA)
-	{
-		(*token)->fd = open((*token)->next->arg[0],
-				O_CREAT | O_RDWR | O_CREAT | O_APPEND, 0664);
-		close((*token)->fd);
-		*token = (*token)->next;
-	}
+	(*token)->fd = open((*token)->next->arg[0],
+			O_CREAT | O_RDWR | O_CREAT | O_APPEND, 0664);
+	close((*token)->fd);
 }
 
 void	ft_redirect_to_output(t_list **token, t_list **tmp)
@@ -44,6 +36,7 @@ void	ft_redirect_to_output(t_list **token, t_list **tmp)
 				ft_loop_redira(token);
 			else
 				ft_loop_redir(token);
+			*token = (*token)->next;
 		}
 		if ((*token)->token == RD_O || (*token)->token == RD_OA)
 		{
