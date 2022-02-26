@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:48:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/24 13:20:15 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/26 00:18:31 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	redirect_in_cmd2(t_list	*cmd, t_list *arg, int fd)
 	pid_t	pid;
 	char	*exec_cmd;
 
-	if (ft_get_path_with_env_arg(cmd, arg, &exec_cmd)
+	if (ft_get_path_arg(arg, &exec_cmd)
 		|| ft_builtin_without_fork(&arg))
 		return ;
 	pid = fork();

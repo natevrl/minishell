@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 21:51:11 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/21 18:56:47 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 00:31:01 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ int	ft_get_path(t_list *cmd, char **exec_cmd)
 	return (0);
 }
 
-void	exec_cmd(t_list	*cmd)
+void	exec_cmd(t_list	**cmd)
 {
 	pid_t	pid;
 	char	*exec_cmd;
 
-	if (ft_get_path(cmd, &exec_cmd) || ft_builtin_without_fork(&cmd))
+	if (ft_get_path(*cmd, &exec_cmd) || ft_builtin_without_fork(cmd))
 		return ;
 	pid = fork();
 	if (pid == -1)
@@ -87,13 +87,14 @@ void	exec_cmd(t_list	*cmd)
 	else
 	{
 		signal(SIGQUIT, sig_handler);
-		ft_bultin(&cmd);
+		ft_bultin(cmd);
 		if (!exec_cmd)
-			exit_failure(cmd->arg[0]);
-		g_err = execve(exec_cmd, cmd->arg,
-				((t_myenv *)cmd->env->content)->envp);
+			exit_failure((*cmd)->arg[0]);
+		g_err = execve(exec_cmd, (*cmd)->arg,
+				((t_myenv *)(*cmd)->env->content)->envp);
 		if (g_err == -1)
-			exit_failure(cmd->arg[0]);
+			exit_failure((*cmd)->arg[0]);
 		ft_exit(g_err);
 	}
+	*cmd = (*cmd)->next;
 }

@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 21:13:28 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/25 22:07:18 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/26 00:29:52 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 int				g_err;
 
-void	exec_cmd(t_list	*cmd);
+void	exec_cmd(t_list	**cmd);
 void	ft_pipe(t_list **token, t_list **cmp);
 int		launch_bash(t_list	*cmd);
 void	prompt(t_list *lst);
@@ -51,6 +51,7 @@ void	ft_check_signal(int pid);
 void	sig_handler(const int sig);
 
 void	list_push(t_list **lst_addr, void *data);
+void	err_found_msg(char *s, int flag);
 void	ft_exit(int status);
 void	exit_failure(const char *msg);
 void	*ft_malloc(size_t size);

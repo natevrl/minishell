@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:19:42 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/23 23:25:54 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/26 00:45:38 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,14 @@ void	ft_check_execution(t_list **tmp, t_list *lst)
 	while (token != NULL)
 	{
 		if (token->token == CMD)
-			exec_cmd(token);
-		else if (token->token == RD_O)
+			exec_cmd(&token);
+		else if (token->token == RD_O || token->token == RD_OA)
 			ft_redirect_to_output(&token, tmp);
 		else if (token->token == RD_ID)
 			ft_input_to_heredoc(&token);
-		else if (token->token == RD_OA)
-			ft_redirect_to_outputa(&token, tmp);
-		if (token->token == RD_I)
+		else if (token->token == RD_I)
 			ft_redirect_input(&token, tmp);
-		if (token->token == PIPE)
+		else if (token->token == PIPE)
 			ft_pipe(&token, tmp);
 		else
 			token = token->next;

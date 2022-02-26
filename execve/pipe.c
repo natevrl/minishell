@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:18:35 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/24 13:23:54 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/26 00:12:49 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 
 	while ((*token) != NULL)
 	{
-		if (ft_get_path_with_env(*cmp, *token, &exec_tube1))
+		if (ft_get_path(*token, &exec_tube1))
 			exit_failure("invalid cmd");
 		pipe(fd);
 		pid = fork();
