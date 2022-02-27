@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 09:07:46 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/25 23:32:49 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/27 13:34:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,17 @@ int	export_error(char *arg)
 	int		i;
 	char	*before;
 
-	before = ft_before_equal(arg);
-	i = -1;
-	if (!before[0] || ft_isdigit(arg[0]))
+	if (!arg[0] || ft_isdigit(arg[0]))
 		return (1);
-	while (before[++i])
+	if (ft_strchr(arg, '='))
 	{
-		if (!ft_isalnum(before[i]) && before[i] != '_')
-			return (1);
+		before = ft_before_equal(arg);
+		i = -1;
+		while (before[++i])
+		{
+			if (!ft_isalnum(before[i]) && before[i] != '_')
+				return (1);
+		}
 	}
 	return (0);
 }
@@ -91,14 +94,14 @@ void	ft_export(t_list **list)
 	i = 0;
 	while (envlist->arg[++i])
 	{
-		if (!ft_strchr(envlist->arg[i], '='))
-			continue ;
 		if (export_error(envlist->arg[i]))
 		{
 			printf("minishell: export: `%s': not a valid identifier\n",
 				envlist->arg[i]);
 			continue ;
 		}
+		if (!ft_strchr(envlist->arg[i], '='))
+			continue ;
 		if (already_in_env(list, &(*list)->env, envlist->arg[i]))
 			continue ;
 		add_in_envp(((t_myenv *)(*list)->env->content)->envp, envlist->arg[i]);
