@@ -6,7 +6,7 @@
 /*   By: nabentay <nabentay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 18:31:03 by nabentay          #+#    #+#             */
-/*   Updated: 2022/02/27 18:50:44 by nabentay         ###   ########.fr       */
+/*   Updated: 2022/02/27 19:07:25 by nabentay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 	int		pid;
 	char	*exec_tube1;
 
-	while (*token)
+	while (*token && ((*token)->token == PIPE || (*token)->token == CMD))
 	{
 		if (ft_get_path(*token, &exec_tube1))
 			exit_failure("invalid cmd");
@@ -46,14 +46,6 @@ void	pipe_loop(t_list **token, t_list **cmp, int fdr, int i)
 		pid = fork();
 		if (pid == 0)
 		{
-			if ((*token)->token == RD_O)
-			{
-				(*token)->fd = open((*token)->next->arg[0],
-						O_CREAT | O_RDWR | O_TRUNC, 0664);
-				dup2((*token)->fd, fdr);
-				close((*token)->fd);
-				ft_exit(0);
-			}
 			dup_read(i, fdr);
 			if ((*token)->next != NULL)
 				dup2(fd[1], 1);
