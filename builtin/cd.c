@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:31:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2022/02/27 14:19:20 by ubuntu           ###   ########.fr       */
+/*   Updated: 2022/02/27 14:21:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	change_env_pwd(t_list *env, char *pathname)
 	while (env)
 	{
 		n = ft_strjoin(ft_before_equal(((t_myenv *)env->content)->env), "=");
-		if (ft_strncmp(n, pathname, 1000) == 0)
+		if (ft_strncmp(n, pathname, ft_strlen(pathname)) == 0)
 		{
 			((t_myenv *)env->content)->env = newpwd;
 			((t_myenv *)env->content)->envp[i] = newpwd;
